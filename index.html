@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat English Academy - Free Learning</title>
+    <style>
+        /* --- CSS STYLES (Design & Colors) --- */
+        :root {
+            --primary: #2563eb; /* Blue */
+            --secondary: #1e40af; /* Dark Blue */
+            --accent: #f59e0b; /* Orange/Gold */
+            --bg: #f3f4f6;
+            --white: #ffffff;
+            --text: #1f2937;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { margin: 0; font-size: 1.5rem; }
+        header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary);
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 8px 16px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Cards (Sections) */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary);
+        }
+
+        h2 { color: var(--secondary); font-size: 1.2rem; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        
+        /* Inputs & Buttons */
+        label { font-weight: bold; font-size: 0.9rem; display: block; margin-top: 10px; }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* Fixes padding issues */
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover { background-color: var(--secondary); }
+        
+        button.secondary { background-color: #6b7280; }
+
+        /* Result Boxes */
+        .result-box {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 6px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Utility */
+        .hindi-text { font-weight: bold; color: #d946ef; font-size: 1.1rem; }
+        .success { color: green; font-weight: bold; }
+        .error { color: #dc2626; font-weight: bold; }
+        .hidden { display: none; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bharat English Academy</h1>
+        <p>Free English Learning for Hindi Medium Students</p>
+    </header>
+
+    <nav>
+        <a href="#translation">Daily Translation</a>
+        <a href="#grammar">Grammar Check</a>
+        <a href="#letters">Letter Writer</a>
+        <a href="#essays">Essay Bank</a>
+    </nav>
+
+    <div class="container">
+
+        <div id="translation" class="card">
+            <h2>🎯 Daily Translation Challenge</h2>
+            <p>Translate the sentence below into English:</p>
+            
+            <p class="hindi-text" id="daily-hindi">Loading...</p>
+            
+            <button class="secondary" onclick="toggleAnswer()">Show Answer (Uttar Dekhein)</button>
+            
+            <div id="daily-answer" class="result-box">
+                <p><strong>Correct English:</strong> <span id="daily-english"></span></p>
+            </div>
+            
+            <button onclick="loadNewSentence()" style="margin-top:15px; background:var(--accent); color:black;">New Sentence</button>
+        </div>
+
+        <div id="grammar" class="card">
+            <h2>✍️ Grammar Practice (Self-Check)</h2>
+            <p>Type the translation for: <br><span class="hindi-text" id="grammar-q">Woh kal bazar nahi gaya tha.</span></p>
+            
+            <input type="text" id="user-grammar-input" placeholder="Type here in English...">
+            <button onclick="checkGrammar()">Check Grammar</button>
+            
+            <div id="grammar-feedback" class="result-box"></div>
+        </div>
+
+        <div id="letters" class="card">
+            <h2>📝 Official Letter Generator</h2>
+            <p>Create a formal letter for school/principal instantly.</p>
+            
+            <label>Your Name (Aapka Naam):</label>
+            <input type="text" id="l-name" placeholder="e.g. Rahul Kumar">
+
+            <label>Subject (Vishay):</label>
+            <input type="text" id="l-subject" placeholder="e.g. Leave for 2 days due to fever">
+
+            <label>Reason (Karan - In one line):</label>
+            <textarea id="l-reason" rows="3" placeholder="e.g. I am suffering from high fever since last night so I cannot attend class."></textarea>
+
+            <button onclick="generateLetter()">Generate Letter</button>
+
+            <div id="letter-output" class="result-box" style="white-space: pre-wrap; font-family: 'Courier New', monospace; background: #fff; border: 2px dashed #ccc;"></div>
+        </div>
+
+        <div id="essays" class="card">
+            <h2>📖 Smart Essay Library</h2>
+            
+            <label>Choose Topic:</label>
+            <select id="essay-topic">
+                <option value="pollution">Pollution (Pradushan)</option>
+                <option value="science">Science: Boon or Curse</option>
+                <option value="friend">My Best Friend</option>
+            </select>
+
+            <label>Difficulty Level:</label>
+            <select id="essay-level">
+                <option value="easy">Easy (Class 6-8)</option>
+                <option value="medium">Medium (Class 9-10)</option>
+                <option value="hard">Hard (Class 11-12)</option>
+            </select>
+
+            <button onclick="getEssay()">Read Essay</button>
+
+            <div id="essay-result" class="result-box" style="background: #fff;"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bharat English Academy. Built for Free Education.</p>
+    </footer>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+
+        // --- DATA: Translation Database ---
+        const sentenceBank = [
+            { h: "Tum kahan ja rahe ho?", e: "Where are you going?" },
+            { h: "Mujhe ek glass pani do.", e: "Give me a glass of water." },
+            { h: "Kya tumne khana kha liya?", e: "Have you eaten the food?" },
+            { h: "Sadar Bazaar yahan se door hai.", e: "Sadar Bazaar is far from here." },
+            { h: "Humein bado ka aadar karna chahiye.", e: "We should respect our elders." },
+            { h: "Woh kal school nahi ayega.", e: "He will not come to school tomorrow." }
+        ];
+
+        let currentGrammarQ = { h: "Woh kal bazar nahi gaya tha.", e: "he did not go to market yesterday" };
+
+        // --- FUNCTION 1: Daily Translation ---
+        function loadNewSentence() {
+            const random = Math.floor(Math.random() * sentenceBank.length);
+            document.getElementById("daily-hindi").innerText = sentenceBank[random].h;
+            document.getElementById("daily-english").innerText = sentenceBank[random].e;
+            document.getElementById("daily-answer").style.display = "none";
+        }
+
+        function toggleAnswer() {
+            const box = document.getElementById("daily-answer");
+            box.style.display = (box.style.display === "block") ? "none" : "block";
+        }
+
+        // --- FUNCTION 2: Grammar Checker ---
+        function checkGrammar() {
+            let input = document.getElementById("user-grammar-input").value.trim().toLowerCase();
+            // Remove punctuation for easier matching
+            let cleanInput = input.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            let cleanCorrect = currentGrammarQ.e.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+
+            const feedback = document.getElementById("grammar-feedback");
+            feedback.style.display = "block";
+
+            if (cleanInput === cleanCorrect) {
+                feedback.innerHTML = "<span class='success'>✅ Amazing! Correct Answer.</span>";
+            } else {
+                feedback.innerHTML = "<span class='error'>❌ Incorrect. Try again!</span><br><br><strong>Correct Answer:</strong> " + currentGrammarQ.e;
+            }
+        }
+
+        // --- FUNCTION 3: Letter Generator ---
+        function generateLetter() {
+            const name = document.getElementById("l-name").value || "[Your Name]";
+            const subject = document.getElementById("l-subject").value || "[Subject]";
+            const reason = document.getElementById("l-reason").value || "[Reason]";
+            const date = new Date().toLocaleDateString();
+
+            const template = `To,
+The Principal,
+Government Inter College,
+Uttar Pradesh.
+
+Date: ${date}
+
+Subject: ${subject}
+
+Respected Sir/Madam,
+
+Most respectfully, I beg to state that I am a student of Class 10th in your college. 
+
+${reason}
+
+Therefore, I request you to kindly grant me permission/leave. I shall be highly obliged to you.
+
+Yours Obediently,
+${name}
+Class: 10th`;
+
+            const output = document.getElementById("letter-output");
+            output.innerText = template;
+            output.style.display = "block";
+        }
+
+        // --- FUNCTION 4: Essay Generator ---
+        const essayDB = {
+            "pollution": {
+                "easy": "Pollution is a bad thing. It makes our air dirty. Smoke from cars and factories causes pollution. We should plant more trees. We should not throw garbage on the road.",
+                "medium": "Pollution is a major problem in India today. There are many types of pollution like Air, Water, and Noise pollution. The smoke coming from factories and vehicles is making the air poisonous. Plastic waste is also very harmful for the soil. We must take steps to save our environment.",
+                "hard": "Environmental pollution is one of the most critical challenges facing humanity. Rapid industrialization and urbanization have led to the degradation of our natural resources. Air pollution leads to respiratory diseases, while water pollution contaminates our drinking sources. It is the moral duty of every citizen to adopt sustainable practices and reduce their carbon footprint."
+            },
+            "science": {
+                "easy": "Science is very useful. It has given us TV, mobile, and fans. Life is easy because of science. But atom bombs are bad. We should use science for good things.",
+                "medium": "Science is a blessing for mankind. It has transformed our lives completely. Electricity, medicine, and transport are gifts of science. However, science can be a curse if used for war. We must use it wisely.",
+                "hard": "Science has revolutionized human existence, turning impossible dreams into reality. From exploring Mars to curing deadly diseases, its contribution is immense. However, the invention of destructive weapons and the loss of privacy due to technology are its dark sides. Science is a good servant but a bad master."
+            },
+            "friend": {
+                "easy": "My best friend is Rohan. He is very kind. We play together. He helps me in studies. I like him very much.",
+                "medium": "A true friend is a blessing of God. My best friend is Rohan. He is honest, hardworking, and kind. We study in the same class and help each other. He always supports me when I am sad.",
+                "hard": "Friendship is one of the most precious bonds in life. A true friend acts as a guide and a supporter. I am lucky to have Rohan as my best friend. His integrity and dedication inspire me. We share a bond of mutual respect and understanding that goes beyond just having fun."
+            }
+        };
+
+        function getEssay() {
+            const topic = document.getElementById("essay-topic").value;
+            const level = document.getElementById("essay-level").value;
+            const output = document.getElementById("essay-result");
+            
+            output.innerText = essayDB[topic][level];
+            output.style.display = "block";
+        }
+
+        // Initialize
+        loadNewSentence();
+    </script>
+</body>
+</html>
