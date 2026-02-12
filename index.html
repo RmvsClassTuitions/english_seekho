@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bharat English Academy - Ultimate Lab</title>
+    <title>भारत इंग्लिश लैब - Hindi Medium Students</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,25 +11,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        /* --- THEME & COLORS --- */
+        /* --- THEME --- */
         :root {
             --primary: #4f46e5;
-            --secondary: #3b82f6;
-            --accent: #8b5cf6;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg: #f8fafc;
+            --accent: #0ea5e9;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg-gradient: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
             --glass: rgba(255, 255, 255, 0.95);
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            background: var(--bg-gradient);
             color: #1e293b;
             margin: 0; padding: 0;
-            padding-bottom: 100px;
+            padding-bottom: 120px;
         }
 
         /* HEADER */
@@ -40,11 +39,12 @@
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
         }
-        .logo { font-weight: 800; color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
-        .xp-pill { background: var(--warning); color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; box-shadow: 0 2px 5px rgba(245, 158, 11, 0.4); }
+        .logo { font-weight: 800; color: var(--primary); font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .xp-pill { background: var(--warning); color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: bold; box-shadow: 0 2px 5px rgba(202, 138, 4, 0.4); font-size: 0.9rem; }
 
-        /* LAYOUT */
+        /* CONTAINER */
         .container {
             max-width: 900px;
             margin: 20px auto;
@@ -59,16 +59,18 @@
         .widget {
             background: var(--glass);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(255,255,255,0.6);
             transition: transform 0.2s;
         }
-        .widget:hover { transform: translateY(-3px); }
         
         h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        p.desc { color: #64748b; font-size: 0.9rem; margin-top: -5px; margin-bottom: 15px; }
 
-        /* CONTROLS */
+        /* INPUTS & BUTTONS */
+        label { font-size: 0.9rem; font-weight: 600; color: #475569; display: block; margin-bottom: 5px; }
+        
         input, textarea, select {
             width: 100%; padding: 12px;
             border: 2px solid #cbd5e1; border-radius: 10px;
@@ -88,142 +90,162 @@
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-outline:hover { background: #e0e7ff; }
 
-        /* COUNTDOWN TIMER */
-        .timer-box {
-            background: var(--primary); color: white;
-            text-align: center; padding: 20px; border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        .timer-digits { font-size: 2.5rem; font-weight: 800; letter-spacing: 2px; }
-
-        /* GAME STYLES */
-        .scramble-box { background: #fff7ed; border: 2px dashed #f97316; padding: 15px; text-align: center; border-radius: 12px; margin-bottom: 15px; }
-        .scramble-text { font-size: 2rem; letter-spacing: 5px; color: #ea580c; font-weight: bold; }
-
-        /* OUTPUT BOXES */
+        /* SPECIFIC STYLES */
+        .timer-digits { font-size: 2rem; font-weight: 800; letter-spacing: 2px; margin-top: 10px; }
+        .hindi-meaning { font-size: 1.4rem; color: #d946ef; font-weight: 700; margin: 5px 0; }
+        
         .output {
             background: #fff; border-left: 5px solid var(--accent);
-            padding: 20px; border-radius: 10px; margin-top: 15px;
+            padding: 15px; border-radius: 10px; margin-top: 15px;
             display: none; animation: slideIn 0.3s ease;
         }
         @keyframes slideIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 
         /* NAV */
         .bottom-nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: #1e293b; padding: 12px 30px; border-radius: 50px;
-            display: flex; gap: 30px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            background: #1e293b; padding: 10px 30px; border-radius: 50px;
+            display: flex; gap: 25px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
-        .bottom-nav a { color: #94a3b8; font-size: 1.5rem; transition: 0.2s; }
+        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; transition: 0.2s; }
         .bottom-nav a:hover, .bottom-nav a.active { color: #fff; transform: scale(1.2); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> Bharat English</div>
-        <div class="xp-pill">XP: <span id="xp-points">0</span></div>
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> भारत English Lab</div>
+        <div class="xp-pill">अंक (XP): <span id="xp-points">0</span></div>
     </header>
 
     <div class="container">
 
-        <div class="widget full-width" style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; border:none;">
-            <div style="text-align: center;">
-                <h2 style="margin:0; font-size:1.5rem;">🔥 English Board Exam</h2>
-                <p style="margin:5px 0 15px 0; opacity:0.9;">Time remaining for success!</p>
-                <div class="timer-digits" id="countdown">00d 00h 00m</div>
-            </div>
+        <div class="widget full-width" style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; border:none; text-align:center;">
+            <h2 style="margin:0; font-size:1.4rem;">📅 बोर्ड परीक्षा उल्टी गिनती</h2>
+            <p style="margin:5px 0; opacity:0.9;">तैयारी का समय बचा है:</p>
+            <div class="timer-digits" id="countdown">00d 00h 00m</div>
         </div>
 
         <div class="widget" id="game">
-            <h3><i class="fa-solid fa-gamepad"></i> Spelling Game</h3>
-            <div class="scramble-box">
-                <div id="scramble-word" class="scramble-text">Loading...</div>
-                <small id="scramble-hint" style="color:#c2410c;">(Hint: ...)</small>
+            <h3><i class="fa-solid fa-gamepad"></i> स्पेलिंग गेम (Game)</h3>
+            <p class="desc">अक्षरों को सही क्रम में लगाओ</p>
+            
+            <div style="background:#fff7ed; border:2px dashed #f97316; padding:15px; text-align:center; border-radius:12px; margin-bottom:15px;">
+                <div id="scramble-word" style="font-size:1.8rem; letter-spacing:4px; color:#ea580c; font-weight:bold;">LOADING...</div>
+                <small id="scramble-hint" style="color:#c2410c;">(इशारा: ...)</small>
             </div>
-            <input type="text" id="user-guess" placeholder="Type correct spelling..." style="text-align:center; font-weight:bold;">
-            <button onclick="checkSpelling()" style="background:#ea580c;">Check Answer</button>
+            
+            <input type="text" id="user-guess" placeholder="सही स्पेलिंग लिखें..." style="text-align:center;">
+            <button onclick="checkSpelling()" style="background:#ea580c;">जवाब चेक करें</button>
             <div id="game-result" class="output" style="text-align:center;"></div>
         </div>
 
-        <div class="widget">
-            <h3><i class="fa-solid fa-lightbulb"></i> Idiom of the Day</h3>
-            <div style="background:#f0fdf4; padding:20px; border-radius:12px; border:1px solid #bbf7d0;">
-                <h2 style="margin:0; color:#15803d;">"Piece of Cake"</h2>
-                <p style="color:#166534; font-weight:bold;">Meaning: Bahut Aasaan (Very Easy)</p>
-                <p style="font-style:italic; color:#475569;">"The English exam was a piece of cake for me."</p>
-            </div>
-            <button class="btn-outline" style="margin-top:15px;">New Idiom</button>
-        </div>
-
-        <div class="widget full-width" id="dict">
-            <h3><i class="fa-solid fa-language"></i> Smart Dictionary</h3>
+        <div class="widget" id="dict">
+            <h3><i class="fa-solid fa-language"></i> शब्दकोश (Dictionary)</h3>
+            <p class="desc">अंग्रेजी शब्द का हिंदी अर्थ जानें</p>
+            
+            <label>अंग्रेजी शब्द लिखें (जैसे: Diligent)</label>
             <div style="display:flex; gap:10px;">
-                <input type="text" id="dict-input" placeholder="Type a word..." style="margin:0;">
+                <input type="text" id="dict-input" style="margin:0;">
                 <button onclick="fetchMeaning()" style="width:auto;"><i class="fa-solid fa-search"></i></button>
             </div>
+            
             <div id="dict-output" class="output">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; justify-content:space-between;">
                     <h2 id="word-title" style="margin:0; color:var(--primary);">...</h2>
-                    <button onclick="playAudio()" style="width:auto; padding:5px 15px; border-radius:20px;"><i class="fa-solid fa-volume-high"></i></button>
+                    <button onclick="playAudio()" style="width:auto; padding:5px 12px; border-radius:20px;"><i class="fa-solid fa-volume-high"></i> सुनें</button>
                 </div>
-                <p id="hindi-word" style="font-size:1.2rem; color:#d946ef; font-weight:bold; margin:10px 0;">...</p>
-                <div id="meanings-list"></div>
+                <p style="margin-top:10px; font-weight:bold; color:#64748b;">हिंदी अर्थ:</p>
+                <p id="hindi-word" class="hindi-meaning">...</p>
+                <hr style="border:0; border-top:1px dashed #ccc;">
+                <div id="meanings-list" style="font-size:0.9rem;"></div>
             </div>
         </div>
 
         <div class="widget" id="speaking">
-            <h3><i class="fa-solid fa-microphone"></i> AI Speaking Coach</h3>
+            <h3><i class="fa-solid fa-microphone"></i> बोलकर सीखें (Speaking)</h3>
+            <p class="desc">नीचे लिखे वाक्य को बोलें, AI चेक करेगा</p>
+            
             <div style="background:#f1f5f9; padding:15px; border-radius:10px; text-align:center; margin-bottom:15px;">
-                <h3 id="speak-target" style="margin:0; color:#334155; border:none; justify-content:center;">I want to learn English.</h3>
+                <h3 id="speak-target" style="margin:0; color:#334155;">I want to learn English.</h3>
             </div>
+            
             <div style="text-align:center;">
                 <button onclick="startListening()" id="mic-btn" style="width:60px; height:60px; border-radius:50%; margin:0 auto;"><i class="fa-solid fa-microphone"></i></button>
-                <p id="listening-status" style="font-size:0.8rem; margin-top:5px;">Tap Mic</p>
+                <p id="listening-status" style="font-size:0.8rem; margin-top:5px;">माइक दबाएं और बोलें</p>
             </div>
+            
             <div id="speak-result" class="output" style="text-align:center;"></div>
-            <button class="btn-outline" onclick="nextSentence()" style="margin-top:10px;">Next Sentence</button>
+            <button class="btn-outline" onclick="nextSentence()" style="margin-top:10px;">अगला वाक्य (Next)</button>
         </div>
 
         <div class="widget">
-            <h3><i class="fa-solid fa-clock"></i> Tense Master</h3>
+            <h3><i class="fa-solid fa-clock"></i> काल चक्र (Tense Master)</h3>
+            <p class="desc">देखें क्रिया (Verb) कैसे बदलती है</p>
+            
+            <label>क्रिया चुनें (Select Verb)</label>
             <select id="tense-verb" onchange="showTense()">
-                <option value="go">Go (Jaana)</option>
-                <option value="play">Play (Khelna)</option>
-                <option value="eat">Eat (Khaana)</option>
-                <option value="write">Write (Likhna)</option>
+                <option value="go">Go (जाना)</option>
+                <option value="eat">Eat (खाना)</option>
+                <option value="play">Play (खेलना)</option>
+                <option value="write">Write (लिखना)</option>
             </select>
+            
             <div id="tense-output" class="output" style="display:none; padding:10px;">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#e0e7ff; padding:8px; border-radius:5px;"><small>Present</small><br><strong>Goes</strong></div>
-                    <div style="background:#fee2e2; padding:8px; border-radius:5px;"><small>Past</small><br><strong>Went</strong></div>
-                    <div style="background:#dcfce7; padding:8px; border-radius:5px;"><small>Future</small><br><strong>Will Go</strong></div>
-                    <div style="background:#fef3c7; padding:8px; border-radius:5px;"><small>Cont.</small><br><strong>Is Going</strong></div>
+                    <div style="background:#e0e7ff; padding:8px; border-radius:5px;"><small>वर्तमान (Present)</small><br><strong>Goes</strong></div>
+                    <div style="background:#fee2e2; padding:8px; border-radius:5px;"><small>भूत (Past)</small><br><strong>Went</strong></div>
+                    <div style="background:#dcfce7; padding:8px; border-radius:5px;"><small>भविष्य (Future)</small><br><strong>Will Go</strong></div>
+                    <div style="background:#fef3c7; padding:8px; border-radius:5px;"><small>जारी (Cont.)</small><br><strong>Is Going</strong></div>
                 </div>
             </div>
         </div>
 
         <div class="widget full-width" id="essay">
-            <h3><i class="fa-solid fa-scroll"></i> Essay Generator</h3>
+            <h3><i class="fa-solid fa-scroll"></i> निबंध लेखक (Essay Writer)</h3>
+            <p class="desc">किसी भी विषय पर तुरंत निबंध लिखें</p>
+            
             <div style="display:grid; grid-template-columns:2fr 1fr; gap:10px;">
-                <input type="text" id="essay-topic" placeholder="Topic (e.g. Pollution)">
-                <select id="essay-level"><option value="easy">Easy</option><option value="hard">Hard</option></select>
+                <div>
+                    <label>विषय (Topic)</label>
+                    <input type="text" id="essay-topic" placeholder="जैसे: Pollution, My School">
+                </div>
+                <div>
+                    <label>स्तर (Level)</label>
+                    <select id="essay-level"><option value="easy">आसान (Easy)</option><option value="hard">कठिन (Hard)</option></select>
+                </div>
             </div>
-            <button onclick="generateEssay()">Write Essay</button>
+            <button onclick="generateEssay()">निबंध तैयार करें (Generate)</button>
+            
             <div id="essay-container" class="output">
                 <div id="essay-content"></div>
-                <button onclick="downloadPDF('essay-content', 'Essay.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> Save PDF</button>
+                <button onclick="downloadPDF('essay-content', 'Essay.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> PDF सेव करें</button>
             </div>
         </div>
 
         <div class="widget full-width" id="letters">
-            <h3><i class="fa-solid fa-envelope"></i> Letter Generator</h3>
-            <input type="text" id="l-subject" placeholder="Subject">
-            <textarea id="l-reason" rows="2" placeholder="Reason"></textarea>
-            <button onclick="generateLetter()">Write Letter</button>
+            <h3><i class="fa-solid fa-envelope"></i> पत्र लेखक (Letter Writer)</h3>
+            <p class="desc">प्रधानाचार्य या अन्य के लिए आवेदन लिखें</p>
+            
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <div>
+                    <label>विषय (Subject)</label>
+                    <input type="text" id="l-subject" placeholder="जैसे: Leave for fever">
+                </div>
+                <div>
+                    <label>किसे भेजना है (To Whom)</label>
+                    <input type="text" id="l-to" value="The Principal">
+                </div>
+            </div>
+            
+            <label>कारण (Reason in English)</label>
+            <textarea id="l-reason" rows="2" placeholder="जैसे: I am sick..."></textarea>
+            
+            <button onclick="generateLetter()">पत्र तैयार करें (Generate)</button>
+            
             <div id="letter-container" class="output">
                 <div id="letter-content" style="font-family:'Courier New'; white-space:pre-wrap;"></div>
-                <button onclick="downloadPDF('letter-content', 'Letter.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> Save PDF</button>
+                <button onclick="downloadPDF('letter-content', 'Letter.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> PDF सेव करें</button>
             </div>
         </div>
 
@@ -241,27 +263,25 @@
         let xp = 0;
         function addXP(n) { xp += n; document.getElementById('xp-points').innerText = xp; }
 
-        // --- 1. COUNTDOWN LOGIC ---
+        // --- 1. COUNTDOWN ---
         function updateTimer() {
             const examDate = new Date("March 15, 2026 09:00:00").getTime();
             const now = new Date().getTime();
             const diff = examDate - now;
-
             if (diff > 0) {
                 const d = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("countdown").innerText = `${d}d ${h}h Left`;
+                document.getElementById("countdown").innerText = `${d} दिन ${h} घंटे`;
             } else {
-                document.getElementById("countdown").innerText = "Best of Luck!";
+                document.getElementById("countdown").innerText = "शुभकामनाएं!";
             }
         }
-        setInterval(updateTimer, 1000);
-        updateTimer();
+        setInterval(updateTimer, 1000); updateTimer();
 
-        // --- 2. GAME LOGIC ---
+        // --- 2. GAME ---
         const gameWords = [
-            {w:"SCHOOL", h:"Place to study"}, {w:"TEACHER", h:"Who teaches us"}, {w:"FRIEND", h:"Playmate"}, 
-            {w:"SUMMER", h:"Hot Season"}, {w:"ENGLISH", h:"Language"}
+            {w:"SCHOOL", h:"जहाँ हम पढ़ते हैं"}, {w:"TEACHER", h:"जो हमें पढ़ाते हैं"}, 
+            {w:"FRIEND", h:"दोस्त"}, {w:"SUMMER", h:"गर्मी का मौसम"}, {w:"ENGLISH", h:"एक भाषा"}
         ];
         let curGameWord = {};
         
@@ -270,7 +290,7 @@
             curGameWord = gameWords[r];
             const scrambled = curGameWord.w.split('').sort(() => 0.5 - Math.random()).join(' ');
             document.getElementById('scramble-word').innerText = scrambled;
-            document.getElementById('scramble-hint').innerText = `Hint: ${curGameWord.h}`;
+            document.getElementById('scramble-hint').innerText = `(इशारा: ${curGameWord.h})`;
             document.getElementById('user-guess').value = "";
             document.getElementById('game-result').style.display = "none";
         }
@@ -280,10 +300,10 @@
             const res = document.getElementById('game-result');
             res.style.display = "block";
             if(g === curGameWord.w) {
-                res.innerHTML = "<h3 style='color:green; margin:0'>🎉 Correct! +10 XP</h3>";
+                res.innerHTML = "<h3 style='color:green; margin:0'>🎉 सही जवाब! (+10 अंक)</h3>";
                 addXP(10); setTimeout(loadGame, 1500);
             } else {
-                res.innerHTML = "<h3 style='color:red; margin:0'>❌ Try Again</h3>";
+                res.innerHTML = "<h3 style='color:red; margin:0'>❌ गलत जवाब!</h3>";
             }
         }
         loadGame();
@@ -296,28 +316,26 @@
             if(!w) return;
             out.style.display="block"; 
             document.getElementById('word-title').innerText = w;
-            document.getElementById('hindi-word').innerText = "Searching...";
+            document.getElementById('hindi-word').innerText = "खोजा जा रहा है...";
             
-            // Hindi
             try {
                 const r1 = await fetch(`https://api.mymemory.translated.net/get?q=${w}&langpair=en|hi`);
                 const d1 = await r1.json();
                 document.getElementById('hindi-word').innerText = d1.responseData.translatedText;
-            } catch(e) { document.getElementById('hindi-word').innerText = "Hindi not found"; }
+            } catch(e) { document.getElementById('hindi-word').innerText = "नहीं मिला"; }
 
-            // English
             try {
                 const r2 = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${w}`);
                 const d2 = await r2.json();
                 const aud = d2[0].phonetics.find(p => p.audio);
                 audioUrl = aud ? aud.audio : null;
-                document.getElementById('meanings-list').innerHTML = `<strong>${d2[0].meanings[0].partOfSpeech}:</strong> ${d2[0].meanings[0].definitions[0].definition}`;
+                document.getElementById('meanings-list').innerHTML = `<p><strong>English Definition:</strong> ${d2[0].meanings[0].definitions[0].definition}</p>`;
                 addXP(5);
-            } catch(e) { document.getElementById('meanings-list').innerText = "Definition not found"; }
+            } catch(e) { document.getElementById('meanings-list').innerText = "English definition not found"; }
         }
-        function playAudio() { if(audioUrl) new Audio(audioUrl).play(); }
+        function playAudio() { if(audioUrl) new Audio(audioUrl).play(); else alert("Audio not available"); }
 
-        // --- 4. SPEAKING COACH ---
+        // --- 4. SPEAKING ---
         const sList = ["I like reading books", "Education is important", "I live in India"];
         let sIdx = 0;
         function nextSentence() {
@@ -326,32 +344,32 @@
             document.getElementById('speak-result').style.display="none";
         }
         function startListening() {
-            if(!('webkitSpeechRecognition' in window)) { alert("Use Chrome Browser"); return; }
+            if(!('webkitSpeechRecognition' in window)) { alert("यह फीचर केवल Chrome Browser में काम करता है"); return; }
             const rec = new webkitSpeechRecognition();
             rec.lang = 'en-US';
             const btn = document.getElementById('mic-btn');
             
-            rec.onstart = () => { btn.style.background="red"; document.getElementById('listening-status').innerText="Listening..."; };
-            rec.onend = () => { btn.style.background="#4f46e5"; document.getElementById('listening-status').innerText="Tap Mic"; };
+            rec.onstart = () => { btn.style.background="red"; document.getElementById('listening-status').innerText="सुन रहा हूँ..."; };
+            rec.onend = () => { btn.style.background="#4f46e5"; document.getElementById('listening-status').innerText="माइक दबाएं और बोलें"; };
             rec.onresult = (e) => {
                 const spoken = e.results[0][0].transcript.toLowerCase();
                 const target = document.getElementById('speak-target').innerText.toLowerCase();
                 const res = document.getElementById('speak-result');
                 res.style.display="block";
                 if(spoken.includes(target) || target.includes(spoken)) {
-                    res.innerHTML = `<h4 style="color:green; margin:0">✅ Great Job!</h4>`; addXP(20);
+                    res.innerHTML = `<h4 style="color:green; margin:0">✅ बहुत बढ़िया! (Perfect)</h4>`; addXP(20);
                 } else {
-                    res.innerHTML = `<h4 style="color:red; margin:0">❌ You said: "${spoken}"</h4>`;
+                    res.innerHTML = `<h4 style="color:red; margin:0">❌ फिर कोशिश करें</h4><small>आपने कहा: "${spoken}"</small>`;
                 }
             };
             rec.start();
         }
 
-        // --- 5. TENSE MASTER ---
+        // --- 5. TENSE ---
         const verbs = {
             "go": ["Goes", "Went", "Will Go", "Is Going"],
-            "play": ["Plays", "Played", "Will Play", "Is Playing"],
             "eat": ["Eats", "Ate", "Will Eat", "Is Eating"],
+            "play": ["Plays", "Played", "Will Play", "Is Playing"],
             "write": ["Writes", "Wrote", "Will Write", "Is Writing"]
         };
         function showTense() {
@@ -389,7 +407,7 @@
             html2pdf().from(el).save(name);
         }
         
-        // --- NAV LOGIC ---
+        // NAV
         document.querySelectorAll('.bottom-nav a').forEach(a => {
             a.addEventListener('click', function() {
                 document.querySelectorAll('.bottom-nav a').forEach(b => b.classList.remove('active'));
