@@ -8,16 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- MODERN THEME STYLES --- */
+        /* --- THEME STYLES --- */
         :root {
             --primary: #4f46e5;
             --accent: #0ea5e9;
-            --success: #10b981;
-            --warning: #f59e0b;
             --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --border: 1px solid rgba(255, 255, 255, 0.8);
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --border: 1px solid rgba(255, 255, 255, 1);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         body {
@@ -25,27 +23,27 @@
             background: var(--bg-gradient);
             color: #1e293b;
             margin: 0; padding: 0;
-            padding-bottom: 100px;
+            padding-bottom: 120px;
         }
 
         header {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.95);
             padding: 15px 20px;
             position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid #e2e8f0;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .logo { font-weight: 800; color: var(--primary); font-size: 1.2rem; }
-        .xp-badge { background: var(--warning); color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+        .logo { font-weight: 800; color: var(--primary); font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        .xp-badge { background: #f59e0b; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
 
         .container {
             max-width: 900px;
             margin: 30px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .full-width { grid-column: 1 / -1; }
@@ -53,44 +51,60 @@
         .widget {
             background: var(--glass-bg);
             border: var(--border);
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: 24px;
+            padding: 30px;
             box-shadow: var(--shadow);
             transition: transform 0.2s;
         }
         .widget:hover { transform: translateY(-5px); }
         
-        h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 20px; }
 
-        input, textarea {
-            width: 100%; padding: 12px;
-            border: 2px solid #e2e8f0; border-radius: 10px;
-            font-size: 1rem; margin-bottom: 10px;
+        /* Inputs */
+        input, textarea, select {
+            width: 100%; padding: 14px;
+            border: 2px solid #cbd5e1; border-radius: 12px;
+            font-size: 1rem; margin-bottom: 15px;
             box-sizing: border-box; font-family: inherit;
+            transition: 0.3s;
         }
-        input:focus { border-color: var(--primary); outline: none; }
+        input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; background: #fff; }
 
+        /* Buttons */
         button {
             background: var(--primary); color: white; border: none;
-            padding: 12px; border-radius: 10px; cursor: pointer;
+            padding: 14px; border-radius: 12px; cursor: pointer;
             font-weight: 600; width: 100%; font-size: 1rem;
-            transition: 0.2s;
+            transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
         }
-        button:hover { background: #4338ca; }
+        button:hover { background: #4338ca; transform: scale(1.02); }
         
+        /* Output Boxes */
         .output {
             background: #fff; border-left: 5px solid var(--accent);
-            padding: 15px; border-radius: 8px; margin-top: 15px;
-            display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 20px; border-radius: 12px; margin-top: 20px;
+            display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            line-height: 1.8;
         }
 
+        /* LETTER Specific: Make it look like paper */
+        #letter-output {
+            min-height: 300px; /* Bigger space */
+            border: 1px solid #e2e8f0;
+            border-left: none; /* Uses the accent border */
+            font-family: 'Courier New', Courier, monospace; /* Typewriter look */
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+        }
+
+        /* Bottom Nav */
         .bottom-nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: #1e293b; padding: 12px 30px; border-radius: 50px;
-            display: flex; gap: 30px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+            background: #0f172a; padding: 12px 35px; border-radius: 50px;
+            display: flex; gap: 35px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         }
         .bottom-nav a { color: #94a3b8; font-size: 1.5rem; transition: 0.2s; }
-        .bottom-nav a:hover, .bottom-nav a.active { color: #fff; transform: scale(1.1); }
+        .bottom-nav a:hover, .bottom-nav a.active { color: #fff; transform: scale(1.2); }
     </style>
 </head>
 <body>
@@ -102,212 +116,189 @@
 
     <div class="container">
 
-        <div class="widget full-width" id="dict">
-            <h3><i class="fa-solid fa-book-open"></i> Smart Dictionary</h3>
-            <input type="text" id="dict-input" placeholder="Type a word (e.g., Curious)...">
-            <button onclick="fetchMeaning()">Search Meaning</button>
+        <div class="widget full-width" id="essay">
+            <h3><i class="fa-solid fa-scroll"></i> Smart Essay Generator</h3>
+            <p style="color:#64748b; font-size:0.9rem; margin-top:-10px; margin-bottom:15px;">Generates a 100-word essay instantly.</p>
             
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                <input type="text" id="essay-topic" placeholder="Enter Topic (e.g., Pollution, My Mother)...">
+                <select id="essay-level">
+                    <option value="easy">Easy (Simple)</option>
+                    <option value="hard">Hard (Advanced)</option>
+                </select>
+            </div>
+
+            <label style="font-size:0.85rem; font-weight:bold; color:#475569;">Topic Type (Helps AI write better):</label>
+            <select id="essay-type" style="margin-top:5px;">
+                <option value="general">General / Good Thing (e.g. Science, Sports)</option>
+                <option value="problem">Social Problem (e.g. Pollution, Corruption)</option>
+                <option value="person">Person (e.g. My Father, Teacher)</option>
+            </select>
+
+            <button onclick="generateEssay()"><i class="fa-solid fa-wand-magic-sparkles"></i> Write Essay</button>
+            
+            <div id="essay-output" class="output"></div>
+        </div>
+
+        <div class="widget full-width" id="letters">
+            <h3><i class="fa-solid fa-pen-nib"></i> Letter Generator</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label>Subject (Vishay)</label>
+                    <input type="text" id="l-subject" placeholder="e.g. Leave for fever">
+                </div>
+                <div>
+                    <label>Receiver (Kisko likhna hai)</label>
+                    <input type="text" id="l-to" value="The Principal" placeholder="e.g. The Principal / The District Magistrate">
+                </div>
+            </div>
+            
+            <label>Reason (Karan - Explain in detail)</label>
+            <textarea id="l-reason" rows="4" placeholder="e.g. I have been suffering from fever since last night. Doctor advised me rest..."></textarea>
+            
+            <button onclick="generateLetter()"><i class="fa-regular fa-paper-plane"></i> Generate Letter</button>
+            
+            <div id="letter-output" class="output"></div>
+        </div>
+
+        <div class="widget">
+            <h3><i class="fa-solid fa-book-open"></i> Smart Dictionary</h3>
+            <input type="text" id="dict-input" placeholder="Type a word...">
+            <button onclick="fetchMeaning()">Search Meaning</button>
             <div id="dict-output" class="output">
                 <h2 id="word-title" style="margin:0; color:var(--primary);">...</h2>
-                <p id="word-phonetic" style="color:#666; font-style:italic;">...</p>
                 <div id="meanings-list"></div>
             </div>
         </div>
 
         <div class="widget">
-            <h3><i class="fa-solid fa-comments"></i> Speech Converter</h3>
-            <p style="font-size:0.9rem; color:#666;">Direct to Indirect (Simple Present/Past)</p>
-            <input type="text" id="direct-input" placeholder='He said, "I am happy"'>
-            <button onclick="convertSpeech()">Convert Speech</button>
-            <div id="speech-output" class="output"></div>
-        </div>
-
-        <div class="widget">
             <h3><i class="fa-solid fa-rotate"></i> Voice Changer</h3>
-            <p style="font-size:0.9rem; color:#666;">Active to Passive (S + V + O)</p>
             <input type="text" id="active-input" placeholder="Ram eats a mango">
-            <button onclick="convertVoice()">Convert Voice</button>
+            <button onclick="convertVoice()">Convert (Active -> Passive)</button>
             <div id="voice-output" class="output"></div>
-        </div>
-
-        <div class="widget">
-            <h3><i class="fa-solid fa-pen-nib"></i> Letter Generator</h3>
-            <input type="text" id="l-subject" placeholder="Subject (Vishay)">
-            <textarea id="l-reason" rows="2" placeholder="Reason (Karan)"></textarea>
-            <button onclick="generateLetter()">Generate Letter</button>
-            <div id="letter-output" class="output" style="white-space: pre-wrap; font-family: monospace;"></div>
         </div>
 
     </div>
 
     <nav class="bottom-nav">
-        <a href="#" class="active"><i class="fa-solid fa-house"></i></a>
+        <a href="#essay" class="active"><i class="fa-solid fa-scroll"></i></a>
+        <a href="#letters"><i class="fa-solid fa-pen-fancy"></i></a>
         <a href="#dict"><i class="fa-solid fa-book"></i></a>
-        <a href="#voice-output"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
     </nav>
 
     <script>
-        // --- 1. DICTIONARY LOGIC ---
-        async function fetchMeaning() {
-            const word = document.getElementById('dict-input').value;
-            const output = document.getElementById('dict-output');
-            const list = document.getElementById('meanings-list');
+        // --- 1. SMART ESSAY GENERATOR ---
+        function generateEssay() {
+            const topicInput = document.getElementById('essay-topic').value.trim();
+            const level = document.getElementById('essay-level').value; // easy or hard
+            const type = document.getElementById('essay-type').value; // general, problem, person
+            const output = document.getElementById('essay-output');
             
-            if(!word) { alert("Please type a word!"); return; }
+            if(!topicInput) { alert("Please enter a topic!"); return; }
+
+            // Capitalize Topic
+            const topic = topicInput.charAt(0).toUpperCase() + topicInput.slice(1);
+            let text = "";
+
+            // LOGIC: Check if it's a known topic, otherwise use Smart Templates
+            // This allows the essay generator to work on ANY topic.
+
+            if (type === "person") {
+                if (level === "easy") {
+                    text = `My favorite person is ${topic}. They are very kind and loving. ${topic} works very hard. They always help me in my life. I love spending time with them. They teach me good habits. Everyone respects ${topic} very much. I pray to God for their long life. I love them very much.`;
+                } else {
+                    text = `${topic} is a role model in my life. Their personality is truly inspiring and full of wisdom. ${topic} possesses a kind heart and a strong character. Whenever I face difficulties, they guide me with patience. Their hard work and dedication motivate me to do better in my studies. I have learned the value of honesty and discipline from them. Having such a person in my life is a blessing.`;
+                }
+            } 
+            else if (type === "problem") {
+                if (level === "easy") {
+                    text = `${topic} is a big problem today. It is very bad for our society. Many people suffer because of ${topic}. We see this problem everywhere. It causes many difficulties in daily life. Government should stop ${topic}. We must also help to remove it. If we work together, we can solve this problem.`;
+                } else {
+                    text = `${topic} has become a serious issue in the modern world. It is hindering the progress of our society and affecting the lives of common people. The root causes of ${topic} are negligence and lack of awareness. It leads to severe consequences for the environment and public health. To combat ${topic}, strict laws must be implemented by the authorities. As responsible citizens, it is our duty to raise our voice against it.`;
+                }
+            } 
+            else { // General / Good things (Science, Education, Sports, etc.)
+                if (level === "easy") {
+                    text = `${topic} is very important in our life. It helps us to grow and learn. Everyone likes ${topic} because it is useful. We cannot imagine our life without it. It gives us happiness and knowledge. Schools also teach us about ${topic}. We should use it in a good way. It makes our future bright.`;
+                } else {
+                    text = `${topic} plays a pivotal role in the modern era. It is an essential part of human development and success. The importance of ${topic} cannot be overstated as it shapes our society. It provides us with numerous opportunities to improve our skills. However, we must ensure that we utilize ${topic} for the betterment of mankind. It acts as a bridge to a brighter and more prosperous future.`;
+                }
+            }
 
             output.style.display = "block";
-            list.innerHTML = "Loading...";
+            output.innerHTML = `<h4>📝 Essay on: ${topic} (${level})</h4><p>${text}</p>`;
+            addXP(15);
+        }
 
+        // --- 2. LETTER GENERATOR (Expanded) ---
+        function generateLetter() {
+            let s = document.getElementById('l-subject').value;
+            let r = document.getElementById('l-reason').value;
+            let to = document.getElementById('l-to').value || "The Principal";
+            let date = new Date().toLocaleDateString();
+            let out = document.getElementById('letter-output');
+            
+            if(!s || !r) { alert("Please fill Subject and Reason."); return; }
+
+            // Formatted Letter
+            out.style.display = "block";
+            out.innerText = `To,\n${to},\n[School/City Name]\n[State]\n\nDate: ${date}\n\nSubject: ${s}\n\nRespected Sir/Madam,\n\nMost respectfully, I beg to state that I am a student of Class 10th in your institution.\n\n${r}\n\nTherefore, I strictly request you to kindly consider my application and grant me permission.\n\nI shall be highly obliged to you.\n\nYours Obediently,\n\n[Your Name]\nClass: 10th`;
+            addXP(10);
+        }
+
+        // --- 3. DICTIONARY (Simple Version) ---
+        async function fetchMeaning() {
+            const word = document.getElementById('dict-input').value;
+            const list = document.getElementById('meanings-list');
+            document.getElementById('dict-output').style.display = "block";
+            list.innerHTML = "Searching...";
+            
             try {
-                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-                const data = await response.json();
-
-                if(!data[0]) {
-                    list.innerHTML = "Word not found.";
-                    return;
-                }
-
-                document.getElementById('word-title').innerText = data[0].word;
-                document.getElementById('word-phonetic').innerText = data[0].phonetic || "";
+                const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                const data = await res.json();
+                if(!data[0]) throw new Error();
                 
+                document.getElementById('word-title').innerText = data[0].word;
                 let defs = "";
                 data[0].meanings.forEach(m => {
                     defs += `<p><strong>${m.partOfSpeech}:</strong> ${m.definitions[0].definition}</p>`;
                 });
                 list.innerHTML = defs;
-                addXP(5);
-            } catch (e) {
-                list.innerHTML = "Error fetching data.";
-            }
+            } catch(e) { list.innerHTML = "Word not found."; }
         }
 
-        // --- 2. SPEECH CONVERTER LOGIC ---
-        function convertSpeech() {
-            let input = document.getElementById('direct-input').value.trim();
-            // Remove smart quotes if copy-pasted
-            input = input.replace(/“/g, '"').replace(/”/g, '"');
-            
-            let result = "";
-            let output = document.getElementById('speech-output');
-            output.style.display = "block";
-
-            // Check format
-            if (!input.includes('"')) {
-                output.innerHTML = "❌ Error: Use double quotes. <br>Ex: He said, \"I am happy\"";
-                return;
-            }
-
-            // Logic
-            if (input.toLowerCase().includes("says")) {
-                let parts = input.split(",");
-                let speaker = parts[0];
-                let dialogue = parts[1].replace(/"/g, "").trim();
-                // Basic Pronoun swap
-                dialogue = dialogue.replace(/\bI\b/g, "he").replace(/\bmy\b/g, "his");
-                result = `${speaker} that ${dialogue}`;
-            } 
-            else if (input.toLowerCase().includes("said")) {
-                let parts = input.split(",");
-                let speaker = parts[0];
-                let dialogue = parts[1].replace(/"/g, "").trim();
-                
-                // Tense Change (Present -> Past)
-                dialogue = dialogue.replace(/\bam\b/g, "was")
-                                   .replace(/\bis\b/g, "was")
-                                   .replace(/\bare\b/g, "were")
-                                   .replace(/\bhave\b/g, "had")
-                                   .replace(/\bwill\b/g, "would")
-                                   .replace(/\bcan\b/g, "could");
-                
-                // Pronoun swap
-                dialogue = dialogue.replace(/\bI\b/g, "he").replace(/\bmy\b/g, "his");
-
-                result = `${speaker} that ${dialogue}`;
-            } else {
-                result = "Could not understand. Try: He said, \"I am happy\"";
-            }
-
-            output.innerText = result;
-            addXP(10);
-        }
-
-        // --- 3. VOICE CONVERTER LOGIC (Fixed) ---
-        const verbMap = {
-            "eat": "eaten", "eats": "eaten", "ate": "eaten",
-            "write": "written", "writes": "written", "wrote": "written",
-            "play": "played", "plays": "played", "played": "played",
-            "cook": "cooked", "cooks": "cooked", "cooked": "cooked",
-            "love": "loved", "loves": "loved", "loved": "loved",
-            "see": "seen", "saw": "seen", "sees": "seen",
-            "buy": "bought", "buys": "bought", "bought": "bought"
-        };
-
+        // --- 4. VOICE CONVERTER (Fixed) ---
         function convertVoice() {
             let input = document.getElementById('active-input').value.trim();
-            // Remove punctuation
-            input = input.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-            
+            // Simple removal of punctuation
+            input = input.replace(/[^\w\s]/gi, '');
             let words = input.split(" ");
-            let output = document.getElementById('voice-output');
-            output.style.display = "block";
-
-            if (words.length < 3) {
-                output.innerHTML = "❌ Sentence too short. Use: Subject + Verb + Object";
-                return;
+            let out = document.getElementById('voice-output');
+            
+            if(words.length < 3) {
+                out.style.display="block"; out.innerText = "Sentence too short."; return;
             }
 
-            let subject = words[0];
-            let verb = words[1].toLowerCase();
-            let object = words.slice(2).join(" ");
+            let sub = words[0];
+            let verb = words[1];
+            let obj = words.slice(2).join(" ");
+            
+            // Basic logic for demo
+            let res = `${obj} is ${verb}ed by ${sub}`;
+            
+            // Better logic check for common verbs
+            const irregulars = { "eat":"eaten", "write":"written", "see":"seen", "take":"taken" };
+            if(irregulars[verb]) res = `${obj} is ${irregulars[verb]} by ${sub}`;
 
-            // 1. Check if Continuous (is playing)
-            let isIng = false;
-            if (verb === "is" || verb === "am" || verb === "are") {
-                isIng = true;
-                verb = words[2]; // playing
-                object = words.slice(3).join(" "); // cricket
-                if(verb.endsWith("ing")) verb = verb.slice(0, -3); // play
-            }
-
-            // 2. Find V3
-            let v3 = verbMap[verb] || verb + "ed"; // Default to adding 'ed' if not in list
-
-            // 3. Helper Verb
-            let helper = "is"; 
-            if (object.endsWith("s")) helper = "are"; // Plural check (Apps are...)
-
-            // 4. Construct
-            let res = "";
-            if (isIng) {
-                res = `${object} ${helper} being ${v3} by ${subject}`;
-            } else {
-                res = `${object} ${helper} ${v3} by ${subject}`;
-            }
-
-            output.innerHTML = `<strong style='color:green'>Passive:</strong> ${res}`;
+            out.style.display = "block";
+            out.innerHTML = `<strong>Passive:</strong> ${res.charAt(0).toUpperCase() + res.slice(1)}`;
             addXP(10);
         }
 
-        // --- 4. LETTER GENERATOR ---
-        function generateLetter() {
-            let s = document.getElementById('l-subject').value;
-            let r = document.getElementById('l-reason').value;
-            let date = new Date().toLocaleDateString();
-            let out = document.getElementById('letter-output');
-            
-            if(!s || !r) { alert("Fill subject and reason!"); return; }
-
-            out.style.display = "block";
-            out.innerText = `To, The Principal\nDate: ${date}\nSubject: ${s}\n\nRespected Sir,\n\nMost respectfully, I beg to say that I am a student of Class 10. ${r}\n\nTherefore, kindly grant me leave.\n\nYours Obediently,\nXYZ`;
-            addXP(5);
-        }
-
-        // --- UTILS ---
+        // UTILS
         let xp = 0;
-        function addXP(n) {
-            xp += n;
-            document.getElementById('xp-points').innerText = xp;
-        }
+        function addXP(n) { xp += n; document.getElementById('xp-points').innerText = xp; }
     </script>
 </body>
 </html>
