@@ -3,12 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RMVS Class Tuitions - Complete Digital Lab</title>
+    
+    <title>RMVS Class Tuitions - Best English UP Board Exam Prep 2026</title>
+    <meta name="description" content="Free Online English Class for UP Board Class 10 & 12. Practice OMR, Essay Writing, Grammar & Translation. Powered by RMVS Class Tuitions, Lakhimpur Kheri.">
+    
+    <meta name="keywords" content="RMVS Class Tuitions, UP Board English Class 10, English Grammar UP Board, Free English Speaking Course, UP Board Exam 2026, Lakhimpur Kheri Tuition, Essay Generator, OMR Practice, Board Exam Preparation, Class 10 Model Paper">
+    
+    <meta name="author" content="RMVS Class Tuitions">
+    <meta name="geo.region" content="IN-UP" />
+    <meta name="geo.placename" content="Lakhimpur Kheri" />
+
+    <meta property="og:title" content="RMVS English Lab - Free Board Exam Prep">
+    <meta property="og:description" content="Practice 20 Marks OMR, Essays & Grammar for UP Board Exam 2026. Join Free!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rmvsclasstuitions.in"> 
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "RMVS Class Tuitions",
+      "description": "Best English Coaching for UP Board Students in Lakhimpur Kheri.",
+      "url": "https://rmvsclasstuitions.in",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lakhimpur Kheri",
+        "addressRegion": "Uttar Pradesh",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
 
     <style>
         /* --- THEME --- */
@@ -79,7 +108,7 @@
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-whatsapp { background: #25D366; color: white; }
 
-        /* OMR STYLES */
+        /* OMR OPTION */
         .omr-option {
             background: white; padding: 12px; border: 1px solid #ddd;
             border-radius: 8px; cursor: pointer; transition: 0.2s;
@@ -87,7 +116,12 @@
         }
         .omr-option:hover { background: #f1f5f9; }
 
-        /* PDF BOX & WATERMARK */
+        /* PDF BOX */
+        .pdf-box {
+            background: white; color: black; padding: 40px; position: relative;
+            border: 1px solid #ddd; min-height: 400px;
+            font-family: 'Times New Roman', serif; line-height: 1.6;
+        }
         .watermark {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
@@ -98,13 +132,13 @@
         .pdf-text { position: relative; z-index: 1; color: black; }
         .output { display: none; margin-top: 15px; }
 
-        /* HOURLY TRANS BOX */
+        /* HOURLY BOX */
         .hourly-box {
             background: #fffbeb; border-left: 5px solid #d97706;
             padding: 15px; border-radius: 8px; margin-bottom: 15px;
         }
 
-        /* FLOAT WHATSAPP */
+        /* FLOAT WA */
         .float-wa {
             position: fixed; bottom: 90px; right: 20px;
             background: #25D366; color: white;
@@ -112,6 +146,12 @@
             display: flex; justify-content: center; align-items: center;
             font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 1000; text-decoration: none;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center; color: #64748b; font-size: 0.8rem;
+            padding: 20px; margin-bottom: 80px;
         }
 
         /* NAV */
@@ -135,13 +175,14 @@
     <div class="container">
 
         <div class="widget full-width" style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; text-align:center;">
-            <h2 style="margin:0; font-size:1.4rem;">📅 बोर्ड परीक्षा (23 Feb 2026)</h2>
+            <h1 style="margin:0; font-size:1.4rem;">📅 बोर्ड परीक्षा (23 Feb 2026)</h1>
+            <p style="font-size:0.9rem; margin-top:5px; opacity:0.9;">RMVS Class Tuitions - Best Prep</p>
             <div style="font-size: 2rem; font-weight: 800; margin-top: 10px;" id="countdown">00d 00h 00m</div>
         </div>
 
         <div class="widget full-width" id="omr">
             <h3><i class="fa-solid fa-check-circle"></i> OMR Test (20 Marks)</h3>
-            <p class="desc">Board Level MCQs Practice</p>
+            <p class="desc">UP Board English Class 10 Important MCQs</p>
             <div id="quiz-box" style="background:#f8fafc; padding:15px; border-radius:10px; border:1px solid #e2e8f0;">
                 <h4 id="q-text" style="margin:0 0 15px 0;">Loading...</h4>
                 <div id="options-box"></div>
@@ -153,8 +194,7 @@
 
         <div class="widget" id="rules">
             <h3><i class="fa-solid fa-book"></i> Grammar Rules</h3>
-            <p class="desc">Short Tricks for Revision</p>
-            
+            <p class="desc">Quick Revision for Board Exam</p>
             <details style="background:#f1f5f9; padding:10px; border-radius:8px; margin-bottom:10px;">
                 <summary style="font-weight:bold; cursor:pointer;">1. Tense Rules</summary>
                 <p style="font-size:0.9rem; margin-top:5px; color:#334155;">
@@ -170,15 +210,6 @@
                     • Always use V3 (3rd form)<br>
                     • Add 'by' before new object<br>
                     • Ex: I play cricket -> Cricket is played by me.
-                </p>
-            </details>
-            <details style="background:#f1f5f9; padding:10px; border-radius:8px; margin-bottom:10px;">
-                <summary style="font-weight:bold; cursor:pointer;">3. Direct -> Indirect</summary>
-                <p style="font-size:0.9rem; margin-top:5px; color:#334155;">
-                    • said to -> told<br>
-                    • " " -> that<br>
-                    • Present -> Past<br>
-                    • Will -> Would, Can -> Could
                 </p>
             </details>
         </div>
@@ -263,7 +294,7 @@
                 <option value="">-- Select Essay --</option>
             </select>
             <div id="essay-container" class="output">
-                <div id="essay-pdf-area" style="background:white; padding:30px; border:1px solid #ddd; position:relative;">
+                <div id="essay-pdf-area" class="pdf-box">
                     <div class="watermark">RMVS Class Tuitions</div>
                     <div id="essay-text" class="pdf-text"></div>
                 </div>
@@ -282,7 +313,7 @@
             <textarea id="l-reason" rows="2" placeholder="Reason"></textarea>
             <button onclick="generateLetter()">Generate Letter</button>
             <div id="letter-container" class="output">
-                <div id="letter-pdf-area" style="background:white; padding:30px; border:1px solid #ddd; position:relative;">
+                <div id="letter-pdf-area" class="pdf-box">
                     <div class="watermark">RMVS Class Tuitions</div>
                     <div id="letter-text" class="pdf-text" style="white-space:pre-wrap;"></div>
                 </div>
@@ -293,6 +324,10 @@
         </div>
 
     </div>
+
+    <footer>
+        <p>© 2026 RMVS Class Tuitions, Lakhimpur Kheri.<br>Best English Coaching for UP Board.</p>
+    </footer>
 
     <a href="https://wa.me/919876543210" class="float-wa"><i class="fa-brands fa-whatsapp"></i></a>
 
@@ -420,7 +455,7 @@
             document.getElementById('tense-output').style.display="block";
         }
 
-        // --- 7. ESSAY & LETTER & PDF ---
+        // --- 7. ESSAY & LETTER ---
         const essays = {
             "Pollution": "Pollution is a big problem. It makes air and water dirty. We should plant trees.",
             "My School": "My school is very big. It has many rooms. I love my school."
@@ -442,12 +477,22 @@
             document.getElementById('letter-text').innerText=txt;
         }
 
-        function downloadPDF(id, name) {
-            const el = document.getElementById(id);
-            const clone = el.cloneNode(true);
-            clone.style.width='700px'; clone.style.padding='40px'; clone.style.background='white'; clone.style.position='absolute'; clone.style.top='-9999px'; clone.style.display='block';
+        // --- PDF FIX (Cloning) ---
+        function downloadPDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            const clone = element.cloneNode(true);
+            clone.style.width='700px'; 
+            clone.style.padding='40px'; 
+            clone.style.background='white'; 
+            clone.style.position='absolute'; 
+            clone.style.top='-9999px'; 
+            clone.style.display='block';
+            
+            const wm = clone.querySelector('.watermark');
+            if(wm) { wm.style.color='rgba(0,0,0,0.05)'; wm.style.transform='translate(-50%,-50%) rotate(-45deg)'; }
+
             document.body.appendChild(clone);
-            html2pdf().set({margin:10, filename:name, html2canvas:{scale:2}, jsPDF:{unit:'mm', format:'a4'}}).from(clone).save().then(()=>document.body.removeChild(clone));
+            html2pdf().set({margin:10, filename:filename, html2canvas:{scale:2, backgroundColor:'#ffffff'}, jsPDF:{unit:'mm', format:'a4'}}).from(clone).save().then(()=>document.body.removeChild(clone));
         }
 
         // --- GLOBAL ---
