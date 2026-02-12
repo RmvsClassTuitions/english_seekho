@@ -14,7 +14,6 @@
         /* --- THEME --- */
         :root {
             --primary: #4f46e5;
-            --accent: #0ea5e9;
             --bg-gradient: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
             --glass: rgba(255, 255, 255, 0.95);
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -60,10 +59,9 @@
             border: 1px solid rgba(255,255,255,0.6);
             position: relative;
         }
-        
         h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        
-        /* INPUTS & BUTTONS */
+
+        /* INPUTS */
         input, textarea, select {
             width: 100%; padding: 12px;
             border: 2px solid #cbd5e1; border-radius: 10px;
@@ -79,13 +77,13 @@
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-whatsapp { background: #25D366; color: white; }
 
-        /* PDF CONTAINER STYLES (CRITICAL FIX) */
+        /* PDF BOX STYLES - CRITICAL FOR DOWNLOAD */
         .pdf-box {
-            background: white !important;
-            color: black !important;
+            background: white;
+            color: black;
             padding: 40px;
             position: relative;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             min-height: 400px;
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -97,7 +95,7 @@
             transform: translate(-50%, -50%) rotate(-45deg);
             font-size: 40px;
             font-weight: bold;
-            color: #e5e7eb; /* Light Gray */
+            color: rgba(0, 0, 0, 0.1); /* Light Grey Transparent */
             z-index: 0;
             pointer-events: none;
             white-space: nowrap;
@@ -105,21 +103,10 @@
 
         .pdf-text {
             position: relative;
-            z-index: 10; /* Above watermark */
-            color: #000 !important; /* Force Black */
+            z-index: 10;
         }
 
-        /* OUTPUT HIDDEN INITIALLY */
         .output { display: none; margin-top: 15px; }
-
-        /* NAV */
-        .bottom-nav {
-            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
-            background: #1e293b; padding: 10px 30px; border-radius: 50px;
-            display: flex; gap: 25px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; }
-        .bottom-nav a.active { color: #fff; transform: scale(1.2); }
 
         /* FLOAT WHATSAPP */
         .float-wa {
@@ -130,6 +117,15 @@
             font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 1000; text-decoration: none;
         }
+
+        /* NAV */
+        .bottom-nav {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            background: #1e293b; padding: 10px 30px; border-radius: 50px;
+            display: flex; gap: 25px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; }
+        .bottom-nav a.active { color: #fff; transform: scale(1.2); }
     </style>
 </head>
 <body>
@@ -237,7 +233,7 @@
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById("countdown").innerText = `${d} दिन ${h} घंटे`;
             } else {
-                document.getElementById("countdown").innerText = "Best of Luck!";
+                document.getElementById("countdown").innerText = "Good Luck!";
             }
         }
         setInterval(updateTimer, 1000); updateTimer();
@@ -307,11 +303,13 @@
             const v = document.getElementById('tense-verb').value;
             let p = v + "s", pt = v + "ed", f = "Will " + v, c = "Is " + v + "ing";
             
-            // Simple Irregular Logic
+            // Basic Regular Rules
+            if(v.endsWith('e')) { c = "Is " + v.slice(0,-1) + "ing"; pt = v + "d"; }
+            
+            // Common Irregulars Override
             const irr = {"Go":["Goes","Went","Will Go","Is Going"],"Eat":["Eats","Ate","Will Eat","Is Eating"],"See":["Sees","Saw","Will See","Is Seeing"],"Do":["Does","Did","Will Do","Is Doing"],"Have":["Has","Had","Will Have","Is Having"],"Buy":["Buys","Bought","Will Buy","Is Buying"],"Write":["Writes","Wrote","Will Write","Is Writing"],"Speak":["Speaks","Spoke","Will Speak","Is Speaking"],"Take":["Takes","Took","Will Take","Is Taking"],"Get":["Gets","Got","Will Get","Is Getting"],"Come":["Comes","Came","Will Come","Is Coming"],"Run":["Runs","Ran","Will Run","Is Running"]};
 
             if(irr[v]) [p, pt, f, c] = irr[v];
-            else if(v.endsWith('e')) { c = "Is " + v.slice(0,-1) + "ing"; pt = v + "d"; }
             
             document.getElementById('t-p').innerText = p; document.getElementById('t-pt').innerText = pt;
             document.getElementById('t-f').innerText = f; document.getElementById('t-c').innerText = c;
@@ -365,16 +363,42 @@
             document.getElementById('letter-text').innerText = txt;
         }
 
-        function downloadPDF(id, name) {
-            const element = document.getElementById(id);
+        // --- PDF FIX (Cloning Method) ---
+        function downloadPDF(elementId, filename) {
+            // Clone the element
+            const element = document.getElementById(elementId);
+            const clone = element.cloneNode(true);
+            
+            // Style clone to be clean and visible for PDF
+            clone.style.width = '800px';
+            clone.style.background = 'white';
+            clone.style.color = 'black';
+            clone.style.padding = '40px';
+            clone.style.position = 'absolute';
+            clone.style.top = '-9999px'; // Hide off-screen
+            clone.style.left = '0';
+            clone.style.display = 'block'; // Ensure it's not hidden
+            
+            // Fix Watermark in clone
+            const wm = clone.querySelector('.watermark');
+            if(wm) {
+                wm.style.color = 'rgba(0,0,0,0.05)'; // Ensure light grey
+                wm.style.transform = 'translate(-50%, -50%) rotate(-45deg)';
+            }
+            
+            document.body.appendChild(clone);
+
             const opt = {
                 margin: 10,
-                filename: name,
+                filename: filename,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(element).save();
+
+            html2pdf().set(opt).from(clone).save().then(() => {
+                document.body.removeChild(clone); // Cleanup
+            });
         }
 
         document.querySelectorAll('.bottom-nav a').forEach(a => {
