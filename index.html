@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bharat English Academy - Digital Lab</title>
+    <title>Bharat English Academy - Ultimate Lab</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,398 +11,391 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        /* --- MODERN THEME --- */
+        /* --- THEME & COLORS --- */
         :root {
-            --primary: #4f46e5; /* Indigo */
-            --accent: #0ea5e9;  /* Sky Blue */
-            --success: #10b981; /* Green */
-            --danger: #ef4444;  /* Red */
-            --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --border: 1px solid rgba(255, 255, 255, 1);
-            --shadow: 0 10px 40px rgba(0,0,0,0.08);
+            --primary: #4f46e5;
+            --secondary: #3b82f6;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--bg-gradient);
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
             color: #1e293b;
             margin: 0; padding: 0;
-            padding-bottom: 120px;
+            padding-bottom: 100px;
         }
 
         /* HEADER */
         header {
-            background: rgba(255,255,255,0.95);
+            background: var(--glass);
             padding: 15px 20px;
             position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid #e2e8f0;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
         }
         .logo { font-weight: 800; color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
-        .xp-badge { background: #f59e0b; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+        .xp-pill { background: var(--warning); color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; box-shadow: 0 2px 5px rgba(245, 158, 11, 0.4); }
 
-        /* GRID LAYOUT */
+        /* LAYOUT */
         .container {
             max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
+            margin: 20px auto;
+            padding: 0 15px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
         .full-width { grid-column: 1 / -1; }
 
-        /* WIDGET CARDS */
+        /* WIDGETS */
         .widget {
-            background: var(--glass-bg);
-            border: var(--border);
-            border-radius: 24px;
+            background: var(--glass);
+            border-radius: 20px;
             padding: 25px;
             box-shadow: var(--shadow);
-            transition: transform 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.6);
+            transition: transform 0.2s;
         }
         .widget:hover { transform: translateY(-3px); }
         
-        h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 20px; font-size: 1.3rem; }
+        h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
 
-        /* INPUTS */
+        /* CONTROLS */
         input, textarea, select {
             width: 100%; padding: 12px;
-            border: 2px solid #cbd5e1; border-radius: 12px;
-            font-size: 1rem; margin-bottom: 15px;
+            border: 2px solid #cbd5e1; border-radius: 10px;
+            font-size: 1rem; margin-bottom: 10px;
             box-sizing: border-box; font-family: inherit;
-            transition: 0.3s; background: #f8fafc;
+            background: #f8fafc;
         }
-        input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; background: #fff; }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; }
 
-        /* BUTTONS */
         button {
             background: var(--primary); color: white; border: none;
-            padding: 14px; border-radius: 12px; cursor: pointer;
+            padding: 12px; border-radius: 10px; cursor: pointer;
             font-weight: 600; width: 100%; font-size: 1rem;
             transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
         }
-        button:hover { background: #4338ca; transform: scale(1.02); }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); box-shadow: none; }
+        button:hover { background: #4338ca; }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-outline:hover { background: #e0e7ff; }
+
+        /* COUNTDOWN TIMER */
+        .timer-box {
+            background: var(--primary); color: white;
+            text-align: center; padding: 20px; border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .timer-digits { font-size: 2.5rem; font-weight: 800; letter-spacing: 2px; }
+
+        /* GAME STYLES */
+        .scramble-box { background: #fff7ed; border: 2px dashed #f97316; padding: 15px; text-align: center; border-radius: 12px; margin-bottom: 15px; }
+        .scramble-text { font-size: 2rem; letter-spacing: 5px; color: #ea580c; font-weight: bold; }
 
         /* OUTPUT BOXES */
         .output {
             background: #fff; border-left: 5px solid var(--accent);
-            padding: 20px; border-radius: 12px; margin-top: 20px;
-            display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            animation: slideIn 0.3s ease-out;
+            padding: 20px; border-radius: 10px; margin-top: 15px;
+            display: none; animation: slideIn 0.3s ease;
         }
         @keyframes slideIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 
-        /* Specific Styles */
-        .hindi-meaning { font-size: 1.4rem; color: #d946ef; font-weight: 700; margin: 5px 0; }
-        
-        /* Tense Table */
-        .tense-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .tense-box { background: #f1f5f9; padding: 10px; border-radius: 8px; font-size: 0.9rem; }
-        .tense-label { font-size: 0.75rem; color: #64748b; font-weight: bold; text-transform: uppercase; }
-
-        /* Microphone Pulse */
-        @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
-        .pulse { animation: pulse-animation 1.5s infinite; background: var(--danger) !important; }
-
-        /* BOTTOM NAV */
+        /* NAV */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: #0f172a; padding: 12px 30px; border-radius: 50px;
-            display: flex; gap: 30px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            background: #1e293b; padding: 12px 30px; border-radius: 50px;
+            display: flex; gap: 30px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
-        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; transition: 0.2s; }
+        .bottom-nav a { color: #94a3b8; font-size: 1.5rem; transition: 0.2s; }
         .bottom-nav a:hover, .bottom-nav a.active { color: #fff; transform: scale(1.2); }
-
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo"><i class="fa-solid fa-graduation-cap"></i> Bharat English</div>
-        <div class="xp-badge">XP: <span id="xp-points">0</span></div>
+        <div class="xp-pill">XP: <span id="xp-points">0</span></div>
     </header>
 
     <div class="container">
 
-        <div class="widget full-width" id="dict">
-            <h3><i class="fa-solid fa-language"></i> Eng-Hindi Dictionary</h3>
-            <div style="display: flex; gap:10px;">
-                <input type="text" id="dict-input" placeholder="Type a word (e.g. Diligent)..." style="margin-bottom: 0;">
-                <button onclick="fetchMeaning()" style="width: auto; padding: 0 25px; margin-bottom: 0;"><i class="fa-solid fa-search"></i></button>
+        <div class="widget full-width" style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; border:none;">
+            <div style="text-align: center;">
+                <h2 style="margin:0; font-size:1.5rem;">🔥 English Board Exam</h2>
+                <p style="margin:5px 0 15px 0; opacity:0.9;">Time remaining for success!</p>
+                <div class="timer-digits" id="countdown">00d 00h 00m</div>
             </div>
-            
+        </div>
+
+        <div class="widget" id="game">
+            <h3><i class="fa-solid fa-gamepad"></i> Spelling Game</h3>
+            <div class="scramble-box">
+                <div id="scramble-word" class="scramble-text">Loading...</div>
+                <small id="scramble-hint" style="color:#c2410c;">(Hint: ...)</small>
+            </div>
+            <input type="text" id="user-guess" placeholder="Type correct spelling..." style="text-align:center; font-weight:bold;">
+            <button onclick="checkSpelling()" style="background:#ea580c;">Check Answer</button>
+            <div id="game-result" class="output" style="text-align:center;"></div>
+        </div>
+
+        <div class="widget">
+            <h3><i class="fa-solid fa-lightbulb"></i> Idiom of the Day</h3>
+            <div style="background:#f0fdf4; padding:20px; border-radius:12px; border:1px solid #bbf7d0;">
+                <h2 style="margin:0; color:#15803d;">"Piece of Cake"</h2>
+                <p style="color:#166534; font-weight:bold;">Meaning: Bahut Aasaan (Very Easy)</p>
+                <p style="font-style:italic; color:#475569;">"The English exam was a piece of cake for me."</p>
+            </div>
+            <button class="btn-outline" style="margin-top:15px;">New Idiom</button>
+        </div>
+
+        <div class="widget full-width" id="dict">
+            <h3><i class="fa-solid fa-language"></i> Smart Dictionary</h3>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="dict-input" placeholder="Type a word..." style="margin:0;">
+                <button onclick="fetchMeaning()" style="width:auto;"><i class="fa-solid fa-search"></i></button>
+            </div>
             <div id="dict-output" class="output">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h2 id="word-title" style="margin:0; color:var(--primary); font-size: 2rem;">...</h2>
-                    <button onclick="playAudio()" style="width:auto; padding:8px 15px; border-radius:20px; background:#e0e7ff; color:var(--primary);"><i class="fa-solid fa-volume-high"></i></button>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2 id="word-title" style="margin:0; color:var(--primary);">...</h2>
+                    <button onclick="playAudio()" style="width:auto; padding:5px 15px; border-radius:20px;"><i class="fa-solid fa-volume-high"></i></button>
                 </div>
-                
-                <div style="background: #fdf4ff; border: 1px dashed #d946ef; padding: 10px; border-radius: 8px; margin-top: 15px;">
-                    <small style="color: #86198f; font-weight: bold;">HINDI MEANING:</small>
-                    <p id="hindi-word" class="hindi-meaning">Loading...</p>
-                </div>
-                <div id="meanings-list" style="margin-top: 20px;"></div>
+                <p id="hindi-word" style="font-size:1.2rem; color:#d946ef; font-weight:bold; margin:10px 0;">...</p>
+                <div id="meanings-list"></div>
             </div>
         </div>
 
         <div class="widget" id="speaking">
-            <h3><i class="fa-solid fa-microphone-lines"></i> AI Speaking Coach</h3>
-            <p style="color:#64748b; font-size:0.9rem;">Read this sentence loudly:</p>
-            
-            <div style="background:#f1f5f9; padding:15px; border-radius:12px; text-align:center; margin-bottom:15px;">
-                <h2 id="speak-target" style="margin:0; color:#334155; font-size:1.2rem;">I want to learn English.</h2>
+            <h3><i class="fa-solid fa-microphone"></i> AI Speaking Coach</h3>
+            <div style="background:#f1f5f9; padding:15px; border-radius:10px; text-align:center; margin-bottom:15px;">
+                <h3 id="speak-target" style="margin:0; color:#334155; border:none; justify-content:center;">I want to learn English.</h3>
             </div>
-
             <div style="text-align:center;">
-                <button onclick="startListening()" id="mic-btn" style="width:70px; height:70px; border-radius:50%; margin:0 auto; font-size:1.5rem;">
-                    <i class="fa-solid fa-microphone"></i>
-                </button>
-                <p id="listening-status" style="margin-top:10px; font-weight:bold; color:#64748b; font-size:0.8rem;">Tap Mic & Speak</p>
+                <button onclick="startListening()" id="mic-btn" style="width:60px; height:60px; border-radius:50%; margin:0 auto;"><i class="fa-solid fa-microphone"></i></button>
+                <p id="listening-status" style="font-size:0.8rem; margin-top:5px;">Tap Mic</p>
             </div>
-            
-            <div id="speak-result" class="output" style="text-align:center; padding:10px;"></div>
-            <button class="btn-outline" onclick="nextSentence()" style="margin-top:15px;">Next Sentence</button>
+            <div id="speak-result" class="output" style="text-align:center;"></div>
+            <button class="btn-outline" onclick="nextSentence()" style="margin-top:10px;">Next Sentence</button>
         </div>
 
-        <div class="widget" id="tense">
-            <h3><i class="fa-solid fa-clock-rotate-left"></i> Tense Master</h3>
-            <p style="color:#64748b; font-size:0.9rem;">See how verbs change with time.</p>
-            
-            <label>Select Verb:</label>
+        <div class="widget">
+            <h3><i class="fa-solid fa-clock"></i> Tense Master</h3>
             <select id="tense-verb" onchange="showTense()">
                 <option value="go">Go (Jaana)</option>
-                <option value="eat">Eat (Khaana)</option>
                 <option value="play">Play (Khelna)</option>
+                <option value="eat">Eat (Khaana)</option>
                 <option value="write">Write (Likhna)</option>
-                <option value="speak">Speak (Bolna)</option>
             </select>
-
-            <div id="tense-output" style="display:none;">
-                <div class="tense-grid">
-                    <div class="tense-box">
-                        <div class="tense-label">Present (Ta Hai)</div>
-                        <strong style="color:var(--primary)" id="t-pres">Goes</strong>
-                    </div>
-                    <div class="tense-box">
-                        <div class="tense-label">Past (Gaya Tha)</div>
-                        <strong style="color:var(--danger)" id="t-past">Went</strong>
-                    </div>
-                    <div class="tense-box">
-                        <div class="tense-label">Future (Jayega)</div>
-                        <strong style="color:var(--success)" id="t-fut">Will Go</strong>
-                    </div>
-                    <div class="tense-box">
-                        <div class="tense-label">Continuous (Raha Hai)</div>
-                        <strong style="color:var(--accent)" id="t-cont">Is Going</strong>
-                    </div>
+            <div id="tense-output" class="output" style="display:none; padding:10px;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#e0e7ff; padding:8px; border-radius:5px;"><small>Present</small><br><strong>Goes</strong></div>
+                    <div style="background:#fee2e2; padding:8px; border-radius:5px;"><small>Past</small><br><strong>Went</strong></div>
+                    <div style="background:#dcfce7; padding:8px; border-radius:5px;"><small>Future</small><br><strong>Will Go</strong></div>
+                    <div style="background:#fef3c7; padding:8px; border-radius:5px;"><small>Cont.</small><br><strong>Is Going</strong></div>
                 </div>
             </div>
         </div>
 
         <div class="widget full-width" id="essay">
-            <h3><i class="fa-solid fa-scroll"></i> Smart Essay Generator</h3>
-            
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
-                <input type="text" id="essay-topic" placeholder="Topic (e.g. Pollution)...">
-                <select id="essay-level">
-                    <option value="easy">Easy</option>
-                    <option value="hard">Hard</option>
-                </select>
+            <h3><i class="fa-solid fa-scroll"></i> Essay Generator</h3>
+            <div style="display:grid; grid-template-columns:2fr 1fr; gap:10px;">
+                <input type="text" id="essay-topic" placeholder="Topic (e.g. Pollution)">
+                <select id="essay-level"><option value="easy">Easy</option><option value="hard">Hard</option></select>
             </div>
-            
-            <select id="essay-type">
-                <option value="general">General Topic</option>
-                <option value="problem">Social Problem</option>
-                <option value="person">Person</option>
-            </select>
-
-            <button onclick="generateEssay()"><i class="fa-solid fa-wand-magic-sparkles"></i> Write Essay</button>
-            
+            <button onclick="generateEssay()">Write Essay</button>
             <div id="essay-container" class="output">
                 <div id="essay-content"></div>
-                <button onclick="downloadPDF('essay-content', 'My_Essay.pdf')" class="btn-outline" style="margin-top:20px;">
-                    <i class="fa-solid fa-file-pdf"></i> Save as PDF
-                </button>
+                <button onclick="downloadPDF('essay-content', 'Essay.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> Save PDF</button>
             </div>
         </div>
 
         <div class="widget full-width" id="letters">
-            <h3><i class="fa-solid fa-pen-nib"></i> Letter Generator</h3>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <input type="text" id="l-subject" placeholder="Subject">
-                <input type="text" id="l-to" value="The Principal" placeholder="To Whom">
-            </div>
-            <textarea id="l-reason" rows="3" placeholder="Reason (Karan)"></textarea>
-            
-            <button onclick="generateLetter()"><i class="fa-regular fa-paper-plane"></i> Generate Letter</button>
-            
+            <h3><i class="fa-solid fa-envelope"></i> Letter Generator</h3>
+            <input type="text" id="l-subject" placeholder="Subject">
+            <textarea id="l-reason" rows="2" placeholder="Reason"></textarea>
+            <button onclick="generateLetter()">Write Letter</button>
             <div id="letter-container" class="output">
-                <div id="letter-content" style="font-family: 'Courier New', monospace; white-space: pre-wrap; padding: 20px; border: 1px dashed #ccc;"></div>
-                <button onclick="downloadPDF('letter-content', 'My_Letter.pdf')" class="btn-outline" style="margin-top:20px;">
-                    <i class="fa-solid fa-file-pdf"></i> Save as PDF
-                </button>
+                <div id="letter-content" style="font-family:'Courier New'; white-space:pre-wrap;"></div>
+                <button onclick="downloadPDF('letter-content', 'Letter.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> Save PDF</button>
             </div>
         </div>
 
     </div>
 
     <nav class="bottom-nav">
-        <a href="#dict" class="active"><i class="fa-solid fa-language"></i></a>
+        <a href="#game" class="active"><i class="fa-solid fa-gamepad"></i></a>
+        <a href="#dict"><i class="fa-solid fa-book"></i></a>
         <a href="#speaking"><i class="fa-solid fa-microphone"></i></a>
-        <a href="#essay"><i class="fa-solid fa-scroll"></i></a>
-        <a href="#letters"><i class="fa-solid fa-pen-fancy"></i></a>
+        <a href="#essay"><i class="fa-solid fa-file-lines"></i></a>
     </nav>
 
     <script>
+        // --- GLOBAL XP ---
         let xp = 0;
         function addXP(n) { xp += n; document.getElementById('xp-points').innerText = xp; }
 
-        // --- 1. DICTIONARY ---
-        let currentAudio = null;
-        async function fetchMeaning() {
-            const word = document.getElementById('dict-input').value.trim();
-            const output = document.getElementById('dict-output');
-            const hindiBox = document.getElementById('hindi-word');
-            const engList = document.getElementById('meanings-list');
-            
-            if(!word) return;
+        // --- 1. COUNTDOWN LOGIC ---
+        function updateTimer() {
+            const examDate = new Date("March 15, 2026 09:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = examDate - now;
 
-            output.style.display = "block";
-            hindiBox.innerHTML = "Searching...";
-            engList.innerHTML = "Loading English...";
-            document.getElementById('word-title').innerText = word;
-
-            // Fetch Hindi
-            try {
-                const resHi = await fetch(`https://api.mymemory.translated.net/get?q=${word}&langpair=en|hi`);
-                const dataHi = await resHi.json();
-                hindiBox.innerText = dataHi.responseData.translatedText || "Not found";
-            } catch(e) { hindiBox.innerText = "Error"; }
-
-            // Fetch English
-            try {
-                const resEn = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-                const dataEn = await resEn.json();
-                if(!dataEn[0]) throw new Error();
-                
-                const aud = dataEn[0].phonetics.find(p => p.audio && p.audio.length > 0);
-                currentAudio = aud ? aud.audio : null;
-
-                let defs = "";
-                dataEn[0].meanings.slice(0, 2).forEach(m => {
-                    defs += `<div style="margin-bottom:10px;"><strong style="color:#4f46e5">${m.partOfSpeech}</strong>: ${m.definitions[0].definition}</div>`;
-                });
-                engList.innerHTML = defs;
-                addXP(5);
-            } catch(e) { engList.innerHTML = "English definition not found."; }
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("countdown").innerText = `${d}d ${h}h Left`;
+            } else {
+                document.getElementById("countdown").innerText = "Best of Luck!";
+            }
         }
-        function playAudio() { if(currentAudio) new Audio(currentAudio).play(); else alert("No audio found."); }
+        setInterval(updateTimer, 1000);
+        updateTimer();
 
-        // --- 2. SPEAKING COACH ---
-        const sentences = ["I want to learn English", "Practice makes a man perfect", "Honesty is the best policy", "The sun rises in the east"];
+        // --- 2. GAME LOGIC ---
+        const gameWords = [
+            {w:"SCHOOL", h:"Place to study"}, {w:"TEACHER", h:"Who teaches us"}, {w:"FRIEND", h:"Playmate"}, 
+            {w:"SUMMER", h:"Hot Season"}, {w:"ENGLISH", h:"Language"}
+        ];
+        let curGameWord = {};
+        
+        function loadGame() {
+            const r = Math.floor(Math.random() * gameWords.length);
+            curGameWord = gameWords[r];
+            const scrambled = curGameWord.w.split('').sort(() => 0.5 - Math.random()).join(' ');
+            document.getElementById('scramble-word').innerText = scrambled;
+            document.getElementById('scramble-hint').innerText = `Hint: ${curGameWord.h}`;
+            document.getElementById('user-guess').value = "";
+            document.getElementById('game-result').style.display = "none";
+        }
+        
+        function checkSpelling() {
+            const g = document.getElementById('user-guess').value.toUpperCase().trim();
+            const res = document.getElementById('game-result');
+            res.style.display = "block";
+            if(g === curGameWord.w) {
+                res.innerHTML = "<h3 style='color:green; margin:0'>🎉 Correct! +10 XP</h3>";
+                addXP(10); setTimeout(loadGame, 1500);
+            } else {
+                res.innerHTML = "<h3 style='color:red; margin:0'>❌ Try Again</h3>";
+            }
+        }
+        loadGame();
+
+        // --- 3. DICTIONARY ---
+        let audioUrl = null;
+        async function fetchMeaning() {
+            const w = document.getElementById('dict-input').value;
+            const out = document.getElementById('dict-output');
+            if(!w) return;
+            out.style.display="block"; 
+            document.getElementById('word-title').innerText = w;
+            document.getElementById('hindi-word').innerText = "Searching...";
+            
+            // Hindi
+            try {
+                const r1 = await fetch(`https://api.mymemory.translated.net/get?q=${w}&langpair=en|hi`);
+                const d1 = await r1.json();
+                document.getElementById('hindi-word').innerText = d1.responseData.translatedText;
+            } catch(e) { document.getElementById('hindi-word').innerText = "Hindi not found"; }
+
+            // English
+            try {
+                const r2 = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${w}`);
+                const d2 = await r2.json();
+                const aud = d2[0].phonetics.find(p => p.audio);
+                audioUrl = aud ? aud.audio : null;
+                document.getElementById('meanings-list').innerHTML = `<strong>${d2[0].meanings[0].partOfSpeech}:</strong> ${d2[0].meanings[0].definitions[0].definition}`;
+                addXP(5);
+            } catch(e) { document.getElementById('meanings-list').innerText = "Definition not found"; }
+        }
+        function playAudio() { if(audioUrl) new Audio(audioUrl).play(); }
+
+        // --- 4. SPEAKING COACH ---
+        const sList = ["I like reading books", "Education is important", "I live in India"];
         let sIdx = 0;
         function nextSentence() {
-            sIdx = (sIdx + 1) % sentences.length;
-            document.getElementById('speak-target').innerText = sentences[sIdx];
-            document.getElementById('speak-result').style.display = "none";
+            sIdx = (sIdx+1)%sList.length;
+            document.getElementById('speak-target').innerText = sList[sIdx];
+            document.getElementById('speak-result').style.display="none";
         }
         function startListening() {
-            if (!('webkitSpeechRecognition' in window)) { alert("Use Chrome browser for this feature."); return; }
+            if(!('webkitSpeechRecognition' in window)) { alert("Use Chrome Browser"); return; }
             const rec = new webkitSpeechRecognition();
             rec.lang = 'en-US';
             const btn = document.getElementById('mic-btn');
-            const status = document.getElementById('listening-status');
             
-            rec.onstart = () => { btn.classList.add("pulse"); status.innerText = "Listening..."; status.style.color="red"; };
-            rec.onend = () => { btn.classList.remove("pulse"); status.innerText = "Tap Mic & Speak"; status.style.color="#64748b"; };
+            rec.onstart = () => { btn.style.background="red"; document.getElementById('listening-status').innerText="Listening..."; };
+            rec.onend = () => { btn.style.background="#4f46e5"; document.getElementById('listening-status').innerText="Tap Mic"; };
             rec.onresult = (e) => {
                 const spoken = e.results[0][0].transcript.toLowerCase();
-                const target = document.getElementById('speak-target').innerText.toLowerCase().replace(/[.]/g, "");
-                const resBox = document.getElementById('speak-result');
-                resBox.style.display = "block";
-                
+                const target = document.getElementById('speak-target').innerText.toLowerCase();
+                const res = document.getElementById('speak-result');
+                res.style.display="block";
                 if(spoken.includes(target) || target.includes(spoken)) {
-                    resBox.innerHTML = `<h3 style="color:green; margin:0">✅ Perfect!</h3><small>You said: ${spoken}</small>`;
-                    addXP(20);
+                    res.innerHTML = `<h4 style="color:green; margin:0">✅ Great Job!</h4>`; addXP(20);
                 } else {
-                    resBox.innerHTML = `<h3 style="color:red; margin:0">❌ Try Again</h3><small>You said: ${spoken}</small>`;
+                    res.innerHTML = `<h4 style="color:red; margin:0">❌ You said: "${spoken}"</h4>`;
                 }
             };
             rec.start();
         }
 
-        // --- 3. TENSE MASTER ---
-        const verbDB = {
-            "go": { p: "Goes", pt: "Went", f: "Will Go", c: "Is Going" },
-            "eat": { p: "Eats", pt: "Ate", f: "Will Eat", c: "Is Eating" },
-            "play": { p: "Plays", pt: "Played", f: "Will Play", c: "Is Playing" },
-            "write": { p: "Writes", pt: "Wrote", f: "Will Write", c: "Is Writing" },
-            "speak": { p: "Speaks", pt: "Spoke", f: "Will Speak", c: "Is Speaking" }
+        // --- 5. TENSE MASTER ---
+        const verbs = {
+            "go": ["Goes", "Went", "Will Go", "Is Going"],
+            "play": ["Plays", "Played", "Will Play", "Is Playing"],
+            "eat": ["Eats", "Ate", "Will Eat", "Is Eating"],
+            "write": ["Writes", "Wrote", "Will Write", "Is Writing"]
         };
         function showTense() {
             const v = document.getElementById('tense-verb').value;
-            const d = verbDB[v];
-            document.getElementById('t-pres').innerText = d.p;
-            document.getElementById('t-past').innerText = d.pt;
-            document.getElementById('t-fut').innerText = d.f;
-            document.getElementById('t-cont').innerText = d.c;
-            document.getElementById('tense-output').style.display = "block";
+            const t = verbs[v];
+            const boxes = document.querySelectorAll('#tense-output strong');
+            boxes.forEach((b, i) => b.innerText = t[i]);
+            document.getElementById('tense-output').style.display="block";
         }
 
-        // --- 4 & 5. GENERATORS + PDF ---
+        // --- 6. ESSAY & LETTER ---
         function generateEssay() {
-            const topic = document.getElementById('essay-topic').value || "Topic";
+            const t = document.getElementById('essay-topic').value || "Topic";
             const level = document.getElementById('essay-level').value;
-            const type = document.getElementById('essay-type').value;
-            let text = "";
+            let txt = `${t} is a very important topic. It helps us understand the world better. Everyone should know about ${t}. It plays a big role in our society. We must use it wisely for a better future.`;
+            if(level==='hard') txt = `${t} holds significant importance in contemporary society. It creates a profound impact on our daily lives. A deeper understanding of ${t} is essential for progress. We must advocate for its positive utilization to ensure sustainable development.`;
             
-            // Simple Template Logic
-            if(type === "person") text = `${topic} is my favorite person. They are very kind and hardworking. ${topic} always helps me. I love them very much.`;
-            else if(type === "problem") text = `${topic} is a big problem. It hurts our society. We must stop ${topic} to save our future. Government should take strict action.`;
-            else text = `${topic} is very important. It helps us grow. Everyone likes ${topic}. It makes our life easy and happy.`;
-
-            if(level === "hard") text = text.replace("big problem", "critical issue").replace("very important", "essential").replace("helps us", "enables us to");
-
-            document.getElementById('essay-container').style.display = "block";
-            document.getElementById('essay-content').innerHTML = `<h3>Essay: ${topic}</h3><p>${text}</p>`;
+            document.getElementById('essay-container').style.display="block";
+            document.getElementById('essay-content').innerHTML = `<h3>${t}</h3><p>${txt}</p>`;
             addXP(15);
         }
 
         function generateLetter() {
             const s = document.getElementById('l-subject').value;
             const r = document.getElementById('l-reason').value;
-            const to = document.getElementById('l-to').value;
-            const date = new Date().toLocaleDateString();
+            const txt = `To,\nThe Principal,\n[School Name]\n\nSubject: ${s}\n\nRespected Sir/Madam,\n\nI beg to state that I am a student of Class 10. ${r}\n\nKindly grant me permission.\n\nYours Obediently,\nName: XYZ`;
             
-            const lText = `To,\n${to},\n[School Name],\n\nDate: ${date}\n\nSubject: ${s}\n\nRespected Sir/Madam,\n\nMost respectfully, I beg to state that I am a student of Class 10th.\n\n${r}\n\nKindly grant me permission.\n\nYours Obediently,\nXYZ\nClass: 10th`;
-            
-            document.getElementById('letter-container').style.display = "block";
-            document.getElementById('letter-content').innerText = lText;
+            document.getElementById('letter-container').style.display="block";
+            document.getElementById('letter-content').innerText = txt;
             addXP(15);
         }
 
-        function downloadPDF(elementId, filename) {
-            const element = document.getElementById(elementId);
-            const opt = { margin: 10, filename: filename, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
-            html2pdf().set(opt).from(element).save();
+        function downloadPDF(id, name) {
+            const el = document.getElementById(id);
+            html2pdf().from(el).save(name);
         }
-
-        // Nav Logic
-        document.querySelectorAll('.bottom-nav a').forEach(l => l.addEventListener('click', function() {
-            document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-            this.classList.add('active');
-        }));
+        
+        // --- NAV LOGIC ---
+        document.querySelectorAll('.bottom-nav a').forEach(a => {
+            a.addEventListener('click', function() {
+                document.querySelectorAll('.bottom-nav a').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
