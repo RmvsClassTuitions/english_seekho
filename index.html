@@ -14,6 +14,7 @@
         /* --- THEME --- */
         :root {
             --primary: #4f46e5;
+            --accent: #0ea5e9;
             --bg-gradient: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
             --glass: rgba(255, 255, 255, 0.95);
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -61,7 +62,7 @@
         }
         h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
 
-        /* INPUTS */
+        /* INPUTS & BUTTONS */
         input, textarea, select {
             width: 100%; padding: 12px;
             border: 2px solid #cbd5e1; border-radius: 10px;
@@ -77,38 +78,28 @@
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-whatsapp { background: #25D366; color: white; }
 
-        /* PDF BOX STYLES - CRITICAL FOR DOWNLOAD */
+        /* PDF BOX */
         .pdf-box {
-            background: white;
-            color: black;
-            padding: 40px;
-            position: relative;
-            border: 1px solid #ddd;
-            min-height: 400px;
-            font-family: 'Times New Roman', serif;
-            line-height: 1.6;
+            background: white; color: black; padding: 40px; position: relative;
+            border: 1px solid #ddd; min-height: 400px;
+            font-family: 'Times New Roman', serif; line-height: 1.6;
         }
-
         .watermark {
-            position: absolute;
-            top: 50%; left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 40px;
-            font-weight: bold;
-            color: rgba(0, 0, 0, 0.1); /* Light Grey Transparent */
-            z-index: 0;
-            pointer-events: none;
-            white-space: nowrap;
+            font-size: 40px; font-weight: bold; color: rgba(0,0,0,0.05);
+            pointer-events: none; white-space: nowrap;
         }
-
-        .pdf-text {
-            position: relative;
-            z-index: 10;
-        }
-
+        .pdf-text { position: relative; z-index: 10; }
         .output { display: none; margin-top: 15px; }
 
-        /* FLOAT WHATSAPP */
+        /* TRANSLATION BOX */
+        .hourly-box {
+            background: #fffbeb; border-left: 5px solid #d97706;
+            padding: 15px; border-radius: 8px; margin-bottom: 15px;
+        }
+
+        /* FLOAT WA */
         .float-wa {
             position: fixed; bottom: 90px; right: 20px;
             background: #25D366; color: white;
@@ -142,6 +133,32 @@
             <div style="font-size: 2rem; font-weight: 800; margin-top: 10px;" id="countdown">00d 00h 00m</div>
         </div>
 
+        <div class="widget full-width" id="translation">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3><i class="fa-solid fa-language"></i> अनुवाद (Translation)</h3>
+                <span style="background:#d97706; color:white; padding:2px 8px; border-radius:5px; font-size:0.8rem;">Changes Hourly</span>
+            </div>
+            
+            <p style="color:#64748b; font-size:0.9rem;">इस पैराग्राफ का अंग्रेजी में अनुवाद करें:</p>
+            
+            <div class="hourly-box">
+                <h4 style="margin:0 0 5px 0; color:#b45309;">हिंदी पैराग्राफ:</h4>
+                <p id="hindi-para" style="font-size:1.1rem; line-height:1.6; color:#1e293b; font-weight:500;">Loading...</p>
+            </div>
+
+            <textarea id="user-trans" rows="3" placeholder="Write English translation here..."></textarea>
+            
+            <button onclick="checkTranslation()">उत्तर देखें (Check Answer)</button>
+            
+            <div id="trans-result" class="output">
+                <h4 style="margin:0; color:green;">सही अनुवाद (Correct English):</h4>
+                <p id="english-para" style="font-style:italic; color:#334155; margin-top:5px;"></p>
+                <button onclick="shareScore()" class="btn-whatsapp" style="margin-top:10px; width:auto; padding:8px 15px;">
+                    <i class="fa-brands fa-whatsapp"></i> Share Attempt
+                </button>
+            </div>
+        </div>
+
         <div class="widget" id="game">
             <div style="display:flex; justify-content:space-between;">
                 <h3><i class="fa-solid fa-gamepad"></i> स्पेलिंग गेम</h3>
@@ -156,10 +173,6 @@
             <input type="text" id="user-guess" placeholder="Spelling..." style="text-align:center;">
             <button onclick="checkSpelling()" style="background:#ea580c;">Check</button>
             <div id="game-result" style="text-align:center; margin-top:10px; display:none;"></div>
-            
-            <button onclick="shareScore()" class="btn-whatsapp" style="margin-top:10px;">
-                <i class="fa-brands fa-whatsapp"></i> Share Score
-            </button>
         </div>
 
         <div class="widget">
@@ -180,7 +193,6 @@
             <select id="essay-select" onchange="loadEssay()">
                 <option value="">-- Select Essay --</option>
             </select>
-            
             <div id="essay-container" class="output">
                 <div id="essay-pdf-area" class="pdf-box">
                     <div class="watermark">RMVS Class Tuitions</div>
@@ -200,7 +212,6 @@
             </div>
             <textarea id="l-reason" rows="2" placeholder="Reason"></textarea>
             <button onclick="generateLetter()">Generate Letter</button>
-            
             <div id="letter-container" class="output">
                 <div id="letter-pdf-area" class="pdf-box">
                     <div class="watermark">RMVS Class Tuitions</div>
@@ -217,7 +228,8 @@
     <a href="https://wa.me/919876543210" class="float-wa"><i class="fa-brands fa-whatsapp"></i></a>
 
     <nav class="bottom-nav">
-        <a href="#game" class="active"><i class="fa-solid fa-gamepad"></i></a>
+        <a href="#translation" class="active"><i class="fa-solid fa-language"></i></a>
+        <a href="#game"><i class="fa-solid fa-gamepad"></i></a>
         <a href="#essay"><i class="fa-solid fa-file-lines"></i></a>
         <a href="#letters"><i class="fa-solid fa-envelope"></i></a>
     </nav>
@@ -233,12 +245,55 @@
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById("countdown").innerText = `${d} दिन ${h} घंटे`;
             } else {
-                document.getElementById("countdown").innerText = "Good Luck!";
+                document.getElementById("countdown").innerText = "Best of Luck!";
             }
         }
         setInterval(updateTimer, 1000); updateTimer();
 
-        // --- 2. GAME ---
+        // --- 2. HOURLY TRANSLATION LOGIC (NO REPEAT) ---
+        const paragraphs = [
+            {h: "भारत एक महान देश है। इसकी संस्कृति बहुत पुरानी है। यहाँ अनेक धर्मों के लोग रहते हैं। हमें अपने देश पर गर्व है।", e: "India is a great country. Its culture is very old. People of many religions live here. We are proud of our country."},
+            {h: "एक बार एक शेर जंगल में सो रहा था। एक चूहा उसके ऊपर कूदने लगा। शेर जाग गया और उसे गुस्सा आ गया।", e: "Once a lion was sleeping in the forest. A mouse started jumping on him. The lion woke up and got angry."},
+            {h: "ईमानदारी सबसे अच्छी नीति है। एक ईमानदार व्यक्ति का सभी सम्मान करते हैं। वह कभी झूठ नहीं बोलता। उसे किसी का डर नहीं होता।", e: "Honesty is the best policy. An honest man is respected by all. He never tells a lie. He is not afraid of anyone."},
+            {h: "प्रदूषण आज की सबसे बड़ी समस्या है। हमें अधिक से अधिक पेड़ लगाने चाहिए। हमें प्लास्टिक का प्रयोग बंद करना चाहिए।", e: "Pollution is the biggest problem of today. We should plant more and more trees. We should stop using plastic."},
+            {h: "राणा प्रताप मेवाड़ के राजा थे। वे अपनी मातृभूमि से बहुत प्रेम करते थे। उन्होंने मुगलों के सामने कभी हार नहीं मानी।", e: "Rana Pratap was the king of Mewar. He loved his motherland very much. He never accepted defeat before the Mughals."},
+            {h: "गंगा एक पवित्र नदी है। यह हिमालय से निकलती है। हिंदू इसे माँ कहते हैं। इसका जल बहुत शुद्ध माना जाता है।", e: "The Ganga is a holy river. It originates from the Himalayas. Hindus call it Mother. Its water is considered very pure."},
+            {h: "सुभाष चंद्र बोस एक महान नेता थे। उन्होंने 'आजाद हिंद फौज' बनाई। उन्होंने कहा था, 'तुम मुझे खून दो, मैं तुम्हें आजादी दूंगा।'", e: "Subhash Chandra Bose was a great leader. He formed the 'Azad Hind Fauj'. He said, 'You give me blood, I will give you freedom.'"},
+            {h: "कल मैं बाजार जा रहा था। रास्ते में मुझे एक बूढ़ा आदमी मिला। वह सड़क पार करना चाहता था। मैंने उसकी मदद की।", e: "Yesterday I was going to the market. On the way, I met an old man. He wanted to cross the road. I helped him."},
+            {h: "परिश्रम सफलता की कुंजी है। जो लोग मेहनत करते हैं, वे कभी असफल नहीं होते। भाग्य भी उन्हीं का साथ देता है जो कर्म करते हैं।", e: "Hard work is the key to success. Those who work hard never fail. Fortune also favors those who work."},
+            {h: "मेरा विद्यालय शहर का सबसे अच्छा विद्यालय है। इसके कमरे बहुत हवादार हैं। यहाँ एक बड़ा पुस्तकालय है। मेरे शिक्षक बहुत अच्छे हैं।", e: "My school is the best school in the city. Its rooms are very airy. There is a big library here. My teachers are very good."},
+            {h: "ताजमहल आगरा में स्थित है। इसे शाहजहाँ ने बनवाया था। यह सफेद संगमरमर का बना है। यह दुनिया के सात अजूबों में से एक है।", e: "The Taj Mahal is located in Agra. It was built by Shah Jahan. It is made of white marble. It is one of the seven wonders of the world."},
+            {h: "लाल बहादुर शास्त्री भारत के दूसरे प्रधानमंत्री थे। वे बहुत साधारण व्यक्ति थे। उन्होंने 'जय जवान, जय किसान' का नारा दिया।", e: "Lal Bahadur Shastri was the second Prime Minister of India. He was a very simple man. He gave the slogan 'Jai Jawan, Jai Kisan'."},
+            {h: "हमें अपने माता-पिता का सम्मान करना चाहिए। वे हमारे लिए बहुत त्याग करते हैं। उनकी सेवा करना हमारा धर्म है।", e: "We should respect our parents. They sacrifice a lot for us. Serving them is our duty."},
+            {h: "वृक्ष हमारे सबसे अच्छे मित्र हैं। वे हमें ऑक्सीजन देते हैं। वे हमें फल और लकड़ी भी देते हैं। हमें उन्हें नहीं काटना चाहिए।", e: "Trees are our best friends. They give us oxygen. They also give us fruits and wood. We should not cut them."},
+            {h: "वाराणसी एक प्राचीन नगर है। यह गंगा के किनारे बसा है। यहाँ अनेक मंदिर हैं। यह विद्या का केंद्र भी है।", e: "Varanasi is an ancient city. It is situated on the bank of the Ganga. There are many temples here. It is also a center of learning."},
+            {h: "दीपावली हिंदुओं का प्रमुख त्योहार है। इस दिन भगवान राम अयोध्या लौटे थे। लोग अपने घरों को दीयों से सजाते हैं।", e: "Diwali is a main festival of Hindus. Lord Rama returned to Ayodhya on this day. People decorate their houses with lamps."},
+            {h: "स्वास्थ्य ही धन है। एक स्वस्थ शरीर में ही स्वस्थ मन निवास करता है। हमें रोज व्यायाम करना चाहिए।", e: "Health is wealth. A healthy mind resides in a healthy body. We should exercise daily."},
+            {h: "जवाहरलाल नेहरू बच्चों से बहुत प्यार करते थे। बच्चे उन्हें 'चाचा नेहरू' कहते थे। उनका जन्म 14 नवंबर को हुआ था।", e: "Jawaharlal Nehru loved children very much. Children called him 'Chacha Nehru'. He was born on 14th November."},
+            {h: "हमें समय का सदुपयोग करना चाहिए। बीता हुआ समय कभी वापस नहीं आता। विद्यार्थी जीवन में समय बहुत मूल्यवान है।", e: "We should make good use of time. Time once lost never returns. Time is very valuable in student life."},
+            {h: "जून का महीना था। गर्मी बहुत तेज थी। नदी और तालाब सूख गए थे। पक्षी प्यास से तड़प रहे थे।", e: "It was the month of June. The heat was very intense. Rivers and ponds had dried up. Birds were suffering from thirst."}
+        ];
+
+        function loadHourlyTranslation() {
+            // Get current hour since 1970 to ensure unique index for decades
+            const currentHour = Math.floor(Date.now() / (1000 * 60 * 60));
+            // Modulo operator loops through array safely
+            const index = currentHour % paragraphs.length;
+            
+            const p = paragraphs[index];
+            document.getElementById('hindi-para').innerText = p.h;
+            document.getElementById('english-para').innerText = p.e;
+            document.getElementById('trans-result').style.display = 'none';
+            document.getElementById('user-trans').value = '';
+        }
+        
+        function checkTranslation() {
+            document.getElementById('trans-result').style.display = 'block';
+            addXP(10);
+        }
+        loadHourlyTranslation(); // Load immediately
+
+        // --- 3. GAME ---
         const gameWords = [
             {w:"SCHOOL", h:"जहाँ हम पढ़ते हैं"}, {w:"TEACHER", h:"जो हमें पढ़ाते हैं"}, 
             {w:"FRIEND", h:"दोस्त"}, {w:"SUMMER", h:"गर्मी का मौसम"}, {w:"ENGLISH", h:"एक भाषा"},
@@ -251,13 +306,11 @@
             clearInterval(gameTimer);
             timeLeft = 10;
             document.getElementById('game-timer').innerText = "10s";
-            
             curGameWord = gameWords[Math.floor(Math.random() * gameWords.length)];
             document.getElementById('scramble-word').innerText = curGameWord.w.split('').sort(() => 0.5 - Math.random()).join(' ');
             document.getElementById('scramble-hint').innerText = `(${curGameWord.h})`;
             document.getElementById('user-guess').value = "";
             document.getElementById('game-result').style.display = "none";
-            
             gameTimer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('game-timer').innerText = timeLeft + "s";
@@ -284,39 +337,27 @@
                 res.innerHTML = "<h3 style='color:red; margin:0'>❌ Wrong!</h3>";
             }
         }
-        
-        function shareScore() {
-            window.open(`https://wa.me/?text=I scored ${score} points in RMVS English Game!`, '_blank');
-        }
+        function shareScore() { window.open(`https://wa.me/?text=I scored ${score} points in RMVS English Game!`, '_blank'); }
         loadGame();
 
-        // --- 3. 100 VERBS ---
+        // --- 4. 100 VERBS ---
         const verbsList = ["Act", "Add", "Ask", "Answer", "Arrive", "Buy", "Break", "Build", "Burn", "Bring", "Call", "Catch", "Carry", "Clean", "Close", "Come", "Cook", "Cry", "Cut", "Dance", "Do", "Dream", "Drink", "Drive", "Eat", "Enter", "Fall", "Feel", "Fight", "Find", "Fly", "Forget", "Forgive", "Get", "Give", "Go", "Grow", "Have", "Hear", "Help", "Hit", "Hold", "Hope", "Hurt", "Jump", "Keep", "Know", "Laugh", "Learn", "Leave", "Like", "Listen", "Live", "Look", "Lose", "Love", "Make", "Meet", "Move", "Need", "Open", "Pay", "Play", "Put", "Read", "Reply", "Run", "Say", "See", "Sell", "Send", "Sing", "Sit", "Sleep", "Smile", "Speak", "Stand", "Start", "Stay", "Stop", "Study", "Swim", "Take", "Talk", "Teach", "Tell", "Think", "Try", "Turn", "Understand", "Use", "Wait", "Walk", "Want", "Watch", "Win", "Work", "Write"];
-        
         verbsList.forEach(v => {
-            let opt = document.createElement('option');
-            opt.value = v; opt.innerText = v;
+            let opt = document.createElement('option'); opt.value = v; opt.innerText = v;
             document.getElementById('tense-verb').appendChild(opt);
         });
 
         function showTense() {
             const v = document.getElementById('tense-verb').value;
             let p = v + "s", pt = v + "ed", f = "Will " + v, c = "Is " + v + "ing";
-            
-            // Basic Regular Rules
-            if(v.endsWith('e')) { c = "Is " + v.slice(0,-1) + "ing"; pt = v + "d"; }
-            
-            // Common Irregulars Override
             const irr = {"Go":["Goes","Went","Will Go","Is Going"],"Eat":["Eats","Ate","Will Eat","Is Eating"],"See":["Sees","Saw","Will See","Is Seeing"],"Do":["Does","Did","Will Do","Is Doing"],"Have":["Has","Had","Will Have","Is Having"],"Buy":["Buys","Bought","Will Buy","Is Buying"],"Write":["Writes","Wrote","Will Write","Is Writing"],"Speak":["Speaks","Spoke","Will Speak","Is Speaking"],"Take":["Takes","Took","Will Take","Is Taking"],"Get":["Gets","Got","Will Get","Is Getting"],"Come":["Comes","Came","Will Come","Is Coming"],"Run":["Runs","Ran","Will Run","Is Running"]};
-
-            if(irr[v]) [p, pt, f, c] = irr[v];
-            
+            if(irr[v]) [p, pt, f, c] = irr[v]; else if(v.endsWith('e')) { c = "Is " + v.slice(0,-1) + "ing"; pt = v + "d"; }
             document.getElementById('t-p').innerText = p; document.getElementById('t-pt').innerText = pt;
             document.getElementById('t-f').innerText = f; document.getElementById('t-c').innerText = c;
             document.getElementById('tense-output').style.display="block";
         }
 
-        // --- 4. 20 ESSAYS ---
+        // --- 5. ESSAYS (UP BOARD) ---
         const essaysDB = {
             "Pollution": "Pollution is a major problem in modern times. It harms our environment and health. There are four types of pollution: air, water, soil, and noise. Factories and vehicles release harmful smoke, causing air pollution. Dirty water from industries spoils rivers, causing water pollution. We must plant more trees to clean the air. We should stop using plastic bags. The government is taking steps to control it, but public help is needed. Let us promise to keep our earth clean and green.",
             "My Best Friend": "A true friend is a blessing. My best friend is Rahul. He is my classmate. He is very honest, kind, and hardworking. We study and play together. He helps me in my studies when I have doubts. His father is a doctor and his mother is a teacher. He respects his elders and loves children. We share our joys and sorrows. I am lucky to have a friend like him. I pray to God for his long life.",
@@ -339,13 +380,10 @@
             "A Rainy Day": "It was a hot day in July. Suddenly, dark clouds covered the sky. Cool winds started blowing. Then it started raining heavily. The streets were full of water. Children came out and played in the rain. Some made paper boats. Farmers were happy for their crops. The weather became cool and pleasant. I sat by the window and enjoyed tea.",
             "Discipline": "Discipline means following rules and regulations. It is the key to success. Nature also follows discipline (Sunrise, Sunset). A disciplined student comes to school on time and respects teachers. Without discipline, life becomes chaotic. Soldiers follow strict discipline to protect the country. We must learn self-discipline to achieve our goals."
         };
-        
         for(let topic in essaysDB) {
-            let opt = document.createElement('option');
-            opt.value = topic; opt.innerText = topic;
+            let opt = document.createElement('option'); opt.value = topic; opt.innerText = topic;
             document.getElementById('essay-select').appendChild(opt);
         }
-
         function loadEssay() {
             const t = document.getElementById('essay-select').value;
             if(t && essaysDB[t]) {
@@ -354,6 +392,7 @@
             }
         }
 
+        // --- 6. LETTER ---
         function generateLetter() {
             const s = document.getElementById('l-subject').value;
             const to = document.getElementById('l-to').value;
@@ -363,31 +402,26 @@
             document.getElementById('letter-text').innerText = txt;
         }
 
-        // --- PDF FIX (Cloning Method) ---
+        // --- PDF FIX (Cloning) ---
         function downloadPDF(elementId, filename) {
-            // Clone the element
             const element = document.getElementById(elementId);
             const clone = element.cloneNode(true);
-            
-            // Style clone to be clean and visible for PDF
             clone.style.width = '800px';
             clone.style.background = 'white';
             clone.style.color = 'black';
             clone.style.padding = '40px';
             clone.style.position = 'absolute';
-            clone.style.top = '-9999px'; // Hide off-screen
+            clone.style.top = '-9999px';
             clone.style.left = '0';
-            clone.style.display = 'block'; // Ensure it's not hidden
+            clone.style.display = 'block';
             
-            // Fix Watermark in clone
             const wm = clone.querySelector('.watermark');
             if(wm) {
-                wm.style.color = 'rgba(0,0,0,0.05)'; // Ensure light grey
+                wm.style.color = 'rgba(0,0,0,0.05)';
                 wm.style.transform = 'translate(-50%, -50%) rotate(-45deg)';
             }
             
             document.body.appendChild(clone);
-
             const opt = {
                 margin: 10,
                 filename: filename,
@@ -395,12 +429,13 @@
                 html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-
-            html2pdf().set(opt).from(clone).save().then(() => {
-                document.body.removeChild(clone); // Cleanup
-            });
+            html2pdf().set(opt).from(clone).save().then(() => { document.body.removeChild(clone); });
         }
 
+        // --- GLOBAL ---
+        let xp = 0;
+        function addXP(n) { xp += n; document.getElementById('xp-points').innerText = xp; }
+        
         document.querySelectorAll('.bottom-nav a').forEach(a => {
             a.addEventListener('click', function() {
                 document.querySelectorAll('.bottom-nav a').forEach(b => b.classList.remove('active'));
