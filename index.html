@@ -546,6 +546,37 @@
                 this.classList.add('active');
             });
         });
+        // --- FLOATING BACKGROUND LOGIC ---
+function createFloatingBackground() {
+    const container = document.getElementById('floating-container');
+    const words = [
+        "Lencho", "Nelson Mandela", "G.L. Fuentes", "Dust of Snow", 
+        "Robert Frost", "Tricki", "Mrs. Pumphrey", "Hari Singh", 
+        "Anil", "Griffin", "Bholi", "Sulekha", "Matilda", 
+        "Ebright", "Hack Driver", "Noun", "Pronoun", "Adjective", 
+        "Tense", "Active Voice", "Direct Indirect", "Letter", 
+        "Application", "Essay", "Article", "Unseen Passage",
+        "A Letter to God", "Fire and Ice", "Tiger in the Zoo"
+    ];
+
+    // Create 20 floating elements
+    for (let i = 0; i < 20; i++) {
+        const span = document.createElement('span');
+        span.classList.add('floating-word');
+        
+        // Random word
+        span.innerText = words[Math.floor(Math.random() * words.length)];
+        
+        // Random Position & Speed
+        span.style.left = Math.random() * 100 + "vw";
+        span.style.animationDuration = (Math.random() * 10 + 10) + "s"; // 10s to 20s
+        span.style.animationDelay = (Math.random() * 10) + "s";
+        span.style.fontSize = (Math.random() * 1.5 + 1) + "rem";
+        
+        container.appendChild(span);
+    }
+}
+createFloatingBackground();
     </script>
 </body>
 </html>
