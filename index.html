@@ -15,9 +15,6 @@
         :root {
             --primary: #4f46e5;
             --accent: #0ea5e9;
-            --success: #16a34a;
-            --warning: #ca8a04;
-            --danger: #dc2626;
             --bg-gradient: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
             --glass: rgba(255, 255, 255, 0.95);
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -38,11 +35,10 @@
             position: sticky; top: 0; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            backdrop-filter: blur(10px);
             border-bottom: 1px solid #e2e8f0;
         }
         .logo { font-weight: 800; color: var(--primary); font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
-        .xp-pill { background: var(--warning); color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+        .xp-pill { background: #ca8a04; color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
 
         /* CONTAINER */
         .container {
@@ -62,62 +58,59 @@
             padding: 20px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(255,255,255,0.6);
-            transition: transform 0.2s;
             position: relative;
         }
         
         h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        p.desc { color: #64748b; font-size: 0.9rem; margin-top: -5px; margin-bottom: 15px; }
-
-        /* INPUTS & BUTTONS */
-        label { font-size: 0.9rem; font-weight: 600; color: #475569; display: block; margin-bottom: 5px; }
         
+        /* INPUTS & BUTTONS */
         input, textarea, select {
             width: 100%; padding: 12px;
             border: 2px solid #cbd5e1; border-radius: 10px;
             font-size: 1rem; margin-bottom: 10px;
-            box-sizing: border-box; font-family: inherit;
-            background: #f8fafc;
+            box-sizing: border-box; background: #f8fafc;
         }
-        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; }
-
         button {
             background: var(--primary); color: white; border: none;
             padding: 12px; border-radius: 10px; cursor: pointer;
             font-weight: 600; width: 100%; font-size: 1rem;
-            transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
         }
         button:hover { background: #4338ca; }
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: #e0e7ff; }
         .btn-whatsapp { background: #25D366; color: white; }
-        .btn-whatsapp:hover { background: #1ebc57; }
 
-        /* OUTPUT AREAS */
-        .output {
-            background: #fff; border-left: 5px solid var(--accent);
-            padding: 15px; border-radius: 10px; margin-top: 15px;
-            display: none; position: relative;
+        /* PDF CONTAINER STYLES (CRITICAL FIX) */
+        .pdf-box {
+            background: white !important;
+            color: black !important;
+            padding: 40px;
+            position: relative;
+            border: 1px solid #ccc;
+            min-height: 400px;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
         }
 
-        /* WATERMARK STYLE */
         .watermark {
             position: absolute;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 30px; font-weight: 900;
-            color: rgba(0,0,0,0.05);
-            pointer-events: none;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 40px;
+            font-weight: bold;
+            color: #e5e7eb; /* Light Gray */
             z-index: 0;
+            pointer-events: none;
             white-space: nowrap;
         }
-        
-        /* CONTENT FOR PDF */
-        .pdf-content {
-            position: relative; z-index: 1; 
-            font-family: 'Times New Roman', Times, serif; 
-            line-height: 1.6; color: #000;
+
+        .pdf-text {
+            position: relative;
+            z-index: 10; /* Above watermark */
+            color: #000 !important; /* Force Black */
         }
+
+        /* OUTPUT HIDDEN INITIALLY */
+        .output { display: none; margin-top: 15px; }
 
         /* NAV */
         .bottom-nav {
@@ -125,10 +118,10 @@
             background: #1e293b; padding: 10px 30px; border-radius: 50px;
             display: flex; gap: 25px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
-        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; transition: 0.2s; }
-        .bottom-nav a:hover, .bottom-nav a.active { color: #fff; transform: scale(1.2); }
+        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; }
+        .bottom-nav a.active { color: #fff; transform: scale(1.2); }
 
-        /* FLOATING WHATSAPP BUTTON */
+        /* FLOAT WHATSAPP */
         .float-wa {
             position: fixed; bottom: 90px; right: 20px;
             background: #25D366; color: white;
@@ -143,15 +136,14 @@
 
     <header>
         <div class="logo"><i class="fa-solid fa-graduation-cap"></i> RMVS Tuitions</div>
-        <div class="xp-pill">अंक (XP): <span id="xp-points">0</span></div>
+        <div class="xp-pill">XP: <span id="xp-points">0</span></div>
     </header>
 
     <div class="container">
 
-        <div class="widget full-width" style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; border:none; text-align:center;">
-            <h2 style="margin:0; font-size:1.4rem;">📅 बोर्ड परीक्षा (23 Feb)</h2>
-            <p style="margin:5px 0; opacity:0.9;">तैयारी का समय बचा है:</p>
-            <div style="font-size: 2rem; font-weight: 800; letter-spacing: 2px; margin-top: 10px;" id="countdown">00d 00h 00m</div>
+        <div class="widget full-width" style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; text-align:center;">
+            <h2 style="margin:0; font-size:1.4rem;">📅 बोर्ड परीक्षा (23 Feb 2026)</h2>
+            <div style="font-size: 2rem; font-weight: 800; margin-top: 10px;" id="countdown">00d 00h 00m</div>
         </div>
 
         <div class="widget" id="game">
@@ -162,82 +154,71 @@
             
             <div style="background:#fff7ed; border:2px dashed #f97316; padding:15px; text-align:center; border-radius:12px; margin-bottom:15px;">
                 <div id="scramble-word" style="font-size:1.8rem; letter-spacing:4px; color:#ea580c; font-weight:bold;">LOADING...</div>
-                <small id="scramble-hint" style="color:#c2410c;">(इशारा: ...)</small>
+                <small id="scramble-hint" style="color:#c2410c;">(Hint...)</small>
             </div>
             
-            <input type="text" id="user-guess" placeholder="सही स्पेलिंग लिखें..." style="text-align:center;">
-            <button onclick="checkSpelling()" style="background:#ea580c;">जवाब चेक करें</button>
-            
-            <div id="game-result" class="output" style="text-align:center;"></div>
+            <input type="text" id="user-guess" placeholder="Spelling..." style="text-align:center;">
+            <button onclick="checkSpelling()" style="background:#ea580c;">Check</button>
+            <div id="game-result" style="text-align:center; margin-top:10px; display:none;"></div>
             
             <button onclick="shareScore()" class="btn-whatsapp" style="margin-top:10px;">
-                <i class="fa-brands fa-whatsapp"></i> स्कोर शेयर करें
+                <i class="fa-brands fa-whatsapp"></i> Share Score
             </button>
         </div>
 
         <div class="widget">
-            <h3><i class="fa-solid fa-clock"></i> काल चक्र (Tense Master)</h3>
-            <p class="desc">100 मुख्य क्रियाएँ (Verbs)</p>
-            
-            <label>क्रिया चुनें (Select Verb)</label>
-            <select id="tense-verb" onchange="showTense()">
-                </select>
-            
-            <div id="tense-output" class="output" style="display:none; padding:10px;">
+            <h3><i class="fa-solid fa-clock"></i> काल चक्र (100 Verbs)</h3>
+            <select id="tense-verb" onchange="showTense()"></select>
+            <div id="tense-output" class="output" style="padding:10px;">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#e0e7ff; padding:8px; border-radius:5px;"><small>Present (ता है)</small><br><strong id="t-p"></strong></div>
-                    <div style="background:#fee2e2; padding:8px; border-radius:5px;"><small>Past (या/था)</small><br><strong id="t-pt"></strong></div>
-                    <div style="background:#dcfce7; padding:8px; border-radius:5px;"><small>Future (गा/गी)</small><br><strong id="t-f"></strong></div>
-                    <div style="background:#fef3c7; padding:8px; border-radius:5px;"><small>Cont. (रहा है)</small><br><strong id="t-c"></strong></div>
+                    <div style="background:#e0e7ff; padding:8px; border-radius:5px;"><small>Present</small><br><strong id="t-p"></strong></div>
+                    <div style="background:#fee2e2; padding:8px; border-radius:5px;"><small>Past</small><br><strong id="t-pt"></strong></div>
+                    <div style="background:#dcfce7; padding:8px; border-radius:5px;"><small>Future</small><br><strong id="t-f"></strong></div>
+                    <div style="background:#fef3c7; padding:8px; border-radius:5px;"><small>Cont.</small><br><strong id="t-c"></strong></div>
                 </div>
             </div>
         </div>
 
         <div class="widget full-width" id="essay">
-            <h3><i class="fa-solid fa-scroll"></i> निबंध (Essay - UP Board)</h3>
-            <p class="desc">20 महत्वपूर्ण निबंध (100 शब्द)</p>
-            
-            <label>विषय चुनें (Select Topic)</label>
+            <h3><i class="fa-solid fa-scroll"></i> Essay (UP Board)</h3>
             <select id="essay-select" onchange="loadEssay()">
-                <option value="">-- चुनें --</option>
-                </select>
+                <option value="">-- Select Essay --</option>
+            </select>
             
             <div id="essay-container" class="output">
-                <div id="essay-content" style="background:white; padding:20px; position:relative; min-height:200px;">
+                <div id="essay-pdf-area" class="pdf-box">
                     <div class="watermark">RMVS Class Tuitions</div>
-                    <div class="pdf-content" id="essay-text-area">
-                        </div>
+                    <div id="essay-text" class="pdf-text"></div>
                 </div>
-                <button onclick="downloadPDF('essay-content', 'Essay.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> PDF सेव करें</button>
+                <button onclick="downloadPDF('essay-pdf-area', 'Essay.pdf')" class="btn-outline" style="margin-top:15px;">
+                    <i class="fa-solid fa-download"></i> Download PDF
+                </button>
             </div>
         </div>
 
         <div class="widget full-width" id="letters">
-            <h3><i class="fa-solid fa-envelope"></i> पत्र (Letter Writer)</h3>
-            
+            <h3><i class="fa-solid fa-envelope"></i> Letter Writer</h3>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                 <input type="text" id="l-subject" placeholder="Subject">
                 <input type="text" id="l-to" value="The Principal">
             </div>
-            <textarea id="l-reason" rows="2" placeholder="Reason (e.g. I am sick)"></textarea>
-            
-            <button onclick="generateLetter()">पत्र तैयार करें</button>
+            <textarea id="l-reason" rows="2" placeholder="Reason"></textarea>
+            <button onclick="generateLetter()">Generate Letter</button>
             
             <div id="letter-container" class="output">
-                <div id="letter-content" style="background:white; padding:30px; position:relative; min-height:300px;">
+                <div id="letter-pdf-area" class="pdf-box">
                     <div class="watermark">RMVS Class Tuitions</div>
-                    <div class="pdf-content" id="letter-text-area" style="font-family:'Courier New'; white-space:pre-wrap;">
-                        </div>
+                    <div id="letter-text" class="pdf-text" style="white-space:pre-wrap;"></div>
                 </div>
-                <button onclick="downloadPDF('letter-content', 'Letter.pdf')" class="btn-outline" style="margin-top:15px;"><i class="fa-solid fa-download"></i> PDF सेव करें</button>
+                <button onclick="downloadPDF('letter-pdf-area', 'Letter.pdf')" class="btn-outline" style="margin-top:15px;">
+                    <i class="fa-solid fa-download"></i> Download PDF
+                </button>
             </div>
         </div>
 
     </div>
 
-    <a href="https://wa.me/919876543210" class="float-wa" target="_blank" title="Ask Doubt">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/919876543210" class="float-wa"><i class="fa-brands fa-whatsapp"></i></a>
 
     <nav class="bottom-nav">
         <a href="#game" class="active"><i class="fa-solid fa-gamepad"></i></a>
@@ -246,7 +227,7 @@
     </nav>
 
     <script>
-        // --- 1. EXAM TIMER (FEB 23, 2026 9:00 AM) ---
+        // --- 1. TIMER ---
         function updateTimer() {
             const examDate = new Date("February 23, 2026 09:00:00").getTime();
             const now = new Date().getTime();
@@ -256,45 +237,38 @@
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById("countdown").innerText = `${d} दिन ${h} घंटे`;
             } else {
-                document.getElementById("countdown").innerText = "शुभकामनाएं!";
+                document.getElementById("countdown").innerText = "Best of Luck!";
             }
         }
         setInterval(updateTimer, 1000); updateTimer();
 
-        // --- 2. GAME WITH 10s TIMER ---
+        // --- 2. GAME ---
         const gameWords = [
             {w:"SCHOOL", h:"जहाँ हम पढ़ते हैं"}, {w:"TEACHER", h:"जो हमें पढ़ाते हैं"}, 
             {w:"FRIEND", h:"दोस्त"}, {w:"SUMMER", h:"गर्मी का मौसम"}, {w:"ENGLISH", h:"एक भाषा"},
             {w:"SUCCESS", h:"सफलता"}, {w:"STUDENT", h:"छात्र"}, {w:"EXAM", h:"परीक्षा"},
             {w:"MORNING", h:"सुबह"}, {w:"WINTER", h:"सर्दी"}
         ];
-        let curGameWord = {};
-        let gameTimer;
-        let timeLeft = 10;
-        let score = 0;
+        let curGameWord, gameTimer, timeLeft = 10, score = 0;
         
         function loadGame() {
             clearInterval(gameTimer);
             timeLeft = 10;
             document.getElementById('game-timer').innerText = "10s";
             
-            const r = Math.floor(Math.random() * gameWords.length);
-            curGameWord = gameWords[r];
-            const scrambled = curGameWord.w.split('').sort(() => 0.5 - Math.random()).join(' ');
-            
-            document.getElementById('scramble-word').innerText = scrambled;
-            document.getElementById('scramble-hint').innerText = `(इशारा: ${curGameWord.h})`;
+            curGameWord = gameWords[Math.floor(Math.random() * gameWords.length)];
+            document.getElementById('scramble-word').innerText = curGameWord.w.split('').sort(() => 0.5 - Math.random()).join(' ');
+            document.getElementById('scramble-hint').innerText = `(${curGameWord.h})`;
             document.getElementById('user-guess').value = "";
             document.getElementById('game-result').style.display = "none";
             
-            // Start Timer
             gameTimer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('game-timer').innerText = timeLeft + "s";
                 if(timeLeft <= 0) {
                     clearInterval(gameTimer);
                     document.getElementById('game-result').style.display = "block";
-                    document.getElementById('game-result').innerHTML = "<h4 style='color:red'>⏰ समय समाप्त! (Time Up)</h4>";
+                    document.getElementById('game-result').innerHTML = "<h4 style='color:red'>⏰ Time Up!</h4>";
                     setTimeout(loadGame, 2000);
                 }
             }, 1000);
@@ -307,89 +281,44 @@
             if(g === curGameWord.w) {
                 clearInterval(gameTimer);
                 score += 10;
-                res.innerHTML = `<h3 style='color:green; margin:0'>🎉 सही! Score: ${score}</h3>`;
+                res.innerHTML = `<h3 style='color:green; margin:0'>🎉 Correct! Score: ${score}</h3>`;
+                document.getElementById('xp-points').innerText = score;
                 setTimeout(loadGame, 1500);
             } else {
-                res.innerHTML = "<h3 style='color:red; margin:0'>❌ गलत!</h3>";
+                res.innerHTML = "<h3 style='color:red; margin:0'>❌ Wrong!</h3>";
             }
         }
         
         function shareScore() {
-            const text = `I scored ${score} points in RMVS English Game! Can you beat me?`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://wa.me/?text=I scored ${score} points in RMVS English Game!`, '_blank');
         }
         loadGame();
 
-        // --- 3. TENSE MASTER (100 VERBS) ---
-        const verbsList = [
-            "Act", "Add", "Ask", "Answer", "Arrive", "Buy", "Break", "Build", "Burn", "Bring",
-            "Call", "Catch", "Carry", "Clean", "Close", "Come", "Cook", "Cry", "Cut", "Dance",
-            "Do", "Dream", "Drink", "Drive", "Eat", "Enter", "Fall", "Feel", "Fight", "Find",
-            "Fly", "Forget", "Forgive", "Get", "Give", "Go", "Grow", "Have", "Hear", "Help",
-            "Hit", "Hold", "Hope", "Hurt", "Jump", "Keep", "Know", "Laugh", "Learn", "Leave",
-            "Like", "Listen", "Live", "Look", "Lose", "Love", "Make", "Meet", "Move", "Need",
-            "Open", "Pay", "Play", "Put", "Read", "Reply", "Run", "Say", "See", "Sell",
-            "Send", "Sing", "Sit", "Sleep", "Smile", "Speak", "Stand", "Start", "Stay", "Stop",
-            "Study", "Swim", "Take", "Talk", "Teach", "Tell", "Think", "Try", "Turn", "Understand",
-            "Use", "Wait", "Walk", "Want", "Watch", "Win", "Work", "Write"
-        ];
+        // --- 3. 100 VERBS ---
+        const verbsList = ["Act", "Add", "Ask", "Answer", "Arrive", "Buy", "Break", "Build", "Burn", "Bring", "Call", "Catch", "Carry", "Clean", "Close", "Come", "Cook", "Cry", "Cut", "Dance", "Do", "Dream", "Drink", "Drive", "Eat", "Enter", "Fall", "Feel", "Fight", "Find", "Fly", "Forget", "Forgive", "Get", "Give", "Go", "Grow", "Have", "Hear", "Help", "Hit", "Hold", "Hope", "Hurt", "Jump", "Keep", "Know", "Laugh", "Learn", "Leave", "Like", "Listen", "Live", "Look", "Lose", "Love", "Make", "Meet", "Move", "Need", "Open", "Pay", "Play", "Put", "Read", "Reply", "Run", "Say", "See", "Sell", "Send", "Sing", "Sit", "Sleep", "Smile", "Speak", "Stand", "Start", "Stay", "Stop", "Study", "Swim", "Take", "Talk", "Teach", "Tell", "Think", "Try", "Turn", "Understand", "Use", "Wait", "Walk", "Want", "Watch", "Win", "Work", "Write"];
         
-        // Populate Select
-        const vSelect = document.getElementById('tense-verb');
         verbsList.forEach(v => {
             let opt = document.createElement('option');
-            opt.value = v;
-            opt.innerText = v;
-            vSelect.appendChild(opt);
+            opt.value = v; opt.innerText = v;
+            document.getElementById('tense-verb').appendChild(opt);
         });
 
         function showTense() {
-            const v = vSelect.value;
-            // Simple rule-based generation (Not perfect but good for standard verbs)
-            let p = v + "s"; // Present (He eats)
-            let pt = v + "ed"; // Past (He walked)
-            let f = "Will " + v; // Future (He will walk)
-            let c = "Is " + v + "ing"; // Cont (He is walking)
+            const v = document.getElementById('tense-verb').value;
+            let p = v + "s", pt = v + "ed", f = "Will " + v, c = "Is " + v + "ing";
+            
+            // Simple Irregular Logic
+            const irr = {"Go":["Goes","Went","Will Go","Is Going"],"Eat":["Eats","Ate","Will Eat","Is Eating"],"See":["Sees","Saw","Will See","Is Seeing"],"Do":["Does","Did","Will Do","Is Doing"],"Have":["Has","Had","Will Have","Is Having"],"Buy":["Buys","Bought","Will Buy","Is Buying"],"Write":["Writes","Wrote","Will Write","Is Writing"],"Speak":["Speaks","Spoke","Will Speak","Is Speaking"],"Take":["Takes","Took","Will Take","Is Taking"],"Get":["Gets","Got","Will Get","Is Getting"],"Come":["Comes","Came","Will Come","Is Coming"],"Run":["Runs","Ran","Will Run","Is Running"]};
 
-            // Irregular overrides (Common ones)
-            const irregulars = {
-                "Go": ["Goes", "Went", "Will Go", "Is Going"],
-                "Eat": ["Eats", "Ate", "Will Eat", "Is Eating"],
-                "See": ["Sees", "Saw", "Will See", "Is Seeing"],
-                "Do": ["Does", "Did", "Will Do", "Is Doing"],
-                "Have": ["Has", "Had", "Will Have", "Is Having"],
-                "Buy": ["Buys", "Bought", "Will Buy", "Is Buying"],
-                "Write": ["Writes", "Wrote", "Will Write", "Is Writing"],
-                "Speak": ["Speaks", "Spoke", "Will Speak", "Is Speaking"],
-                "Take": ["Takes", "Took", "Will Take", "Is Taking"],
-                "Get": ["Gets", "Got", "Will Get", "Is Getting"],
-                "Come": ["Comes", "Came", "Will Come", "Is Coming"]
-            };
-
-            if(irregulars[v]) {
-                [p, pt, f, c] = irregulars[v];
-            } else {
-                // Formatting cleanups for regulars
-                if(v.endsWith('y') && !['a','e','i','o','u'].includes(v[v.length-2])) {
-                    p = v.slice(0,-1) + "ies"; // Cry -> Cries
-                } else if(v.endsWith('s') || v.endsWith('h')) {
-                    p = v + "es"; // Wash -> Washes
-                }
-                
-                if(v.endsWith('e')) {
-                    c = "Is " + v.slice(0,-1) + "ing"; // Dance -> Dancing
-                    pt = v + "d"; // Love -> Loved
-                }
-            }
-
-            document.getElementById('t-p').innerText = p;
-            document.getElementById('t-pt').innerText = pt;
-            document.getElementById('t-f').innerText = f;
-            document.getElementById('t-c').innerText = c;
+            if(irr[v]) [p, pt, f, c] = irr[v];
+            else if(v.endsWith('e')) { c = "Is " + v.slice(0,-1) + "ing"; pt = v + "d"; }
+            
+            document.getElementById('t-p').innerText = p; document.getElementById('t-pt').innerText = pt;
+            document.getElementById('t-f').innerText = f; document.getElementById('t-c').innerText = c;
             document.getElementById('tense-output').style.display="block";
         }
 
-        // --- 4. 20 PRE-DESIGNED ESSAYS (UP BOARD) ---
+        // --- 4. 20 ESSAYS ---
         const essaysDB = {
             "Pollution": "Pollution is a major problem in modern times. It harms our environment and health. There are four types of pollution: air, water, soil, and noise. Factories and vehicles release harmful smoke, causing air pollution. Dirty water from industries spoils rivers, causing water pollution. We must plant more trees to clean the air. We should stop using plastic bags. The government is taking steps to control it, but public help is needed. Let us promise to keep our earth clean and green.",
             "My Best Friend": "A true friend is a blessing. My best friend is Rahul. He is my classmate. He is very honest, kind, and hardworking. We study and play together. He helps me in my studies when I have doubts. His father is a doctor and his mother is a teacher. He respects his elders and loves children. We share our joys and sorrows. I am lucky to have a friend like him. I pray to God for his long life.",
@@ -412,37 +341,32 @@
             "A Rainy Day": "It was a hot day in July. Suddenly, dark clouds covered the sky. Cool winds started blowing. Then it started raining heavily. The streets were full of water. Children came out and played in the rain. Some made paper boats. Farmers were happy for their crops. The weather became cool and pleasant. I sat by the window and enjoyed tea.",
             "Discipline": "Discipline means following rules and regulations. It is the key to success. Nature also follows discipline (Sunrise, Sunset). A disciplined student comes to school on time and respects teachers. Without discipline, life becomes chaotic. Soldiers follow strict discipline to protect the country. We must learn self-discipline to achieve our goals."
         };
-
-        const esSelect = document.getElementById('essay-select');
+        
         for(let topic in essaysDB) {
             let opt = document.createElement('option');
-            opt.value = topic;
-            opt.innerText = topic;
-            esSelect.appendChild(opt);
+            opt.value = topic; opt.innerText = topic;
+            document.getElementById('essay-select').appendChild(opt);
         }
 
         function loadEssay() {
-            const t = esSelect.value;
+            const t = document.getElementById('essay-select').value;
             if(t && essaysDB[t]) {
                 document.getElementById('essay-container').style.display = "block";
-                document.getElementById('essay-text-area').innerHTML = `<h3>${t}</h3><p>${essaysDB[t]}</p>`;
+                document.getElementById('essay-text').innerHTML = `<h3>${t}</h3><p>${essaysDB[t]}</p>`;
             }
         }
 
-        // --- 5. LETTER GENERATOR & PDF ---
         function generateLetter() {
             const s = document.getElementById('l-subject').value;
             const to = document.getElementById('l-to').value;
             const r = document.getElementById('l-reason').value;
-            const txt = `To,\n${to},\n[School Name / City]\n\nDate: ${new Date().toLocaleDateString()}\n\nSubject: ${s}\n\nRespected Sir/Madam,\n\nMost respectfully, I beg to state that I am a student of Class 10th in your school.\n\n${r}\n\nTherefore, I request you to kindly grant me permission/leave. I shall be highly obliged to you.\n\nYours Obediently,\n\nName: XYZ\nClass: 10th`;
-            
+            const txt = `To,\n${to},\n[School Name],\n[City]\n\nDate: ${new Date().toLocaleDateString()}\n\nSubject: ${s}\n\nRespected Sir/Madam,\n\nMost respectfully, I beg to state that I am a student of Class 10th in your school.\n\n${r}\n\nTherefore, I request you to kindly grant me permission. I shall be highly obliged to you.\n\nYours Obediently,\n\nName: XYZ\nClass: 10th`;
             document.getElementById('letter-container').style.display="block";
-            document.getElementById('letter-text-area').innerText = txt;
+            document.getElementById('letter-text').innerText = txt;
         }
 
         function downloadPDF(id, name) {
-            const el = document.getElementById(id);
-            // Options to ensure nice print
+            const element = document.getElementById(id);
             const opt = {
                 margin: 10,
                 filename: name,
@@ -450,10 +374,9 @@
                 html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(el).save();
+            html2pdf().set(opt).from(element).save();
         }
 
-        // --- NAV ---
         document.querySelectorAll('.bottom-nav a').forEach(a => {
             a.addEventListener('click', function() {
                 document.querySelectorAll('.bottom-nav a').forEach(b => b.classList.remove('active'));
