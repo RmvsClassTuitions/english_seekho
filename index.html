@@ -161,8 +161,9 @@
         <div class="widget full-width" id="omr">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h3><i class="fa-solid fa-check-circle"></i> OMR Test</h3>
-                <span style="background:#dc2626; color:white; padding:3px 8px; border-radius:5px; font-size:0.7rem; font-weight:bold;">HOURLY SET</span>
+                <span style="background:#dc2626; color:white; padding:3px 8px; border-radius:5px; font-size:0.7rem; font-weight:bold;">NEW SET (4 HRS)</span>
             </div>
+            <p class="desc">Board Important Questions (Prose, Poetry, Grammar)</p>
             <div id="quiz-box" style="background:white; padding:15px; border-radius:12px; margin-top:10px; border:1px solid #e2e8f0;">
                 <h4 id="q-text" style="margin:0 0 15px 0;">Loading...</h4>
                 <div id="options-box"></div>
@@ -182,16 +183,16 @@
         <div class="widget" id="translation">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h3><i class="fa-solid fa-language"></i> Translation</h3>
-                <span style="background:#ca8a04; color:white; padding:3px 8px; border-radius:5px; font-size:0.7rem;">HOURLY</span>
+                <span style="background:#ca8a04; color:white; padding:3px 8px; border-radius:5px; font-size:0.7rem;">4 HOURS</span>
             </div>
             <div style="background:#fffbeb; border-left:4px solid #d97706; padding:10px; border-radius:8px; margin-bottom:10px;">
-                <p id="hindi-para" style="margin:0; font-weight:500;">Loading...</p>
+                <p id="hindi-para" style="margin:0; font-weight:500; font-size:1.05rem; line-height:1.6;">Loading...</p>
             </div>
             <textarea id="user-trans" rows="3" placeholder="English translation..."></textarea>
             <button onclick="checkTranslation()">Show Answer</button>
             <div id="trans-result" class="output">
-                <h4 style="margin:5px 0; color:green;">Correct:</h4>
-                <p id="english-para" style="font-style:italic; color:#444; margin:0;"></p>
+                <h4 style="margin:5px 0; color:green;">Correct English:</h4>
+                <p id="english-para" style="font-style:italic; color:#444; margin:0; line-height:1.5;"></p>
             </div>
         </div>
 
@@ -210,7 +211,7 @@
         </div>
 
         <div class="widget">
-            <h3><i class="fa-solid fa-clock"></i> Tense</h3>
+            <h3><i class="fa-solid fa-clock"></i> 100 Verbs</h3>
             <select id="tense-verb" onchange="showTense()"></select>
             <div id="tense-output" class="output" style="display:grid; grid-template-columns:1fr 1fr; gap:5px;">
                 <div style="background:#e0e7ff; padding:5px; border-radius:5px;"><small>Present</small><br><b id="t-p"></b></div>
@@ -249,7 +250,7 @@
 
     </div>
 
-    <a href="https://wa.me/919506760791" target="_blank">
+    <a href="https://wa.me/919876543210" target="_blank">
         <div class="help-bubble">Doubts?</div>
         <img src="https://cdn-icons-png.flaticon.com/512/9408/9408201.png" class="teacher-float" alt="Teacher">
     </a>
@@ -266,7 +267,7 @@
         // 1. BACKGROUND
         function createFloatingWords() {
             const container = document.getElementById('floating-container');
-            const words = ["Lencho", "Nelson Mandela", "G.L. Fuentes", "Dust of Snow", "Robert Frost", "Tricki", "Hari Singh", "Griffin", "Bholi", "Sulekha", "Matilda", "Noun", "Tense", "Passive", "Fire and Ice", "Amanda", "Trees", "Fog", "Coorg", "Valli"];
+            const words = ["Lencho", "Mandela", "G.L. Fuentes", "Frost", "Tricki", "Hari Singh", "Griffin", "Bholi", "Sulekha", "Matilda", "Noun", "Tense", "Passive", "Fire & Ice", "Amanda", "Trees", "Fog", "Coorg", "Valli"];
             for (let i = 0; i < 20; i++) {
                 const s = document.createElement('span'); s.classList.add('floating-word');
                 s.innerText = words[Math.floor(Math.random() * words.length)];
@@ -348,7 +349,7 @@
         function loadEssay() { const t=document.getElementById('essay-select').value; if(t && essaysDB[t]) { document.getElementById('essay-container').style.display="block"; typeWriter('essay-text', essaysDB[t]); } }
         function loadLetter() { const t=document.getElementById('letter-select').value; if(t && lettersDB[t]) { document.getElementById('letter-container').style.display="block"; typeWriter('letter-text', lettersDB[t]); } }
 
-        // 6. OMR LOGIC
+        // 6. OMR LOGIC (100 Questions High-Yield)
         const qBank = [
             {q:"Author of 'A Letter to God'?", opt:["G.L. Fuentes","Robert Frost","Anil","Bholi"], a:0},
             {q:"Lencho wrote to...?", opt:["Postman","God","Mayor","Friend"], a:1},
@@ -369,32 +370,120 @@
             {q:"Color of ramparts?", opt:["Honey","Yellow","Red","Blue"], a:0},
             {q:"Lomov asked for hand of?", opt:["Natalya","Chubukov","Sulekha","Amanda"], a:0},
             {q:"Writer of 'Thief's Story'?", opt:["Ruskin Bond","Herriot","Wells","Frost"], a:0},
-            {q:"Valli's age?", opt:["7","8","9","10"], a:1}
+            {q:"Valli's age?", opt:["7","8","9","10"], a:1},
+            {q:"Meaning of 'Amiable'?", opt:["Rude","Friendly","Sad","Angry"], a:1},
+            {q:"Postmaster sent money to...?", opt:["God","Lencho","Postman","Farmer"], a:1},
+            {q:"Mandela's daughter?", opt:["Zenani","Winnie","Zindzi","Maki"], a:0},
+            {q:"'Fire' stands for?", opt:["Hatred","Desire","Love","Cold"], a:1},
+            {q:"'Ice' stands for?", opt:["Hatred","Desire","Hot","Love"], a:0},
+            {q:"Mrs. Pumphrey was...?", opt:["Poor","Rich","Miser","Cruel"], a:1},
+            {q:"Anil was a...?", opt:["Thief","Writer","Scientist","Teacher"], a:1},
+            {q:"Hari Singh was a...?", opt:["Writer","Thief","Cook","Doctor"], a:1},
+            {q:"Griffin swallowed...?", opt:["Food","Drugs","Water","Poison"], a:1},
+            {q:"Jaffers was a...?", opt:["Doctor","Constable","Teacher","Thief"], a:1},
+            {q:"Ebright collected...?", opt:["Rocks","Butterflies","Coins","All"], a:3},
+            {q:"Ramlal had ... daughters?", opt:["One","Two","Three","Four"], a:3},
+            {q:"Bholi's teacher was...?", opt:["Cruel","Kind","Rude","Angry"], a:1},
+            {q:"Necklace was made of...?", opt:["Gold","Diamond","Fake","Silver"], a:2},
+            {q:"Loisel was a...?", opt:["Minister","Clerk","Doctor","Officer"], a:1},
+            {q:"What did Valli save?", opt:["Coins","Notes","Gold","Silver"], a:0},
+            {q:"Buddha preached at...?", opt:["Kashi","Benares","Gaya","Delhi"], a:1},
+            {q:"Custard was a...?", opt:["Dog","Dragon","Cat","Rat"], a:1},
+            {q:"Belinda lived in a...?", opt:["White House","Red House","Blue House","Hut"], a:0},
+            {q:"Name of black kitten?", opt:["Ink","Blink","Mustard","Custard"], a:0},
+            {q:"... is the best policy.", opt:["Honesty","Lies","Theft","Greed"], a:0},
+            {q:"The sun ... in the East.", opt:["Rise","Rising","Rises","Rose"], a:2},
+            {q:"She ... a song now.", opt:["Sing","Sings","Is singing","Sang"], a:2},
+            {q:"He ... to school yesterday.", opt:["Go","Went","Gone","Going"], a:1},
+            {q:"I have ... my work.", opt:["Do","Did","Done","Doing"], a:2},
+            {q:"This is ... useful book.", opt:["A","An","The","None"], a:0},
+            {q:"He died ... cancer.", opt:["Of","From","By","With"], a:0},
+            {q:"Listen ... me.", opt:["at","to","on","in"], a:1},
+            {q:"The cat jumped ... the table.", opt:["in","upon","at","with"], a:1},
+            {q:"Ram is ... than Shyam.", opt:["Tall","Taller","Tallest","More tall"], a:1},
+            {q:"Plural of 'Man'?", opt:["Mans","Men","Mens","Manes"], a:1},
+            {q:"Fem. of 'Boy'?", opt:["Girl","Lady","Woman","Madam"], a:0},
+            {q:"Opposite of 'Rich'?", opt:["Poor","Weak","Sad","Bad"], a:0},
+            {q:"Synonym of 'Happy'?", opt:["Sad","Glad","Cry","Weep"], a:1},
+            {q:"Verb form of 'Education'?", opt:["Educate","Educational","Educator","None"], a:0},
+            {q:"Correct spelling?", opt:["Grammer","Grammar","Gramar","Gremmar"], a:1},
+            {q:"Correct spelling?", opt:["Beleive","Believe","Belive","Beeleve"], a:1},
+            {q:"Correct spelling?", opt:["Attendence","Attendance","Attendents","None"], a:1},
+            {q:"Rearrange: loves/toys/he.", opt:["He loves toys","Toys loves he","He toys loves","None"], a:0},
+            {q:"Rearrange: go/to/school/I.", opt:["I school go to","I to go school","I go to school","None"], a:2},
+            {q:"Poet of 'Fire and Ice'?", opt:["Robert Frost","Keats","Leslie Norris","Whitman"], a:0},
+            {q:"'The Tiger in the Zoo' written by?", opt:["Leslie Norris","Robert Frost","Keats","Yeats"], a:0},
+            {q:"Where is Coorg?", opt:["Karnataka","Goa","Kerala","Assam"], a:0},
+            {q:"Coorg is famous for...?", opt:["Coffee","Tea","Wheat","Rice"], a:0},
+            {q:"Assam is famous for...?", opt:["Tea","Coffee","Gold","Silver"], a:0},
+            {q:"Pranjol and Rajvir were...?", opt:["Classmates","Enemies","Brothers","Cousins"], a:0},
+            {q:"Who was Rajvir?", opt:["A student","A teacher","A doctor","A farmer"], a:0},
+            {q:"Valli's favorite pastime?", opt:["Standing at doorway","Playing","Reading","Sleeping"], a:0},
+            {q:"Buddha's real name?", opt:["Siddhartha","Gautam","Ashoka","Mahavira"], a:0},
+            {q:"Kisa Gotami lost her...?", opt:["Son","Husband","Father","Brother"], a:0},
+            {q:"Lomov's age?", opt:["35","30","40","25"], a:0},
+            {q:"Natalya's age?", opt:["25","20","30","35"], a:0},
+            {q:"Chubukov was a...?", opt:["Landowner","Doctor","Teacher","Farmer"], a:0},
+            {q:"Name of Lomov's dog?", opt:["Guess","Squeezer","Tom","Jerry"], a:0},
+            {q:"Name of Natalya's dog?", opt:["Squeezer","Guess","Tiger","Lion"], a:0},
+            {q:"Tricki's illness was...?", opt:["Malnutrition","Overeating","Fever","Cold"], a:1},
+            {q:"Dr. Herriot was a...?", opt:["Vet","Dentist","Surgeon","Physician"], a:0},
+            {q:"Hari Singh changed name every...?", opt:["Month","Week","Year","Day"], a:0},
+            {q:"Anil was ... years old.", opt:["25","20","30","35"], a:0},
+            {q:"Griffin was invisible because of...?", opt:["Rare drugs","Magic","Curse","Dream"], a:0},
+            {q:"Who entered the shop?", opt:["Griffin","Anil","Hari","Bholi"], a:0},
+            {q:"Ebright's mother gave him book...?", opt:["Travels of Monarch X","Travels of X","Monarch X","None"], a:0},
+            {q:"Matilda's husband was a...?", opt:["Clerk","Officer","Minister","Doctor"], a:0},
+            {q:"Cost of necklace?", opt:["36000","40000","500","30000"], a:0},
+            {q:"Bholi had ... marks.", opt:["Pock","Cut","Burn","Birth"], a:0},
+            {q:"Bishamber demanded ... dowry.", opt:["5000","1000","50000","10000"], a:0},
+            {q:"Who saved the earth?", opt:["Think-Tank","Noodle","Omega","Book"], a:3},
+            {q:"Book that saved earth?", opt:["Mother Goose","Nursery Rhymes","Dictionary","Atlas"], a:0},
+            {q:"Think-Tank was...?", opt:["Ruler of Mars","Ruler of Earth","Ruler of Moon","None"], a:0},
+            {q:"Noodle was...?", opt:["Apprentice","King","Soldier","Cook"], a:0},
+            {q:"Synonym of 'Enormous'?", opt:["Huge","Tiny","Small","Weak"], a:0},
+            {q:"Antonym of 'Flexible'?", opt:["Rigid","Soft","Elastic","Easy"], a:0},
+            {q:"Noun form of 'Succeed'?", opt:["Success","Successful","Successively","None"], a:0},
+            {q:"Adjective of 'Cloud'?", opt:["Cloudy","Cloud","Clouds","Clouding"], a:0},
+            {q:"Verb form of 'Beauty'?", opt:["Beautify","Beautiful","Beautifully","None"], a:0}
         ];
-        let qIdx=0, marks=0;
+        let currentSet=[], qIdx=0, marks=0;
+        function generateHourly() {
+            const seed = Math.floor(Date.now()/(4*3600000)); // Change every 4 hours
+            let temp = [...qBank];
+            for(let i=temp.length-1; i>0; i--) { const j=(seed+i*7)%(i+1); [temp[i],temp[j]]=[temp[j],temp[i]]; }
+            currentSet = temp.slice(0,20);
+        }
         function loadOMR() {
-            if(qIdx>=qBank.length) { document.getElementById('quiz-box').innerHTML=`<h3 style='color:green;text-align:center;'>Done! Score: ${marks}/20</h3>`; return; }
-            const q = qBank[qIdx]; document.getElementById('q-num').innerText=qIdx+1; document.getElementById('q-score').innerText=marks; document.getElementById('q-text').innerText=q.q;
+            if(currentSet.length===0) generateHourly();
+            if(qIdx>=currentSet.length) { document.getElementById('quiz-box').innerHTML=`<h3 style='color:green;text-align:center;'>Done! Score: ${marks}/20</h3>`; return; }
+            const q = currentSet[qIdx]; document.getElementById('q-num').innerText=qIdx+1; document.getElementById('q-score').innerText=marks; document.getElementById('q-text').innerText=q.q;
             let h=""; q.opt.forEach((o,i)=>{ h+=`<div class="omr-option" onclick="checkOMR(${i},this)"><b style="margin-right:10px;">${['A','B','C','D'][i]}</b> ${o}</div>` });
             document.getElementById('options-box').innerHTML=h;
         }
         function checkOMR(sel,el) {
-            if(sel===qBank[qIdx].a) { el.style.background="#dcfce7"; el.style.borderColor="green"; marks++; xp+=5; document.getElementById('xp-points').innerText=xp; confetti({particleCount:100, spread:70, origin:{y:0.6}}); }
+            if(sel===currentSet[qIdx].a) { el.style.background="#dcfce7"; el.style.borderColor="green"; marks++; xp+=5; document.getElementById('xp-points').innerText=xp; confetti({particleCount:100, spread:70, origin:{y:0.6}}); }
             else { el.style.background="#fee2e2"; el.style.borderColor="red"; }
             const all=document.querySelectorAll('.omr-option'); all.forEach(d=>d.onclick=null);
             setTimeout(()=>{ qIdx++; loadOMR(); }, 1000);
         }
         loadOMR();
 
-        // 7. HOURLY TRANSLATION
+        // 7. TRANSLATION (4-LINE, 4-HOUR)
         const paras = [
-            {h:"भारत एक महान देश है।", e:"India is a great country."},
-            {h:"ईमानदारी सबसे अच्छी नीति है।", e:"Honesty is the best policy."},
-            {h:"गंगा एक पवित्र नदी है।", e:"The Ganga is a holy river."},
-            {h:"हमें बड़ों का सम्मान करना चाहिए।", e:"We should respect our elders."}
+            {h:"भारत एक महान देश है। इसकी संस्कृति बहुत पुरानी है। यहाँ अनेक धर्मों के लोग रहते हैं। हमें अपने देश पर गर्व है।", e:"India is a great country. Its culture is very old. People of many religions live here. We are proud of our country."},
+            {h:"ईमानदारी सबसे अच्छी नीति है। एक ईमानदार व्यक्ति का सभी सम्मान करते हैं। वह कभी झूठ नहीं बोलता है। उसे किसी का डर नहीं होता।", e:"Honesty is the best policy. An honest man is respected by all. He never tells a lie. He is not afraid of anyone."},
+            {h:"प्रदूषण आज की सबसे बड़ी समस्या है। यह हमारे स्वास्थ्य के लिए हानिकारक है। हमें अधिक से अधिक पेड़ लगाने चाहिए। हमें प्लास्टिक का प्रयोग बंद करना चाहिए।", e:"Pollution is the biggest problem of today. It is harmful to our health. We should plant more and more trees. We should stop using plastic."},
+            {h:"गंगा एक पवित्र नदी है। यह हिमालय से निकलती है। हिंदू इसे माँ कहते हैं। इसका जल बहुत शुद्ध माना जाता है।", e:"The Ganga is a holy river. It originates from the Himalayas. Hindus call it Mother. Its water is considered very pure."},
+            {h:"सुभाष चंद्र बोस एक महान नेता थे। उन्होंने 'आजाद हिंद फौज' बनाई थी। वे अपनी मातृभूमि से बहुत प्रेम करते थे। उन्होंने नारा दिया, 'तुम मुझे खून दो, मैं तुम्हें आजादी दूंगा।'", e:"Subhash Chandra Bose was a great leader. He formed the 'Azad Hind Fauj'. He loved his motherland very much. He gave the slogan, 'You give me blood, I will give you freedom.'"},
+            {h:"परिश्रम सफलता की कुंजी है। जो मेहनत करते हैं वे कभी असफल नहीं होते। भाग्य भी उन्हीं का साथ देता है जो कर्म करते हैं। हमें अपने समय का सदुपयोग करना चाहिए।", e:"Hard work is the key to success. Those who work hard never fail. Fortune also favors those who work. We should make good use of our time."},
+            {h:"ताजमहल दुनिया के सात अजूबों में से एक है। इसे शाहजहाँ ने अपनी बेगम की याद में बनवाया था। यह आगरा में यमुना नदी के किनारे स्थित है। यह सफेद संगमरमर का बना है।", e:"The Taj Mahal is one of the seven wonders of the world. Shah Jahan built it in memory of his queen. It is situated on the bank of the Yamuna in Agra. It is made of white marble."},
+            {h:"लाल बहादुर शास्त्री भारत के दूसरे प्रधानमंत्री थे। वे सादगी और ईमानदारी की प्रतिमूर्ति थे। उन्होंने 'जय जवान, जय किसान' का नारा दिया था। सारा देश उनका सम्मान करता है।", e:"Lal Bahadur Shastri was the second Prime Minister of India. He was the embodiment of simplicity and honesty. He gave the slogan 'Jai Jawan, Jai Kisan'. The whole country respects him."},
+            {h:"वृक्ष हमारे सबसे अच्छे मित्र हैं। वे हमें ऑक्सीजन, फल और दवाइयां देते हैं। वे पर्यावरण को संतुलित रखते हैं। हमें उन्हें काटने से बचाना चाहिए।", e:"Trees are our best friends. They give us oxygen, fruits and medicines. They keep the environment balanced. We should save them from being cut."},
+            {h:"वाराणसी एक प्राचीन और धार्मिक नगरी है। यह उत्तर प्रदेश में गंगा के किनारे स्थित है। यहाँ अनेक सुंदर मंदिर और घाट हैं। लोग यहाँ दूर-दूर से पूजा करने आते हैं।", e:"Varanasi is an ancient and religious city. It is situated on the bank of the Ganga in Uttar Pradesh. There are many beautiful temples and ghats here. People come from far and wide to worship here."}
         ];
         function loadTrans() {
-            const idx = Math.floor(Date.now()/3600000)%paras.length;
+            const idx = Math.floor(Date.now()/(4*3600000))%paras.length;
             document.getElementById('hindi-para').innerText=paras[idx].h;
             document.getElementById('english-para').innerText=paras[idx].e;
         }
@@ -402,7 +491,7 @@
         loadTrans();
 
         // 8. GAME
-        const gWords = [{w:"SCHOOL",h:"Place to study"}, {w:"TEACHER",h:"Who teaches"}, {w:"FRIEND",h:"Playmate"}];
+        const gWords = [{w:"SCHOOL",h:"Place to study"}, {w:"TEACHER",h:"Who teaches"}, {w:"FRIEND",h:"Playmate"}, {w:"SUMMER",h:"Hot season"}, {w:"ENGLISH",h:"Language"}, {w:"SUCCESS",h:"Goal"}, {w:"STUDENT",h:"Learner"}, {w:"EXAM",h:"Test"}];
         let curW, gTimer, time=15;
         function loadGame() {
             clearInterval(gTimer); time=15; document.getElementById('game-timer').innerText="15s";
@@ -415,13 +504,14 @@
         function checkSpelling() { if(document.getElementById('user-guess').value.toUpperCase().trim()===curW.w) { clearInterval(gTimer); confetti(); loadGame(); xp+=10; document.getElementById('xp-points').innerText=xp; } }
         loadGame();
 
-        // 9. TENSE
-        const vList=["Go","Eat","Play","Read","Write","Sleep","Run"];
+        // 9. TENSE (100 WORDS)
+        const vList=["Accept","Act","Achieve","Add","Admire","Admit","Adopt","Advise","Agree","Allow","Answer","Appear","Apply","Argue","Arise","Arrange","Arrive","Ask","Attack","Bake","Bathe","Be","Bear","Beat","Become","Beg","Begin","Behave","Believe","Belong","Bend","Bet","Bind","Bite","Blow","Boil","Borrow","Bow","Break","Bring","Build","Burn","Burst","Buy","Call","Care","Carry","Cast","Catch","Cause","Change","Chase","Cheat","Check","Choose","Clean","Clear","Climb","Close","Collect","Come","Compare","Complete","Cook","Copy","Cost","Count","Cover","Cross","Cry","Cut","Dance","Dare","Deal","Decide","Decorate","Defeat","Demand","Describe","Destroy","Die","Dig","Dinner","Dip","Disappear","Discover","Divide","Do","Draw","Dream","Drink","Drive","Drop","Dry","Earn","Eat","Elect","Employ","Enjoy","Enter","Escape","Excise","Explain","Fail","Fall","Fear","Feed","Feel","Fight","Find","Finish","Fit","Fly","Fold","Follow","Forbid","Forget","Forgive","Freeze","Fry","Gain","Get","Give","Go","Grow","Hang","Hate","Have","Hear","Help","Hide","Hit","Hold","Hope","Hurt"];
         vList.forEach(v=>{ let o=document.createElement('option'); o.value=v; o.innerText=v; document.getElementById('tense-verb').appendChild(o); });
         function showTense() {
             const v=document.getElementById('tense-verb').value;
             let p=v+"s", pt=v+"ed", c="Is "+v+"ing"; if(v.endsWith('e')){ c="Is "+v.slice(0,-1)+"ing"; pt=v+"d"; }
-            if(v=="Go"){ p="Goes"; pt="Went"; } if(v=="Eat"){ p="Eats"; pt="Ate"; }
+            // Basic irregular overrides for common words
+            if(v=="Go"){p="Goes";pt="Went";} if(v=="Do"){p="Does";pt="Did";} if(v=="Eat"){p="Eats";pt="Ate";} if(v=="See"){pt="Saw";} if(v=="Come"){pt="Came";}
             document.getElementById('t-p').innerText=p; document.getElementById('t-pt').innerText=pt;
             document.getElementById('t-f').innerText="Will "+v; document.getElementById('t-c').innerText=c;
             document.getElementById('tense-output').style.display="grid";
