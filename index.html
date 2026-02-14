@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMVS Class Tuitions - The Digital Lab</title>
     
-    <title>RMVS Class Tuitions - UP Board English Digital Lab</title>
-    <meta name="description" content="Best English Preparation for UP Board Class 10. OMR Test, Essays, Grammar, Letters & Games. Powered by RMVS Class Tuitions.">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        /* --- 1. ANIMATED THEME VARIABLES --- */
         :root {
             --primary: #4f46e5;
             --accent: #0ea5e9;
@@ -24,204 +20,114 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0; padding: 0;
-            padding-bottom: 120px;
-            color: #1e293b;
-            overflow-x: hidden;
+            margin: 0; padding: 0; padding-bottom: 120px;
+            color: #1e293b; overflow-x: hidden;
             background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1, #fbc2eb);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%; animation: gradientBG 15s ease infinite;
         }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- 2. FLYING WORDS BACKGROUND --- */
-        #floating-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none; overflow: hidden;
-        }
+        /* FLYING BACKGROUND */
+        #floating-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         .floating-word {
-            position: absolute; bottom: -50px;
-            font-size: 1.5rem; font-weight: 800;
-            color: rgba(255, 255, 255, 0.4);
-            font-family: 'Times New Roman', serif;
-            user-select: none; animation: floatUp linear infinite;
-            white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: absolute; bottom: -50px; font-size: 1.5rem; font-weight: 800;
+            color: rgba(255, 255, 255, 0.4); user-select: none; animation: floatUp linear infinite;
+            white-space: nowrap; font-family: 'Times New Roman', serif;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
-        }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; } }
 
-        /* --- 3. UI COMPONENTS --- */
+        /* UI */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 20px; position: sticky; top: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.95); padding: 15px 20px; position: sticky; top: 0; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); backdrop-filter: blur(10px);
         }
         .logo { font-weight: 800; color: var(--primary); font-size: 1.1rem; display: flex; flex-direction: column; }
-        .greeting { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .xp-pill { background: #ca8a04; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(202, 138, 4, 0.4); }
+        .greeting { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; }
+        .xp-pill { background: #ca8a04; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
 
-        .container {
-            max-width: 900px; margin: 25px auto; padding: 0 15px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
+        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .full-width { grid-column: 1 / -1; }
 
         .widget {
             background: var(--glass); border-radius: 24px; padding: 25px;
             box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.6);
-            position: relative; 
-            animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transition: transform 0.3s;
+            position: relative; animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .widget:hover { transform: translateY(-5px); }
-
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         
-        h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.3rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
-        p.desc { color: #64748b; font-size: 0.9rem; margin-top: -5px; margin-bottom: 15px; }
+        h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
+        p.desc { color: #64748b; font-size: 0.85rem; margin-top: -5px; margin-bottom: 15px; }
 
-        /* --- 4. LIVE VISITOR POPUP --- */
+        /* VISITOR */
         .visitor-popup {
-            position: fixed; top: 85px; right: 20px;
-            background: rgba(0, 0, 0, 0.85); color: white;
-            padding: 8px 16px; border-radius: 30px;
-            font-size: 0.85rem; font-weight: bold;
-            z-index: 999; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px); display: none;
-            align-items: center; gap: 8px;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: fixed; top: 85px; right: 20px; background: rgba(0, 0, 0, 0.8); color: white;
+            padding: 8px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: bold;
+            z-index: 999; backdrop-filter: blur(5px); display: none; align-items: center; gap: 8px;
+            animation: popIn 0.5s;
         }
-        .live-dot {
-            width: 8px; height: 8px; background: #22c55e;
-            border-radius: 50%; box-shadow: 0 0 10px #22c55e;
-            animation: blinkDot 1s infinite alternate;
-        }
-        @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .live-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: blinkDot 1s infinite alternate; }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes blinkDot { from { opacity: 0.6; } to { opacity: 1; } }
 
-        /* --- 5. TIMER GRID --- */
-        .timer-grid {
-            display: flex; justify-content: center; gap: 10px; margin-top: 15px;
-        }
+        /* TIMER */
+        .timer-grid { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .time-box {
-            background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.4); border-radius: 15px;
-            padding: 10px; min-width: 65px; text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px; padding: 10px; min-width: 60px; text-align: center;
         }
-        .time-val {
-            display: block; font-size: 1.8rem; font-weight: 800; line-height: 1;
-            font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-        .time-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
-        .pulse-sec { animation: heartBeat 1s infinite; color: #ffeb3b; }
-        @keyframes heartBeat {
-            0% { transform: scale(1); text-shadow: 0 0 10px red; }
-            50% { transform: scale(1.1); text-shadow: 0 0 20px red; }
-            100% { transform: scale(1); text-shadow: 0 0 10px red; }
-        }
+        .time-val { display: block; font-size: 1.6rem; font-weight: 800; font-family: 'Orbitron', sans-serif; }
+        .time-label { font-size: 0.7rem; text-transform: uppercase; }
+        .pulse-sec { animation: heartBeat 1s infinite; color: #ffeb3b; text-shadow: 0 0 10px red; }
+        @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        /* --- 6. INPUTS & BUTTONS --- */
-        input, textarea, select {
-            width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 15px;
-            font-size: 1rem; margin-bottom: 12px; box-sizing: border-box; background: rgba(255,255,255,0.9);
-            transition: 0.3s;
-        }
-        input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; background: #fff; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
+        /* CONTROLS */
+        select, textarea, input { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #cbd5e1; margin-bottom: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { transform: scale(1.02); background: #4338ca; }
+        .btn-whatsapp { background: #25D366; }
 
-        button {
-            background: var(--primary); color: white; border: none;
-            padding: 14px; border-radius: 15px; cursor: pointer;
-            font-weight: 600; width: 100%; font-size: 1rem; transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
-        }
-        button:hover { background: #4338ca; transform: scale(1.02); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4); }
-        .btn-whatsapp { background: #25D366; color: white; }
-        .btn-whatsapp:hover { box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4); background: #20bd5a; }
-
-        /* OMR STYLES */
-        .omr-option {
-            background: white; padding: 12px; border: 1px solid #ddd;
-            border-radius: 12px; cursor: pointer; transition: 0.2s;
-            margin-bottom: 8px; font-weight: 500; display: flex; align-items: center; gap: 10px;
-        }
+        /* OMR */
+        .omr-option { background: white; padding: 12px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; border: 1px solid #ddd; transition: 0.2s; display:flex; align-items:center; gap:10px; }
         .omr-option:hover { background: #f1f5f9; border-color: var(--primary); transform: translateX(5px); }
 
-        /* PAPER TYPEWRITER */
+        /* PAPER */
         .result-paper {
-            background: white; padding: 40px; border-radius: 5px;
-            position: relative; min-height: 250px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            font-family: 'Times New Roman', serif; line-height: 1.8; color: #000;
-            overflow: hidden; border: 1px solid #e2e8f0;
-            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 100% 2rem;
+            background: white; padding: 30px; border-radius: 5px; min-height: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;
+            background-image: linear-gradient(#e5e7eb 1px, transparent 1px); background-size: 100% 2rem;
+            position: relative; overflow: hidden;
         }
         .watermark {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 40px; font-weight: 900;
-            color: rgba(0,0,0,0.03); pointer-events: none;
-            z-index: 0; white-space: nowrap; text-transform: uppercase;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 35px; font-weight: 900; color: rgba(0,0,0,0.03); pointer-events: none; white-space: nowrap;
         }
-        .paper-text { position: relative; z-index: 10; white-space: pre-wrap; font-size: 1.1rem;}
-        .cursor-blink::after { content: '✍️'; animation: blink 1s step-end infinite; font-size: 1.2rem; }
+        .paper-text { position: relative; z-index: 10; white-space: pre-wrap; font-family: 'Times New Roman', serif; font-size: 1.1rem; line-height: 2rem; }
+        .cursor-blink::after { content: '✍️'; animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
+        .output { display: none; margin-top: 15px; }
 
-        /* --- 7. 3D ANIMATED TEACHER --- */
+        /* TEACHER */
         .teacher-float {
-            position: fixed; bottom: 100px; right: 20px;
-            width: 130px; height: auto; z-index: 1000; cursor: pointer;
-            animation: floatTeacher 4s ease-in-out infinite;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
-            transition: transform 0.3s;
+            position: fixed; bottom: 90px; right: 20px; width: 120px; z-index: 2000; cursor: pointer;
+            animation: floatTeacher 4s ease-in-out infinite; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
         }
-        .teacher-float:hover { transform: scale(1.1) rotate(-3deg); }
         .help-bubble {
-            position: fixed; bottom: 230px; right: 30px;
-            background: white; padding: 8px 15px; border-radius: 20px 20px 0 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            font-size: 0.9rem; font-weight: bold; color: var(--primary);
-            animation: floatTeacher 4s ease-in-out infinite; z-index: 1001; pointer-events: none;
+            position: fixed; bottom: 210px; right: 30px; background: white; padding: 6px 12px;
+            border-radius: 15px 15px 0 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 0.8rem; font-weight: bold; color: var(--primary); z-index: 2001; animation: floatTeacher 4s ease-in-out infinite;
         }
-        @keyframes floatTeacher {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+        @keyframes floatTeacher { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* --- 8. BOTTOM NAV --- */
+        /* NAV */
         .bottom-nav {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(15px);
-            padding: 12px 30px; border-radius: 50px;
-            display: flex; gap: 30px; z-index: 999; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            white-space: nowrap; overflow-x: auto; max-width: 90%; border: 1px solid rgba(255,255,255,0.1);
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
+            padding: 10px 25px; border-radius: 50px; display: flex; gap: 25px; z-index: 1900;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); white-space: nowrap; overflow-x: auto; max-width: 90%;
         }
-        .bottom-nav a { color: #94a3b8; font-size: 1.5rem; padding: 0 5px; transition: 0.3s; position: relative; }
-        .bottom-nav a.active { color: #fff; transform: scale(1.3); }
-        .bottom-nav a.active::after {
-            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
-            width: 5px; height: 5px; background: var(--accent); border-radius: 50%;
-        }
-        .hourly-box { background: #fffbeb; border-left: 5px solid #d97706; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .output { display: none; margin-top: 15px; animation: slideUpFade 0.5s ease; }
+        .bottom-nav a { color: #94a3b8; font-size: 1.4rem; transition: 0.2s; }
+        .bottom-nav a.active { color: #fff; transform: scale(1.2); }
     </style>
 </head>
 <body>
@@ -235,7 +141,7 @@
     <header>
         <div class="logo">
             <span><i class="fa-solid fa-graduation-cap"></i> RMVS Tuitions</span>
-            <span class="greeting" id="greeting-text">Loading...</span>
+            <span class="greeting" id="greeting-text">Welcome</span>
         </div>
         <div class="xp-pill">XP: <span id="xp-points">0</span></div>
     </header>
@@ -243,100 +149,74 @@
     <div class="container">
 
         <div class="widget full-width" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; text-align:center; border:none;">
-            <h1 style="margin:0; font-size:1.4rem; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">🚀 UP Board 2026</h1>
-            <p style="font-size:0.9rem; opacity:0.9; margin-bottom:15px;">Time remaining for Exam:</p>
-            
+            <h1 style="margin:0; font-size:1.4rem; text-shadow:0 2px 4px rgba(0,0,0,0.2);">🚀 UP Board 2026</h1>
             <div class="timer-grid">
-                <div class="time-box">
-                    <span class="time-val" id="d">00</span>
-                    <span class="time-label">Days</span>
-                </div>
-                <div class="time-box">
-                    <span class="time-val" id="h">00</span>
-                    <span class="time-label">Hrs</span>
-                </div>
-                <div class="time-box">
-                    <span class="time-val" id="m">00</span>
-                    <span class="time-label">Min</span>
-                </div>
-                <div class="time-box" style="border-color: rgba(255, 235, 59, 0.6); background: rgba(255, 235, 59, 0.1);">
-                    <span class="time-val pulse-sec" id="s">00</span>
-                    <span class="time-label">Sec</span>
-                </div>
+                <div class="time-box"><span class="time-val" id="d">00</span><span class="time-label">Days</span></div>
+                <div class="time-box"><span class="time-val" id="h">00</span><span class="time-label">Hrs</span></div>
+                <div class="time-box"><span class="time-val" id="m">00</span><span class="time-label">Min</span></div>
+                <div class="time-box" style="border-color:rgba(255,235,59,0.5);"><span class="time-val pulse-sec" id="s">00</span><span class="time-label">Sec</span></div>
             </div>
         </div>
 
         <div class="widget full-width" id="omr">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h3><i class="fa-solid fa-check-circle"></i> OMR Test</h3>
-                <span style="background:#dc2626; color:white; padding:3px 10px; border-radius:8px; font-size:0.7rem; font-weight:bold; box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);">HOURLY SET</span>
+                <span style="background:#dc2626; color:white; padding:3px 8px; border-radius:5px; font-size:0.7rem; font-weight:bold;">HOURLY SET</span>
             </div>
-            <p class="desc">20 Unique Questions generated every hour.</p>
-            
-            <div id="quiz-box" style="background:white; padding:20px; border-radius:15px; border:1px solid #e2e8f0;">
-                <h4 id="q-text" style="margin:0 0 20px 0; font-size:1.1rem; line-height:1.5;">Loading Question...</h4>
+            <div id="quiz-box" style="background:white; padding:15px; border-radius:12px; margin-top:10px; border:1px solid #e2e8f0;">
+                <h4 id="q-text" style="margin:0 0 15px 0;">Loading...</h4>
                 <div id="options-box"></div>
             </div>
-            
-            <div style="display:flex; justify-content:space-between; margin-top:20px; align-items:center;">
-                <span style="font-weight:bold; color:#64748b;">Q: <span id="q-num">1</span>/20</span>
-                <span style="font-weight:bold; color:var(--primary);">Score: <span id="q-score">0</span></span>
+            <div style="display:flex; justify-content:space-between; margin-top:15px; font-weight:bold; color:#64748b;">
+                <span>Q: <span id="q-num">1</span>/20</span>
+                <span style="color:var(--primary);">Score: <span id="q-score">0</span></span>
             </div>
         </div>
 
         <div class="widget" id="rules">
-            <h3><i class="fa-solid fa-book"></i> Grammar Tricks</h3>
-            <details style="background:white; padding:15px; border-radius:12px; margin-bottom:12px; border:1px solid #e2e8f0; cursor:pointer;">
-                <summary style="font-weight:bold; color:#334155;">1. Tense Rules</summary>
-                <div style="font-size:0.9rem; margin-top:10px; color:#475569; line-height:1.6;">• <b>Present:</b> V1 + s/es<br>• <b>Past:</b> V2<br>• <b>Future:</b> Will/Shall + V1</div>
-            </details>
-            <details style="background:white; padding:15px; border-radius:12px; margin-bottom:12px; border:1px solid #e2e8f0; cursor:pointer;">
-                <summary style="font-weight:bold; color:#334155;">2. Active -> Passive</summary>
-                <div style="font-size:0.9rem; margin-top:10px; color:#475569; line-height:1.6;">• Object becomes Subject<br>• Use <b>V3</b><br>• Add 'by'</div>
-            </details>
+            <h3><i class="fa-solid fa-book"></i> Grammar</h3>
+            <details style="background:white; padding:10px; border-radius:10px; margin-bottom:10px; border:1px solid #ddd;"><summary style="font-weight:bold;">1. Tense Rules</summary><div style="font-size:0.9rem; margin-top:5px; color:#555;">Present: V1+s/es<br>Past: V2</div></details>
+            <details style="background:white; padding:10px; border-radius:10px; margin-bottom:10px; border:1px solid #ddd;"><summary style="font-weight:bold;">2. Active -> Passive</summary><div style="font-size:0.9rem; margin-top:5px; color:#555;">Object -> Subject<br>Use V3 + by</div></details>
         </div>
 
         <div class="widget" id="translation">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h3><i class="fa-solid fa-language"></i> Translation</h3>
-                <span style="background:#ca8a04; color:white; padding:3px 8px; border-radius:6px; font-size:0.7rem; font-weight:bold;">HOURLY</span>
+                <span style="background:#ca8a04; color:white; padding:3px 8px; border-radius:5px; font-size:0.7rem;">HOURLY</span>
             </div>
-            <div class="hourly-box">
-                <p id="hindi-para" style="font-size:1rem; line-height:1.6; color:#1e293b; font-weight:500; margin:0;">Loading...</p>
+            <div style="background:#fffbeb; border-left:4px solid #d97706; padding:10px; border-radius:8px; margin-bottom:10px;">
+                <p id="hindi-para" style="margin:0; font-weight:500;">Loading...</p>
             </div>
-            <textarea id="user-trans" rows="3" placeholder="Type English translation here..."></textarea>
+            <textarea id="user-trans" rows="3" placeholder="English translation..."></textarea>
             <button onclick="checkTranslation()">Show Answer</button>
             <div id="trans-result" class="output">
-                <h4 style="margin:0; color:green;">Correct English:</h4>
-                <p id="english-para" style="font-style:italic; color:#334155; margin-top:5px; line-height:1.5;"></p>
+                <h4 style="margin:5px 0; color:green;">Correct:</h4>
+                <p id="english-para" style="font-style:italic; color:#444; margin:0;"></p>
             </div>
         </div>
 
         <div class="widget" id="game">
             <div style="display:flex; justify-content:space-between;">
                 <h3><i class="fa-solid fa-gamepad"></i> Game</h3>
-                <span id="game-timer" style="background:#dc2626; color:white; padding:2px 10px; border-radius:6px; font-weight:bold;">15s</span>
+                <span id="game-timer" style="background:#dc2626; color:white; padding:2px 8px; border-radius:5px; font-weight:bold;">15s</span>
             </div>
-            <div style="background:#fff7ed; border:2px dashed #f97316; padding:20px; text-align:center; border-radius:12px; margin-bottom:15px;">
-                <div id="scramble-word" style="font-size:1.8rem; letter-spacing:4px; color:#ea580c; font-weight:bold;">...</div>
-                <small id="scramble-hint" style="color:#c2410c; font-weight:bold;">(Hint...)</small>
+            <div style="background:#fff7ed; border:2px dashed #f97316; padding:15px; text-align:center; border-radius:12px; margin-bottom:10px;">
+                <div id="scramble-word" style="font-size:1.5rem; letter-spacing:3px; color:#ea580c; font-weight:bold;">...</div>
+                <small id="scramble-hint" style="color:#c2410c;">(Hint...)</small>
             </div>
             <input type="text" id="user-guess" placeholder="Spelling..." style="text-align:center; font-weight:bold;">
             <button onclick="checkSpelling()" style="background:#ea580c;">Check</button>
             <div id="game-result" style="text-align:center; margin-top:10px; display:none;"></div>
-            <button onclick="shareScore()" class="btn-whatsapp" style="margin-top:10px;">Share Score</button>
         </div>
 
         <div class="widget">
-            <h3><i class="fa-solid fa-clock"></i> Tense Master</h3>
+            <h3><i class="fa-solid fa-clock"></i> Tense</h3>
             <select id="tense-verb" onchange="showTense()"></select>
-            <div id="tense-output" class="output" style="padding:10px;">
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#e0e7ff; padding:10px; border-radius:8px;"><small>Present</small><br><strong id="t-p" style="color:#4f46e5"></strong></div>
-                    <div style="background:#fee2e2; padding:10px; border-radius:8px;"><small>Past</small><br><strong id="t-pt" style="color:#dc2626"></strong></div>
-                    <div style="background:#dcfce7; padding:10px; border-radius:8px;"><small>Future</small><br><strong id="t-f" style="color:#16a34a"></strong></div>
-                    <div style="background:#fef3c7; padding:10px; border-radius:8px;"><small>Cont.</small><br><strong id="t-c" style="color:#ca8a04"></strong></div>
-                </div>
+            <div id="tense-output" class="output" style="display:grid; grid-template-columns:1fr 1fr; gap:5px;">
+                <div style="background:#e0e7ff; padding:5px; border-radius:5px;"><small>Present</small><br><b id="t-p"></b></div>
+                <div style="background:#fee2e2; padding:5px; border-radius:5px;"><small>Past</small><br><b id="t-pt"></b></div>
+                <div style="background:#dcfce7; padding:5px; border-radius:5px;"><small>Future</small><br><b id="t-f"></b></div>
+                <div style="background:#fef3c7; padding:5px; border-radius:5px;"><small>Cont.</small><br><b id="t-c"></b></div>
             </div>
         </div>
 
@@ -347,4 +227,209 @@
             </select>
             <div id="essay-container" class="output">
                 <div class="result-paper">
-                    <div class
+                    <div class="watermark">RMVS Class Tuitions</div>
+                    <div id="essay-text" class="paper-text cursor-blink"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget full-width" id="letters">
+            <h3><i class="fa-solid fa-envelope"></i> Letter Generator</h3>
+            <p class="desc">Select a topic for perfect Board Format Letter.</p>
+            <select id="letter-select" onchange="loadLetter()">
+                <option value="">-- Select Letter Topic --</option>
+            </select>
+            <div id="letter-container" class="output">
+                <div class="result-paper">
+                    <div class="watermark">RMVS Class Tuitions</div>
+                    <div id="letter-text" class="paper-text cursor-blink"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="https://wa.me/919876543210" target="_blank">
+        <div class="help-bubble">Doubts?</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/9408/9408201.png" class="teacher-float" alt="Teacher">
+    </a>
+
+    <nav class="bottom-nav">
+        <a href="#omr" class="active"><i class="fa-solid fa-check-circle"></i></a>
+        <a href="#translation"><i class="fa-solid fa-language"></i></a>
+        <a href="#game"><i class="fa-solid fa-gamepad"></i></a>
+        <a href="#essay"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="#letters"><i class="fa-solid fa-envelope"></i></a>
+    </nav>
+
+    <script>
+        // 1. BACKGROUND
+        function createFloatingWords() {
+            const container = document.getElementById('floating-container');
+            const words = ["Lencho", "Nelson Mandela", "G.L. Fuentes", "Dust of Snow", "Robert Frost", "Tricki", "Hari Singh", "Griffin", "Bholi", "Sulekha", "Matilda", "Noun", "Tense", "Passive", "Fire and Ice", "Amanda", "Trees", "Fog", "Coorg", "Valli"];
+            for (let i = 0; i < 20; i++) {
+                const s = document.createElement('span'); s.classList.add('floating-word');
+                s.innerText = words[Math.floor(Math.random() * words.length)];
+                s.style.left = Math.random() * 100 + "vw";
+                s.style.animationDuration = (Math.random() * 15 + 15) + "s";
+                s.style.animationDelay = (Math.random() * 20) + "s";
+                container.appendChild(s);
+            }
+        }
+        createFloatingWords();
+
+        // 2. GREETING & VISITOR
+        document.getElementById('greeting-text').innerText = (new Date().getHours() < 12 ? "Good Morning" : new Date().getHours() < 17 ? "Good Afternoon" : "Good Evening") + ", Topper!";
+        
+        setTimeout(() => {
+            document.getElementById('visitor-badge').style.display = 'flex';
+            let count = Math.floor(Math.random() * 30) + 20;
+            document.getElementById('visitor-count').innerText = count;
+            setInterval(() => { count += (Math.random() > 0.4 ? 1 : -1); if(count<15) count=15; document.getElementById('visitor-count').innerText = count; }, 4000);
+        }, 2000);
+
+        // 3. TIMER
+        function updateTimer() {
+            const diff = new Date("February 23, 2026 09:00:00").getTime() - new Date().getTime();
+            if(diff > 0) {
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }
+        setInterval(updateTimer, 1000); updateTimer();
+
+        // 4. TYPEWRITER
+        let typeTimer;
+        function typeWriter(id, text) {
+            const el = document.getElementById(id); el.innerText = ""; clearTimeout(typeTimer);
+            let i = 0; function type() { if(i < text.length) { el.innerText += text.charAt(i); i++; typeTimer = setTimeout(type, 5); } }
+            type();
+        }
+
+        // 5. DATA (ESSAYS & LETTERS)
+        const essaysDB = {
+            "Pollution": `Pollution is a very big problem today. It harms our environment. There are mainly four types of pollution: air, water, soil, and noise pollution. Smoke from factories and cars causes air pollution. Dirty water from cities goes into rivers and causes water pollution. This spreads many diseases. We should plant more trees to reduce pollution. We must stop using plastic bags. If we want a healthy life, we must keep our earth clean.`,
+            "Wonders of Science": `We live in the age of science. Science has made our life very easy and comfortable. Electricity, mobile phones, computers, and cars are great gifts of science. Medical science helps to cure many dangerous diseases. The internet gives us information about the whole world. However, science has some bad effects too. Atom bombs and pollution are bad results of science. If we use it wisely, science is a blessing for us.`,
+            "My Best Friend": `I have many friends, but Ravi is my best friend. He is my classmate and neighbor. He is fifteen years old. His father is a teacher and his mother is a housewife. Ravi is very intelligent and hardworking. He always stands first in the class. He helps me in my studies. We play cricket together in the evening. He is very honest and kind. He respects his elders. I am proud of my friend.`,
+            "My Favourite Festival": `India is a land of festivals. My favorite festival is Diwali. It is the festival of lights. It is celebrated in October or November. On this day, Lord Rama returned to Ayodhya after 14 years. People clean and decorate their houses with lamps and candles. Children burn firecrackers and wear new clothes. We eat sweets and share gifts with friends. At night, we worship Goddess Lakshmi. Diwali brings joy and happiness to everyone.`,
+            "Population Explosion": `The rising population is a big problem in India. India is the second-largest country by population. Overpopulation causes many other problems like poverty, unemployment, and hunger. There are not enough schools, hospitals, or houses for everyone. Forests are being cut down to build houses. The government should take steps to control the population. Small families are happy families. We must spread awareness about family planning.`,
+            "Unemployment": `Unemployment means when people want to work but cannot find a job. It is a major problem in our country. Many educated young people are without jobs. The main cause of unemployment is the rising population and a lack of technical education. It makes people poor and unhappy. The government is starting new schemes like 'Make in India' to create jobs. We should also focus on self-employment and business.`,
+            "Importance of Discipline": `Discipline is very important in life. It means following rules and regulations. Without discipline, we cannot achieve success. Nature also follows discipline; the sun rises and sets on time. In student life, discipline is the key to success. A disciplined student comes to school on time, respects teachers, and completes homework. It builds our character and makes us good citizens. We must learn to be disciplined from childhood.`,
+            "My Country": `The name of my country is India. It is a very big and beautiful country. New Delhi is the capital of India. It has a rich culture and history. People of many religions live here together with love. We have the Himalayas in the north and the Indian Ocean in the south. Agriculture is the main occupation here. I love my country very much and I am proud to be an Indian.`,
+            "My Mother": `My mother’s name is Smt. Sunita Devi. She is a very religious and kind lady. She wakes up early in the morning and cooks tasty food for us. She takes care of the whole family. She helps me with my homework and teaches me good manners. She never gets angry. She is my first teacher and my best friend. Her love for me is selfless. May she live long.`,
+            "My Favourite Teacher": `Mr. Sharma is my favorite teacher. He teaches us English. He is a very learned and active person. His method of teaching is very simple. Even weak students understand his lessons easily. He is strict but very loving. He guides us like a father. He wants us to become good citizens. All the students respect him very much. He is an ideal teacher.`,
+            "Mobile Phone": `The mobile phone is a wonderful invention of science. It helps us talk to people far away. We can use the internet, watch videos, and learn new things on it. It is very useful for students during online classes. But it has some bad sides too. Many students waste time playing games on mobile phones. Using it too much is bad for our eyes. We should use mobile phones carefully and only for good work.`,
+            "Swachh Bharat Abhiyan": `Swachh Bharat Abhiyan is a cleanliness mission started by PM Narendra Modi on 2nd October 2014. The main aim is to make India clean and green. Cleanliness is next to Godliness. If our surroundings are clean, we will be healthy. We should not throw garbage on the roads. We should use dustbins. Schools and colleges also take part in this mission. It is our duty to keep our country clean.`,
+            "Historical Place (Taj Mahal)": `Last year, I went to Agra with my family. We went there to see the Taj Mahal. It was built by Shah Jahan in memory of his wife Mumtaz Mahal. It is made of white marble. It stands on the bank of the river Yamuna. It looked very beautiful in the sunlight. It is one of the seven wonders of the world. Many tourists come to see it every day. I enjoyed this trip very much.`,
+            "My Aim in Life": `Every person should have an aim in life. My aim is to become a teacher. Teaching is a noble profession. A teacher builds the future of the nation. I want to teach poor children who cannot go to big schools. I want to make my students good and honest citizens. I will work hard to achieve my goal. I will be a kind and helpful teacher.`,
+            "Mahatma Gandhi": `Mahatma Gandhi was a great leader of India. He is called the 'Father of the Nation.' He was born on 2nd October 1869 at Porbandar. His full name was Mohandas Karamchand Gandhi. He believed in truth and non-violence. He fought for India’s freedom against the British rule. He lived a very simple life. He died on 30th January 1948. We remember him with great respect.`,
+            "Road Safety": `Road safety is very important to save lives. Many accidents happen every day because people do not follow rules. We should always walk on the footpath. We should cross the road at the zebra crossing. We must follow traffic lights. Red means stop, and green means go. We should never run on the road. While driving, we must wear a helmet or seatbelt. Carelessness causes accidents.`,
+            "Women Empowerment": `Women empowerment means giving power and respect to women. In the past, women were not treated equally. But now, women are working in every field like doctors, engineers, and pilots. The government is making laws to protect women. Educating a girl is very important for the society. When women are strong, the country becomes strong. We must respect women and give them equal rights.`,
+            "A Visit to a Fair": `Last month, I visited a village fair with my friends. It was held near a temple. There was a huge crowd. There were many shops selling toys, sweets, and clothes. I saw a juggler showing tricks. We sat on the giant wheel and enjoyed it a lot. It was very noisy but fun. We ate jalebis and bought some toys. We returned home in the evening.`,
+            "My Favourite Book": `I like reading books. My favorite book is the Ramcharitmanas. It was written by Tulsidas. It tells the story of Lord Rama. It is a holy book for Hindus. It teaches us how to be a good son, a good brother, and a good king. My grandmother reads it every morning. It teaches us the victory of good over evil. I get peace of mind when I read it.`,
+            "Terrorism": `Terrorism is a big threat to the world. It is an act of violence against innocent people. Terrorists want to spread fear. They have no religion; their only religion is hatred. They kill people and destroy property. India has faced many terror attacks. The whole world must unite to fight against terrorism. We need peace and love to make the world a better place.`
+        };
+
+        const lettersDB = {
+            "Sick Leave": "To,\nThe Principal,\n[School Name],\n[City].\n\nSubject: Application for Sick Leave.\n\nSir,\nMost respectfully, I beg to state that I have been suffering from fever since last night. The doctor has advised me to take rest for two days.\n\nTherefore, I request you to grant me leave for 15/02/2026 and 16/02/2026. I shall be highly obliged to you.\n\nYours obediently,\nName: XYZ\nClass: 10th",
+            "Fee Concession": "To,\nThe Principal,\n[School Name],\n[City].\n\nSubject: Full Fee Concession.\n\nSir,\nMost respectfully, I beg to say that my father is a poor farmer. His monthly income is very small. He is unable to pay my school fee.\n\nI have always been a good student. Therefore, I request you to grant me full fee concession. I shall be highly obliged to you.\n\nYours obediently,\nName: XYZ\nClass: 10th",
+            "Transfer Certificate": "To,\nThe Principal,\n[School Name],\n[City].\n\nSubject: Request for Transfer Certificate.\n\nSir,\nRespectfully, I beg to state that my father has been transferred to Lucknow. My whole family is shifting there.\n\nTherefore, I request you to issue my Transfer Certificate as soon as possible. I have paid all my dues.\n\nYours obediently,\nName: XYZ",
+            "Letter to Father": "Adarsh Nagar,\nLakhimpur Kheri.\nDate: 15 Feb 2026\n\nRespected Father,\nSadar Pranam.\n\nI am quite well here. My studies are going well. The Board exams are near. I need to buy some important books.\n\nSo, please send me Rs. 1000/- by UPI. Convey my regards to Mother.\n\nYour loving son,\nXYZ",
+            "Letter to Friend": "Civil Lines,\nLakhimpur.\nDate: 15 Feb 2026\n\nDear Rahul,\nI am very happy to inform you that the marriage of my elder sister has been fixed. You are cordially invited to attend the wedding.\n\nWe will have a lot of fun. Please come two days before the date.\n\nYour loving friend,\nXYZ",
+            "Change of Subject": "To,\nThe Principal,\n[School Name],\n[City].\n\nSubject: Change of Subject.\n\nSir,\nRespectfully, I beg to state that I offered Mathematics in Class 10th. But I find it very difficult. I cannot understand it properly.\n\nTherefore, I request you to permit me to offer Home Science instead of Mathematics.\n\nYours obediently,\nName: XYZ",
+            "Evening Games": "To,\nThe Principal,\n[School Name],\n[City].\n\nSubject: Arrangement for Evening Games.\n\nSir,\nMost respectfully, I beg to bring to your kind notice that there is no proper arrangement for evening games in our college. Many students want to play cricket.\n\nTherefore, I request you to make arrangements for evening games.\n\nYours obediently,\nName: XYZ\nCaptain"
+        };
+
+        for(let k in essaysDB) { let o=document.createElement('option'); o.value=k; o.innerText=k; document.getElementById('essay-select').appendChild(o); }
+        for(let k in lettersDB) { let o=document.createElement('option'); o.value=k; o.innerText=k; document.getElementById('letter-select').appendChild(o); }
+
+        function loadEssay() { const t=document.getElementById('essay-select').value; if(t && essaysDB[t]) { document.getElementById('essay-container').style.display="block"; typeWriter('essay-text', essaysDB[t]); } }
+        function loadLetter() { const t=document.getElementById('letter-select').value; if(t && lettersDB[t]) { document.getElementById('letter-container').style.display="block"; typeWriter('letter-text', lettersDB[t]); } }
+
+        // 6. OMR LOGIC
+        const qBank = [
+            {q:"Author of 'A Letter to God'?", opt:["G.L. Fuentes","Robert Frost","Anil","Bholi"], a:0},
+            {q:"Lencho wrote to...?", opt:["Postman","God","Mayor","Friend"], a:1},
+            {q:"First Black President of SA?", opt:["USA","India","Mandela","England"], a:2},
+            {q:"Who was Tricki?", opt:["Dog","Cat","Rat","Boy"], a:0},
+            {q:"Griffin was a...", opt:["Teacher","Doctor","Scientist","Thief"], a:2},
+            {q:"Destroyed Lencho's fields?", opt:["Flood","Fire","Hailstones","Wind"], a:2},
+            {q:"Bholi's real name?", opt:["Sulekha","Rekha","Champa","Kamla"], a:0},
+            {q:"Kisa Gotami asked for?", opt:["Money","Mustard seeds","Gold","Medicine"], a:1},
+            {q:"Poet of 'Dust of Snow'?", opt:["Robert Frost","Keats","Wordsworth","Norris"], a:0},
+            {q:"Stole Hari Singh's money?", opt:["Anil","Griffin","Hari Singh","None"], a:2},
+            {q:"Matilda borrowed a...", opt:["Dress","Necklace","Ring","Car"], a:1},
+            {q:"Baker in Goa called?", opt:["Pader","Baker","Chef","Cook"], a:0},
+            {q:"Coorg is famous for?", opt:["Tea","Coffee","Spices","Gold"], a:1},
+            {q:"Founder of Buddhism?", opt:["Ashoka","Buddha","Mahavira","Krishna"], a:1},
+            {q:"Amanda bites her?", opt:["Lips","Nails","Food","Pen"], a:1},
+            {q:"Fog comes on little?", opt:["Dog feet","Cat feet","Lion feet","Bird feet"], a:1},
+            {q:"Color of ramparts?", opt:["Honey","Yellow","Red","Blue"], a:0},
+            {q:"Lomov asked for hand of?", opt:["Natalya","Chubukov","Sulekha","Amanda"], a:0},
+            {q:"Writer of 'Thief's Story'?", opt:["Ruskin Bond","Herriot","Wells","Frost"], a:0},
+            {q:"Valli's age?", opt:["7","8","9","10"], a:1}
+        ];
+        let qIdx=0, marks=0;
+        function loadOMR() {
+            if(qIdx>=qBank.length) { document.getElementById('quiz-box').innerHTML=`<h3 style='color:green;text-align:center;'>Done! Score: ${marks}/20</h3>`; return; }
+            const q = qBank[qIdx]; document.getElementById('q-num').innerText=qIdx+1; document.getElementById('q-score').innerText=marks; document.getElementById('q-text').innerText=q.q;
+            let h=""; q.opt.forEach((o,i)=>{ h+=`<div class="omr-option" onclick="checkOMR(${i},this)"><b style="margin-right:10px;">${['A','B','C','D'][i]}</b> ${o}</div>` });
+            document.getElementById('options-box').innerHTML=h;
+        }
+        function checkOMR(sel,el) {
+            if(sel===qBank[qIdx].a) { el.style.background="#dcfce7"; el.style.borderColor="green"; marks++; xp+=5; document.getElementById('xp-points').innerText=xp; confetti({particleCount:100, spread:70, origin:{y:0.6}}); }
+            else { el.style.background="#fee2e2"; el.style.borderColor="red"; }
+            const all=document.querySelectorAll('.omr-option'); all.forEach(d=>d.onclick=null);
+            setTimeout(()=>{ qIdx++; loadOMR(); }, 1000);
+        }
+        loadOMR();
+
+        // 7. HOURLY TRANSLATION
+        const paras = [
+            {h:"भारत एक महान देश है।", e:"India is a great country."},
+            {h:"ईमानदारी सबसे अच्छी नीति है।", e:"Honesty is the best policy."},
+            {h:"गंगा एक पवित्र नदी है।", e:"The Ganga is a holy river."},
+            {h:"हमें बड़ों का सम्मान करना चाहिए।", e:"We should respect our elders."}
+        ];
+        function loadTrans() {
+            const idx = Math.floor(Date.now()/3600000)%paras.length;
+            document.getElementById('hindi-para').innerText=paras[idx].h;
+            document.getElementById('english-para').innerText=paras[idx].e;
+        }
+        function checkTranslation() { document.getElementById('trans-result').style.display='block'; xp+=10; document.getElementById('xp-points').innerText=xp; }
+        loadTrans();
+
+        // 8. GAME
+        const gWords = [{w:"SCHOOL",h:"Place to study"}, {w:"TEACHER",h:"Who teaches"}, {w:"FRIEND",h:"Playmate"}];
+        let curW, gTimer, time=15;
+        function loadGame() {
+            clearInterval(gTimer); time=15; document.getElementById('game-timer').innerText="15s";
+            curW = gWords[Math.floor(Math.random()*gWords.length)];
+            document.getElementById('scramble-word').innerText = curW.w.split('').sort(()=>0.5-Math.random()).join(' ');
+            document.getElementById('scramble-hint').innerText = `(${curW.h})`;
+            document.getElementById('user-guess').value=""; document.getElementById('game-result').style.display="none";
+            gTimer = setInterval(()=>{ time--; document.getElementById('game-timer').innerText=time+"s"; if(time<=0) loadGame(); }, 1000);
+        }
+        function checkSpelling() { if(document.getElementById('user-guess').value.toUpperCase().trim()===curW.w) { clearInterval(gTimer); confetti(); loadGame(); xp+=10; document.getElementById('xp-points').innerText=xp; } }
+        loadGame();
+
+        // 9. TENSE
+        const vList=["Go","Eat","Play","Read","Write","Sleep","Run"];
+        vList.forEach(v=>{ let o=document.createElement('option'); o.value=v; o.innerText=v; document.getElementById('tense-verb').appendChild(o); });
+        function showTense() {
+            const v=document.getElementById('tense-verb').value;
+            let p=v+"s", pt=v+"ed", c="Is "+v+"ing"; if(v.endsWith('e')){ c="Is "+v.slice(0,-1)+"ing"; pt=v+"d"; }
+            if(v=="Go"){ p="Goes"; pt="Went"; } if(v=="Eat"){ p="Eats"; pt="Ate"; }
+            document.getElementById('t-p').innerText=p; document.getElementById('t-pt').innerText=pt;
+            document.getElementById('t-f').innerText="Will "+v; document.getElementById('t-c').innerText=c;
+            document.getElementById('tense-output').style.display="grid";
+        }
+
+        // NAV
+        let xp=0;
+        document.querySelectorAll('.bottom-nav a').forEach(a => { a.addEventListener('click', function() { document.querySelectorAll('.bottom-nav a').forEach(b => b.classList.remove('active')); this.classList.add('active'); }); });
+    </script>
+</body>
+</html>
