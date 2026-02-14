@@ -6,7 +6,6 @@
     
     <title>RMVS Class Tuitions - UP Board English Digital Lab</title>
     <meta name="description" content="Best English Preparation for UP Board Class 10. OMR Test, Essays, Grammar & Games. Powered by RMVS Class Tuitions.">
-    <meta name="keywords" content="RMVS Class Tuitions, UP Board English, Lakhimpur Kheri, Class 10 Model Paper, OMR Practice">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,7 +28,6 @@
             padding-bottom: 120px;
             color: #1e293b;
             overflow-x: hidden;
-            /* Aurora Background Animation */
             background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1, #fbc2eb);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -99,7 +97,27 @@
         h3 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; font-size: 1.3rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
         p.desc { color: #64748b; font-size: 0.9rem; margin-top: -5px; margin-bottom: 15px; }
 
-        /* --- 4. COOL TIMER (GLASS DIGITAL) --- */
+        /* --- 4. LIVE VISITOR POPUP (NEW) --- */
+        .visitor-popup {
+            position: fixed; top: 85px; right: 20px;
+            background: rgba(0, 0, 0, 0.85); color: white;
+            padding: 8px 16px; border-radius: 30px;
+            font-size: 0.85rem; font-weight: bold;
+            z-index: 999; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            display: none; /* Hidden initially */
+            align-items: center; gap: 8px;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .live-dot {
+            width: 8px; height: 8px; background: #22c55e;
+            border-radius: 50%; box-shadow: 0 0 10px #22c55e;
+            animation: blinkDot 1s infinite alternate;
+        }
+        @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes blinkDot { from { opacity: 0.6; } to { opacity: 1; } }
+
+        /* --- 5. COOL TIMER (GLASS DIGITAL) --- */
         .timer-grid {
             display: flex; justify-content: center; gap: 10px; margin-top: 15px;
         }
@@ -128,7 +146,7 @@
             100% { transform: scale(1); text-shadow: 0 0 10px red; }
         }
 
-        /* --- 5. INPUTS & BUTTONS --- */
+        /* --- 6. INPUTS & BUTTONS --- */
         input, textarea, select {
             width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 15px;
             font-size: 1rem; margin-bottom: 12px; box-sizing: border-box; background: rgba(255,255,255,0.9);
@@ -162,7 +180,7 @@
             font-family: 'Times New Roman', serif; line-height: 1.8; color: #000;
             overflow: hidden; border: 1px solid #e2e8f0;
             background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 100% 2rem; /* Ruled paper lines */
+            background-size: 100% 2rem;
         }
         .watermark {
             position: absolute; top: 50%; left: 50%;
@@ -175,7 +193,7 @@
         .cursor-blink::after { content: '✍️'; animation: blink 1s step-end infinite; font-size: 1.2rem; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- 6. 3D ANIMATED TEACHER --- */
+        /* --- 7. 3D ANIMATED TEACHER --- */
         .teacher-float {
             position: fixed; bottom: 100px; right: 20px;
             width: 130px; height: auto; z-index: 1000; cursor: pointer;
@@ -196,7 +214,7 @@
             50% { transform: translateY(-15px); }
         }
 
-        /* --- 7. BOTTOM NAV --- */
+        /* --- 8. BOTTOM NAV --- */
         .bottom-nav {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
             background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(15px);
@@ -218,6 +236,10 @@
 <body>
 
     <div id="floating-container"></div>
+
+    <div id="visitor-badge" class="visitor-popup">
+        <div class="live-dot"></div> <span id="visitor-count">0</span> Students Live
+    </div>
 
     <header>
         <div class="logo">
@@ -360,7 +382,7 @@
 
     <a href="https://wa.me/919876543210" target="_blank" title="Ask Doubt">
         <div class="help-bubble">Ask Doubt?</div>
-        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/teacher-showing-gesture-6332711-5230239.png" class="teacher-float" alt="Teacher">
+        <img src="https://cdn-icons-png.flaticon.com/512/9374/9374940.png" class="teacher-float" alt="Teacher">
     </a>
 
     <nav class="bottom-nav">
@@ -372,7 +394,7 @@
     </nav>
 
     <script>
-        // --- 0. ANIMATION & GREETING ---
+        // --- 0. ANIMATION & GREETING & VISITOR ---
         function createFloatingWords() {
             const container = document.getElementById('floating-container');
             const words = ["Lencho", "Nelson Mandela", "G.L. Fuentes", "Dust of Snow", "Robert Frost", "Tricki", "Hari Singh", "Griffin", "Bholi", "Sulekha", "Matilda", "Noun", "Tense", "Passive Voice", "Fire and Ice", "Amanda", "Trees", "Fog", "Coorg", "Valli"];
@@ -393,6 +415,29 @@
             document.getElementById('greeting-text').innerText = `${g}, Topper!`;
         }
         setGreeting();
+
+        // --- FAKE VISITOR COUNTER ---
+        function initVisitorCounter() {
+            const badge = document.getElementById('visitor-badge');
+            const countSpan = document.getElementById('visitor-count');
+            let count = Math.floor(Math.random() * (50 - 20 + 1) + 20); // Start between 20-50
+
+            // Pop up random (2s - 5s)
+            setTimeout(() => {
+                countSpan.innerText = count;
+                badge.style.display = 'flex';
+
+                // Slow Update (3s - 8s)
+                setInterval(() => {
+                    const change = Math.random() > 0.3 ? 1 : -1; // Mostly increase
+                    count += change;
+                    if(count < 15) count = 15; // Min limit
+                    countSpan.innerText = count;
+                }, Math.floor(Math.random() * 5000) + 3000);
+
+            }, Math.floor(Math.random() * 3000) + 2000);
+        }
+        initVisitorCounter();
 
         // --- 1. SUPER COOL TIMER (SECONDS) ---
         function updateTimer() {
