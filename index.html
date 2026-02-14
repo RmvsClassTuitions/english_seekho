@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>RMVS Class Tuitions - UP Board English Lab</title>
-    <meta name="description" content="Complete English Preparation for UP Board Class 10. Hourly OMR Test, Essays, Letter Writing & Grammar.">
+    <title>RMVS Class Tuitions - UP Board English Digital Lab</title>
+    <meta name="description" content="Best English Preparation for UP Board Class 10. OMR Test, Essays, Grammar & Games. Powered by RMVS Class Tuitions.">
+    <meta name="keywords" content="RMVS Class Tuitions, UP Board English, Lakhimpur Kheri, Class 10 Model Paper, OMR Practice">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
-        /* --- THEME --- */
+        /* --- 1. THEME VARIABLES --- */
         :root {
-            --primary: #4f46e5;
-            --accent: #0ea5e9;
-            --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            --primary: #4f46e5; /* Indigo */
+            --accent: #0ea5e9;  /* Sky Blue */
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
             --glass: rgba(255, 255, 255, 0.95);
-            --shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
 
         body {
@@ -26,56 +29,53 @@
             color: #1e293b;
             margin: 0; padding: 0;
             padding-bottom: 120px;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        /* --- FLYING BACKGROUND --- */
+        /* --- 2. FLYING WORDS BACKGROUND --- */
         #floating-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; pointer-events: none; overflow: hidden;
         }
         .floating-word {
             position: absolute; bottom: -50px;
-            font-size: 1.5rem; font-weight: 800;
-            color: rgba(79, 70, 229, 0.08);
+            font-size: 1.4rem; font-weight: 800;
+            color: rgba(79, 70, 229, 0.06); /* Very Faint */
+            font-family: 'Times New Roman', serif;
             user-select: none; animation: floatUp linear infinite;
             white-space: nowrap;
         }
         @keyframes floatUp {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            100% { transform: translateY(-110vh) rotate(10deg); opacity: 0; }
+            100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
         }
 
-        /* --- ANIMATED TEACHER (WhatsApp) --- */
+        /* --- 3. ANIMATED TEACHER (WhatsApp) --- */
         .teacher-float {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            z-index: 1000;
-            cursor: pointer;
+            position: fixed; bottom: 90px; right: 20px;
+            width: 100px; height: auto;
+            z-index: 1000; cursor: pointer;
             animation: floatTeacher 3s ease-in-out infinite;
-            transition: transform 0.3s;
-            width: 80px;
-            height: auto;
             filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            transition: transform 0.3s;
         }
-        .teacher-float:hover { transform: scale(1.1); }
+        .teacher-float:hover { transform: scale(1.1) rotate(-5deg); }
         
         @keyframes floatTeacher {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
 
-        /* --- UI COMPONENTS --- */
+        /* --- 4. UI COMPONENTS --- */
         header {
             background: var(--glass); padding: 15px 20px;
             position: sticky; top: 0; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.6);
         }
         .logo { font-weight: 800; color: var(--primary); font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
-        .xp-pill { background: #ca8a04; color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+        .xp-pill { background: #ca8a04; color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
         .container {
             max-width: 900px; margin: 25px auto; padding: 0 15px;
@@ -98,6 +98,8 @@
             width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 12px;
             font-size: 1rem; margin-bottom: 12px; box-sizing: border-box; background: #f8fafc;
         }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; }
+
         button {
             background: var(--primary); color: white; border: none;
             padding: 14px; border-radius: 12px; cursor: pointer;
@@ -112,33 +114,34 @@
             border-radius: 8px; cursor: pointer; transition: 0.2s;
             margin-bottom: 8px; font-weight: 500; display: flex; align-items: center; gap: 10px;
         }
-        .omr-option:hover { background: #f1f5f9; }
+        .omr-option:hover { background: #f1f5f9; border-color: var(--primary); }
 
-        /* RESULT PAPER (Visual only, no download) */
+        /* RESULT PAPER (NO DOWNLOAD) */
         .result-paper {
             background: white; 
-            padding: 30px; 
+            padding: 40px; 
             border: 1px solid #ddd; 
-            border-radius: 4px;
+            border-radius: 5px;
             position: relative;
-            min-height: 200px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            min-height: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             font-family: 'Times New Roman', serif;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #000;
+            overflow: hidden;
         }
         .watermark {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-30deg);
             font-size: 40px; font-weight: 900;
             color: rgba(0,0,0,0.04); pointer-events: none;
-            z-index: 0; white-space: nowrap;
+            z-index: 0; white-space: nowrap; text-transform: uppercase;
         }
-        .paper-text { position: relative; z-index: 10; }
+        .paper-text { position: relative; z-index: 10; white-space: pre-wrap; }
         .output { display: none; margin-top: 15px; animation: slideIn 0.3s ease; }
         @keyframes slideIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 
-        /* HOURLY BOX */
+        /* HOURLY TRANS BOX */
         .hourly-box {
             background: #fffbeb; border-left: 5px solid #d97706;
             padding: 15px; border-radius: 8px; margin-bottom: 15px;
@@ -148,7 +151,7 @@
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: #1e293b; padding: 12px 30px; border-radius: 50px;
-            display: flex; gap: 25px; z-index: 999; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            display: flex; gap: 30px; z-index: 999; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             white-space: nowrap; overflow-x: auto; max-width: 90%;
         }
         .bottom-nav a { color: #94a3b8; font-size: 1.5rem; padding: 0 5px; transition: 0.2s; }
@@ -177,16 +180,16 @@
                 <h3><i class="fa-solid fa-check-circle"></i> OMR Test (Hourly)</h3>
                 <span style="background:#dc2626; color:white; padding:3px 10px; border-radius:8px; font-size:0.8rem; font-weight:bold;">NEW SET</span>
             </div>
-            <p class="desc">20 Unique Questions every hour from Question Bank.</p>
+            <p class="desc">20 Unique Questions generated every hour.</p>
             
             <div id="quiz-box" style="background:white; padding:20px; border-radius:12px; border:1px solid #e2e8f0;">
-                <h4 id="q-text" style="margin:0 0 20px 0; font-size:1.1rem;">Loading Question...</h4>
+                <h4 id="q-text" style="margin:0 0 20px 0; font-size:1.1rem; line-height:1.5;">Loading Question...</h4>
                 <div id="options-box"></div>
             </div>
             
             <div style="display:flex; justify-content:space-between; margin-top:20px; align-items:center;">
                 <span style="font-weight:bold; color:#64748b;">Q: <span id="q-num">1</span>/20</span>
-                <span style="font-weight:bold; color:var(--primary);">Marks: <span id="q-score">0</span></span>
+                <span style="font-weight:bold; color:var(--primary);">Score: <span id="q-score">0</span></span>
             </div>
         </div>
 
@@ -269,7 +272,7 @@
         <div class="widget full-width" id="essay">
             <h3><i class="fa-solid fa-scroll"></i> Essay Generator</h3>
             <select id="essay-select" onchange="loadEssay()">
-                <option value="">-- Select Essay Topic --</option>
+                <option value="">-- Select Essay Topic (Important) --</option>
             </select>
             <div id="essay-container" class="output">
                 <div class="result-paper">
@@ -298,7 +301,7 @@
     </div>
 
     <a href="https://wa.me/919876543210" target="_blank" title="Ask Doubt">
-        <img src="https://cdn-icons-png.flaticon.com/512/3429/3429149.png" class="teacher-float" alt="Teacher">
+        <img src="https://cdn-icons-png.flaticon.com/512/2941/2941584.png" class="teacher-float" alt="Teacher">
     </a>
 
     <nav class="bottom-nav">
@@ -336,9 +339,9 @@
         }
         setInterval(updateTimer, 1000); updateTimer();
 
-        // --- 2. QUESTION BANK & HOURLY OMR ---
-        // Large Question Bank (Simulating 1000 with Logic)
+        // --- 2. OMR LOGIC (Large Bank Simulation) ---
         const qBank = [
+            // Prose & Poetry
             {q:"Who is the author of 'A Letter to God'?", opt:["G.L. Fuentes", "Robert Frost", "Anil", "Bholi"], a:0},
             {q:"Lencho wrote a letter to _______.", opt:["The Postman", "God", "The Mayor", "His Friend"], a:1},
             {q:"Nelson Mandela became the first black president of _______.", opt:["USA", "India", "South Africa", "England"], a:2},
@@ -368,34 +371,50 @@
             {q:"What was the name of the scientist?", opt:["Griffin", "Hari", "Anil", "Richard"], a:0},
             {q:"Ebright was interested in _______.", opt:["Collecting Butterflies", "Collecting Stamps", "Collecting Coins", "Collecting Rocks"], a:0},
             {q:"Who was Ramlal's eldest daughter?", opt:["Radha", "Mangla", "Champa", "Sulekha"], a:0},
-            {q:"Who was Bishamber?", opt:["A teacher", "A grocer", "A doctor", "A soldier"], a:1}
-            // *To have 1000 questions, just keep adding more here in the same format.*
-            // This simulation uses logic to rotate these 30 questions to look new every hour.
+            {q:"Who was Bishamber?", opt:["A teacher", "A grocer", "A doctor", "A soldier"], a:1},
+            // Grammar & Structure
+            {q:"She _______ to the market yesterday.", opt:["go", "went", "gone", "going"], a:1},
+            {q:"He has _______ his work.", opt:["do", "did", "done", "doing"], a:2},
+            {q:"Honesty _______ the best policy.", opt:["is", "are", "was", "were"], a:0},
+            {q:"The sun _______ in the east.", opt:["rise", "rose", "rises", "rising"], a:2},
+            {q:"Identify the noun: 'The cat is black'.", opt:["The", "Cat", "Is", "Black"], a:1},
+            {q:"Identify the adjective: 'She is a beautiful girl'.", opt:["She", "Is", "Beautiful", "Girl"], a:2},
+            {q:"We _______ follow traffic rules.", opt:["can", "should", "may", "might"], a:1},
+            {q:"My friend lives _______ Delhi.", opt:["on", "at", "in", "to"], a:2},
+            {q:"The book is _______ the table.", opt:["on", "in", "at", "to"], a:0},
+            {q:"Passive Voice: 'He writes a letter'.", opt:["A letter is written by him", "A letter was written", "He wrote a letter", "None"], a:0},
+            {q:"Indirect Speech: He said, 'I am busy'.", opt:["He said he is busy", "He said that he was busy", "He says he was busy", "None"], a:1},
+            {q:"Find the correctly spelled word.", opt:["Grammer", "Grammar", "Gramar", "Gremmar"], a:1},
+            {q:"Find the correctly spelled word.", opt:["Beleive", "Believe", "Belive", "Beeleve"], a:1},
+            {q:"Antonym of 'Good' is _______.", opt:["Bad", "Nice", "Fine", "Well"], a:0},
+            {q:"Synonym of 'Happy' is _______.", opt:["Sad", "Glad", "Angry", "Cry"], a:1},
+            {q:"A person who cannot read or write is _______.", opt:["Blind", "Illiterate", "Deaf", "Dumb"], a:1},
+            {q:"A place where animals are kept is called _______.", opt:["Zoo", "Museum", "Hospital", "School"], a:0},
+            {q:"Opposite of 'Day' is _______.", opt:["Morning", "Night", "Evening", "Noon"], a:1},
+            {q:"Past form of 'Run' is _______.", opt:["Runned", "Ran", "Running", "Run"], a:1},
+            {q:"Plural of 'Child' is _______.", opt:["Childs", "Children", "Childrens", "Baby"], a:1}
         ];
 
         let currentSet = [];
         let qIdx = 0, marks = 0;
 
         function generateHourlyQuestions() {
-            // Logic: Use current Hour as a Seed to pick 20 random questions
-            const hour = Math.floor(Date.now() / 3600000); // Unique number for every hour
-            
-            // Random Shuffle based on Hour (Pseudo-random)
+            // Logic: Use current Hour as a Seed to randomize
+            const hour = Math.floor(Date.now() / 3600000); 
             let tempBank = [...qBank];
+            // Simple shuffle based on hour
             for(let i = tempBank.length - 1; i > 0; i--) {
-                const j = (hour + i * 7) % (i + 1); // Simple hashing
+                const j = (hour + i * 3) % (i + 1); 
                 [tempBank[i], tempBank[j]] = [tempBank[j], tempBank[i]];
             }
-            
-            // Take first 10-20 questions for this hour
-            currentSet = tempBank.slice(0, 15); // Taking 15 for demo, can be 20
+            currentSet = tempBank.slice(0, 20); // Pick first 20
         }
 
         function loadOMR() {
             if(currentSet.length === 0) generateHourlyQuestions();
             
             if(qIdx >= currentSet.length) {
-                document.getElementById('quiz-box').innerHTML = `<h3 style='text-align:center; color:green'>Test Complete!</h3><h1 style='text-align:center'>Score: ${marks}/${currentSet.length}</h1><p style='text-align:center'>Come back next hour for new questions!</p>`;
+                document.getElementById('quiz-box').innerHTML = `<h3 style='text-align:center; color:green'>Test Complete!</h3><h1 style='text-align:center'>Score: ${marks}/20</h1><p style='text-align:center; color:#64748b;'>Great job! Come back next hour for a new set.</p>`;
                 return;
             }
             const q = currentSet[qIdx];
@@ -404,27 +423,34 @@
             document.getElementById('q-text').innerText = q.q;
             let html = "";
             q.opt.forEach((o, i) => {
-                html += `<div class="omr-option" onclick="checkOMR(${i}, this)"><div style="width:20px; height:20px; border-radius:50%; border:2px solid #ccc; margin-right:10px; display:flex; justify-content:center; align-items:center;">${['A','B','C','D'][i]}</div> ${o}</div>`;
+                html += `<div class="omr-option" onclick="checkOMR(${i}, this)"><div style="width:25px; height:25px; border-radius:50%; border:2px solid #ccc; margin-right:15px; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:0.8rem;">${['A','B','C','D'][i]}</div> ${o}</div>`;
             });
             document.getElementById('options-box').innerHTML = html;
         }
         function checkOMR(sel, el) {
             if(sel === currentSet[qIdx].a) { el.style.background = "#dcfce7"; el.style.borderColor = "green"; marks++; addXP(5); } 
             else { el.style.background = "#fee2e2"; el.style.borderColor = "red"; }
+            
+            // Disable clicks
             const all = document.querySelectorAll('.omr-option');
             all.forEach(d => d.onclick = null);
+            
             setTimeout(() => { qIdx++; loadOMR(); }, 1000);
         }
         loadOMR();
 
-        // --- 3. HOURLY TRANSLATION ---
+        // --- 3. HOURLY TRANSLATION (4 Sentences) ---
         const paras = [
             {h: "भारत एक महान देश है। इसकी संस्कृति बहुत पुरानी है। यहाँ अनेक धर्मों के लोग रहते हैं। हमें अपने देश पर गर्व है।", e: "India is a great country. Its culture is very old. People of many religions live here. We are proud of our country."},
             {h: "ईमानदारी सबसे अच्छी नीति है। एक ईमानदार व्यक्ति का सभी सम्मान करते हैं। वह कभी झूठ नहीं बोलता है। उसे किसी का डर नहीं होता।", e: "Honesty is the best policy. An honest man is respected by all. He never tells a lie. He is not afraid of anyone."},
             {h: "प्रदूषण आज की सबसे बड़ी समस्या है। यह हमारे स्वास्थ्य के लिए हानिकारक है। हमें अधिक से अधिक पेड़ लगाने चाहिए। हमें प्लास्टिक का प्रयोग बंद करना चाहिए।", e: "Pollution is the biggest problem of today. It is harmful to our health. We should plant more and more trees. We should stop using plastic."},
             {h: "गंगा एक पवित्र नदी है। यह हिमालय से निकलती है। हिंदू इसे माँ कहते हैं। इसका जल बहुत शुद्ध माना जाता है।", e: "The Ganga is a holy river. It originates from the Himalayas. Hindus call it Mother. Its water is considered very pure."},
             {h: "सुभाष चंद्र बोस एक महान नेता थे। उन्होंने 'आजाद हिंद फौज' बनाई थी। वे अपनी मातृभूमि से बहुत प्रेम करते थे। उन्होंने नारा दिया, 'तुम मुझे खून दो, मैं तुम्हें आजादी दूंगा।'", e: "Subhash Chandra Bose was a great leader. He formed the 'Azad Hind Fauj'. He loved his motherland very much. He gave the slogan, 'You give me blood, I will give you freedom.'"},
-            {h: "परिश्रम सफलता की कुंजी है। जो मेहनत करते हैं वे कभी असफल नहीं होते। भाग्य भी उन्हीं का साथ देता है जो कर्म करते हैं। हमें अपने समय का सदुपयोग करना चाहिए।", e: "Hard work is the key to success. Those who work hard never fail. Fortune also favors those who work. We should make good use of our time."}
+            {h: "परिश्रम सफलता की कुंजी है। जो मेहनत करते हैं वे कभी असफल नहीं होते। भाग्य भी उन्हीं का साथ देता है जो कर्म करते हैं। हमें अपने समय का सदुपयोग करना चाहिए।", e: "Hard work is the key to success. Those who work hard never fail. Fortune also favors those who work. We should make good use of our time."},
+            {h: "ताजमहल दुनिया के सात अजूबों में से एक है। इसे शाहजहाँ ने अपनी बेगम की याद में बनवाया था। यह आगरा में यमुना नदी के किनारे स्थित है। यह सफेद संगमरमर का बना है।", e: "The Taj Mahal is one of the seven wonders of the world. Shah Jahan built it in memory of his queen. It is situated on the bank of the Yamuna in Agra. It is made of white marble."},
+            {h: "लाल बहादुर शास्त्री भारत के दूसरे प्रधानमंत्री थे। वे सादगी और ईमानदारी की प्रतिमूर्ति थे। उन्होंने 'जय जवान, जय किसान' का नारा दिया था। सारा देश उनका सम्मान करता है।", e: "Lal Bahadur Shastri was the second Prime Minister of India. He was the embodiment of simplicity and honesty. He gave the slogan 'Jai Jawan, Jai Kisan'. The whole country respects him."},
+            {h: "वृक्ष हमारे सबसे अच्छे मित्र हैं। वे हमें ऑक्सीजन, फल और दवाइयां देते हैं। वे पर्यावरण को संतुलित रखते हैं। हमें उन्हें काटने से बचाना चाहिए।", e: "Trees are our best friends. They give us oxygen, fruits and medicines. They keep the environment balanced. We should save them from being cut."},
+            {h: "वाराणसी एक प्राचीन और धार्मिक नगरी है। यह उत्तर प्रदेश में गंगा के किनारे स्थित है। यहाँ अनेक सुंदर मंदिर और घाट हैं। लोग यहाँ दूर-दूर से पूजा करने आते हैं।", e: "Varanasi is an ancient and religious city. It is situated on the bank of the Ganga in Uttar Pradesh. There are many beautiful temples and ghats here. People come from far and wide to worship here."}
         ];
         function loadTrans() {
             const idx = Math.floor(Date.now() / 3600000) % paras.length;
@@ -467,11 +493,28 @@
             document.getElementById('tense-output').style.display="block";
         }
 
-        // --- 6. ESSAY & LETTER (No Download) ---
+        // --- 6. ESSAY & LETTER ---
         const essaysDB = {
-            "Pollution": "Pollution is a major problem in modern times. It harms our environment and health. There are four types of pollution: air, water, soil, and noise. Factories and vehicles release harmful smoke, causing air pollution. Dirty water from industries spoils rivers, causing water pollution. We must plant more trees to clean the air. We should stop using plastic bags. The government is taking steps to control it, but public help is needed. Let us promise to keep our earth clean and green.",
-            "My Best Friend": "A true friend is a blessing. My best friend is Rahul. He is my classmate. He is very honest, kind, and hardworking. We study and play together. He helps me in my studies when I have doubts. His father is a doctor and his mother is a teacher. He respects his elders and loves children. We share our joys and sorrows. I am lucky to have a friend like him. I pray to God for his long life.",
-            "My School": "The name of my school is G.I.C. Inter College. It is a very big and famous school in my city. It has a grand building with 50 rooms. There is a big library and a science lab. The teachers are very learned and helpful. The principal is very strict but kind. There is a big playground where we play games. I love my school very much because I learn good manners and discipline here."
+            "Pollution": "Pollution is a very big problem today. It harms our environment. There are mainly four types of pollution: air, water, soil, and noise pollution. Smoke from factories and cars causes air pollution. Dirty water from cities goes into rivers and causes water pollution. This spreads many diseases. We should plant more trees to reduce pollution. We must stop using plastic bags. If we want a healthy life, we must keep our earth clean.",
+            "Wonders of Science": "We live in the age of science. Science has made our life very easy and comfortable. Electricity, mobile phones, computers, and cars are great gifts of science. Medical science helps to cure many dangerous diseases. The internet gives us information about the whole world. However, science has some bad effects too. Atom bombs and pollution are bad results of science. If we use it wisely, science is a blessing for us.",
+            "My Best Friend": "I have many friends, but Ravi is my best friend. He is my classmate and neighbor. He is fifteen years old. His father is a teacher and his mother is a housewife. Ravi is very intelligent and hardworking. He always stands first in the class. He helps me in my studies. We play cricket together in the evening. He is very honest and kind. He respects his elders. I am proud of my friend.",
+            "My Favourite Festival": "India is a land of festivals. My favorite festival is Diwali. It is the festival of lights. It is celebrated in October or November. On this day, Lord Rama returned to Ayodhya after 14 years. People clean and decorate their houses with lamps and candles. Children burn firecrackers and wear new clothes. We eat sweets and share gifts with friends. At night, we worship Goddess Lakshmi. Diwali brings joy and happiness to everyone.",
+            "Population Explosion": "The rising population is a big problem in India. India is the second-largest country by population. Overpopulation causes many other problems like poverty, unemployment, and hunger. There are not enough schools, hospitals, or houses for everyone. Forests are being cut down to build houses. The government should take steps to control the population. Small families are happy families. We must spread awareness about family planning.",
+            "Unemployment": "Unemployment means when people want to work but cannot find a job. It is a major problem in our country. Many educated young people are without jobs. The main cause of unemployment is the rising population and a lack of technical education. It makes people poor and unhappy. The government is starting new schemes like 'Make in India' to create jobs. We should also focus on self-employment and business.",
+            "Importance of Discipline": "Discipline is very important in life. It means following rules and regulations. Without discipline, we cannot achieve success. Nature also follows discipline; the sun rises and sets on time. In student life, discipline is the key to success. A disciplined student comes to school on time, respects teachers, and completes homework. It builds our character and makes us good citizens. We must learn to be disciplined from childhood.",
+            "My Country": "The name of my country is India. It is a very big and beautiful country. New Delhi is the capital of India. It has a rich culture and history. People of many religions live here together with love. We have the Himalayas in the north and the Indian Ocean in the south. Agriculture is the main occupation here. I love my country very much and I am proud to be an Indian.",
+            "My Mother": "My mother’s name is Smt. Sunita Devi. She is a very religious and kind lady. She wakes up early in the morning and cooks tasty food for us. She takes care of the whole family. She helps me with my homework and teaches me good manners. She never gets angry. She is my first teacher and my best friend. Her love for me is selfless. May she live long.",
+            "My Favourite Teacher": "Mr. Sharma is my favorite teacher. He teaches us English. He is a very learned and active person. His method of teaching is very simple. Even weak students understand his lessons easily. He is strict but very loving. He guides us like a father. He wants us to become good citizens. All the students respect him very much. He is an ideal teacher.",
+            "Mobile Phone": "The mobile phone is a wonderful invention of science. It helps us talk to people far away. We can use the internet, watch videos, and learn new things on it. It is very useful for students during online classes. But it has some bad sides too. Many students waste time playing games on mobile phones. Using it too much is bad for our eyes. We should use mobile phones carefully and only for good work.",
+            "Swachh Bharat Abhiyan": "Swachh Bharat Abhiyan is a cleanliness mission started by PM Narendra Modi on 2nd October 2014. The main aim is to make India clean and green. Cleanliness is next to Godliness. If our surroundings are clean, we will be healthy. We should not throw garbage on the roads. We should use dustbins. Schools and colleges also take part in this mission. It is our duty to keep our country clean.",
+            "Historical Place (Taj Mahal)": "Last year, I went to Agra with my family. We went there to see the Taj Mahal. It was built by Shah Jahan in memory of his wife Mumtaz Mahal. It is made of white marble. It stands on the bank of the river Yamuna. It looked very beautiful in the sunlight. It is one of the seven wonders of the world. Many tourists come to see it every day. I enjoyed this trip very much.",
+            "My Aim in Life": "Every person should have an aim in life. My aim is to become a teacher. Teaching is a noble profession. A teacher builds the future of the nation. I want to teach poor children who cannot go to big schools. I want to make my students good and honest citizens. I will work hard to achieve my goal. I will be a kind and helpful teacher.",
+            "Mahatma Gandhi": "Mahatma Gandhi was a great leader of India. He is called the 'Father of the Nation.' He was born on 2nd October 1869 at Porbandar. His full name was Mohandas Karamchand Gandhi. He believed in truth and non-violence. He fought for India’s freedom against the British rule. He lived a very simple life. He died on 30th January 1948. We remember him with great respect.",
+            "Road Safety": "Road safety is very important to save lives. Many accidents happen every day because people do not follow rules. We should always walk on the footpath. We should cross the road at the zebra crossing. We must follow traffic lights. Red means stop, and green means go. We should never run on the road. While driving, we must wear a helmet or seatbelt. Carelessness causes accidents.",
+            "Women Empowerment": "Women empowerment means giving power and respect to women. In the past, women were not treated equally. But now, women are working in every field like doctors, engineers, and pilots. The government is making laws to protect women. Educating a girl is very important for the society. When women are strong, the country becomes strong. We must respect women and give them equal rights.",
+            "A Visit to a Fair": "Last month, I visited a village fair with my friends. It was held near a temple. There was a huge crowd. There were many shops selling toys, sweets, and clothes. I saw a juggler showing tricks. We sat on the giant wheel and enjoyed it a lot. It was very noisy but fun. We ate jalebis and bought some toys. We returned home in the evening.",
+            "My Favourite Book": "I like reading books. My favorite book is the Ramcharitmanas. It was written by Tulsidas. It tells the story of Lord Rama. It is a holy book for Hindus. It teaches us how to be a good son, a good brother, and a good king. My grandmother reads it every morning. It teaches us the victory of good over evil. I get peace of mind when I read it.",
+            "Terrorism": "Terrorism is a big threat to the world. It is an act of violence against innocent people. Terrorists want to spread fear. They have no religion; their only religion is hatred. They kill people and destroy property. India has faced many terror attacks. The whole world must unite to fight against terrorism. We need peace and love to make the world a better place."
         };
         for(let topic in essaysDB) { let opt = document.createElement('option'); opt.value = topic; opt.innerText = topic; document.getElementById('essay-select').appendChild(opt); }
         function loadEssay() { const t = document.getElementById('essay-select').value; if(t && essaysDB[t]) { document.getElementById('essay-container').style.display = "block"; document.getElementById('essay-text').innerHTML = `<h3>${t}</h3><p>${essaysDB[t]}</p>`; } }
