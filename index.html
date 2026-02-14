@@ -11,8 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <style>
         /* --- 1. THEME VARIABLES --- */
         :root {
@@ -29,7 +27,7 @@
             color: #1e293b;
             margin: 0; padding: 0;
             padding-bottom: 120px;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
         }
 
         /* --- 2. FLYING WORDS BACKGROUND --- */
@@ -50,20 +48,39 @@
             100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
         }
 
-        /* --- 3. ANIMATED TEACHER (WhatsApp) --- */
+        /* --- 3. 3D ANIMATED TEACHER (WhatsApp) --- */
         .teacher-float {
-            position: fixed; bottom: 90px; right: 20px;
-            width: 100px; height: auto;
-            z-index: 1000; cursor: pointer;
-            animation: floatTeacher 3s ease-in-out infinite;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            position: fixed; 
+            bottom: 90px; 
+            right: 15px;
+            width: 110px; /* Bigger size */
+            height: auto;
+            z-index: 1000; 
+            cursor: pointer;
+            animation: floatTeacher 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); /* 3D Shadow */
             transition: transform 0.3s;
         }
-        .teacher-float:hover { transform: scale(1.1) rotate(-5deg); }
+        /* Hover Effect: Teacher leans forward */
+        .teacher-float:hover { 
+            transform: scale(1.1) rotate(-5deg); 
+        }
         
+        /* Floating Animation */
         @keyframes floatTeacher {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Help Bubble above Teacher */
+        .help-bubble {
+            position: fixed; bottom: 200px; right: 25px;
+            background: white; padding: 8px 12px; border-radius: 15px 15px 0 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 0.8rem; font-weight: bold; color: var(--primary);
+            animation: floatTeacher 4s ease-in-out infinite; z-index: 1001;
+            pointer-events: none;
         }
 
         /* --- 4. UI COMPONENTS --- */
@@ -301,7 +318,8 @@
     </div>
 
     <a href="https://wa.me/919876543210" target="_blank" title="Ask Doubt">
-        <img src="https://cdn-icons-png.flaticon.com/512/2941/2941584.png" class="teacher-float" alt="Teacher">
+        <div class="help-bubble">Doubts?</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/9408/9408201.png" class="teacher-float" alt="Teacher">
     </a>
 
     <nav class="bottom-nav">
@@ -493,7 +511,7 @@
             document.getElementById('tense-output').style.display="block";
         }
 
-        // --- 6. ESSAY & LETTER ---
+        // --- 6. ESSAY & LETTER (No Download) ---
         const essaysDB = {
             "Pollution": "Pollution is a very big problem today. It harms our environment. There are mainly four types of pollution: air, water, soil, and noise pollution. Smoke from factories and cars causes air pollution. Dirty water from cities goes into rivers and causes water pollution. This spreads many diseases. We should plant more trees to reduce pollution. We must stop using plastic bags. If we want a healthy life, we must keep our earth clean.",
             "Wonders of Science": "We live in the age of science. Science has made our life very easy and comfortable. Electricity, mobile phones, computers, and cars are great gifts of science. Medical science helps to cure many dangerous diseases. The internet gives us information about the whole world. However, science has some bad effects too. Atom bombs and pollution are bad results of science. If we use it wisely, science is a blessing for us.",
